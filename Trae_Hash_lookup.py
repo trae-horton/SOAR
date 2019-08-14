@@ -73,7 +73,7 @@ This is malicious file"""
         },
     ]
 
-    phantom.prompt2(container=container, user=user, message=message, respond_in_mins=30, name="prompt_1", response_types=response_types)
+    phantom.prompt2(container=container, user=user, message=message, respond_in_mins=30, name="prompt_1", response_types=response_types, callback=create_ticket_1)
 
     return
 
@@ -95,6 +95,35 @@ def prompt_2(action=None, success=None, container=None, results=None, handle=Non
     ]
 
     phantom.prompt2(container=container, user=user, message=message, respond_in_mins=30, name="prompt_2", response_types=response_types)
+
+    return
+
+def create_ticket_1(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None):
+    phantom.debug('create_ticket_1() called')
+    
+    #phantom.debug('Action: {0} {1}'.format(action['name'], ('SUCCEEDED' if success else 'FAILED')))
+    
+    # collect data for 'create_ticket_1' call
+    results_data_1 = phantom.collect2(container=container, datapath=['file_reputation_1:action_result.data.*.scans.Malwarebytes.result', 'file_reputation_1:action_result.parameter.context.artifact_id'], action_results=results)
+
+    parameters = []
+    
+    # build parameters list for 'create_ticket_1' call
+    for results_item_1 in results_data_1:
+        parameters.append({
+            'project_key': "ITSEC",
+            'summary': "Test ticket from Phantom",
+            'description': results_item_1[0],
+            'issue_type': "Task",
+            'priority': "",
+            'assignee': "",
+            'fields': "",
+            'vault_id': "",
+            # context (artifact id) is added to associate results with the artifact
+            'context': {'artifact_id': results_item_1[1]},
+        })
+
+    phantom.act("create ticket", parameters=parameters, assets=['atlassian_api'], name="create_ticket_1")
 
     return
 
