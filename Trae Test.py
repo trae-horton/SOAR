@@ -31,27 +31,7 @@ def lookup_domain_1(action=None, success=None, container=None, results=None, han
                 'context': {'artifact_id': container_item[1]},
             })
 
-    phantom.act("lookup domain", parameters=parameters, assets=['google_dns'], callback=decision_1, name="lookup_domain_1")
-
-    return
-
-def decision_1(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None):
-    phantom.debug('decision_1() called')
-
-    # check for 'if' condition 1
-    matched_artifacts_1, matched_results_1 = phantom.condition(
-        container=container,
-        action_results=results,
-        conditions=[
-            ["lookup_domain_1:action_result.status", "=>", "3"],
-        ])
-
-    # call connected blocks if condition 1 matched
-    if matched_artifacts_1 or matched_results_1:
-        return
-
-    # call connected blocks for 'else' condition 2
-    prompt_1(action=action, success=success, container=container, results=results, handle=handle)
+    phantom.act("lookup domain", parameters=parameters, assets=['google_dns'], callback=decision_2, name="lookup_domain_1")
 
     return
 
@@ -73,6 +53,48 @@ def prompt_1(action=None, success=None, container=None, results=None, handle=Non
     ]
 
     phantom.prompt2(container=container, user=user, message=message, respond_in_mins=30, name="prompt_1", response_types=response_types)
+
+    return
+
+def decision_2(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None):
+    phantom.debug('decision_2() called')
+
+    # check for 'if' condition 1
+    matched_artifacts_1, matched_results_1 = phantom.condition(
+        container=container,
+        action_results=results,
+        conditions=[
+            ["lookup_domain1:summary.total_objects", ">=", "3"],
+        ])
+
+    # call connected blocks if condition 1 matched
+    if matched_artifacts_1 or matched_results_1:
+        prompt_2(action=action, success=success, container=container, results=results, handle=handle)
+        return
+
+    # call connected blocks for 'else' condition 2
+    prompt_1(action=action, success=success, container=container, results=results, handle=handle)
+
+    return
+
+def prompt_2(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None):
+    phantom.debug('prompt_2() called')
+    
+    # set user and message variables for phantom.prompt call
+    user = "admin"
+    message = """Greater than 3"""
+
+    #responses:
+    response_types = [
+        {
+            "prompt": "",
+            "options": {
+                "type": "message",
+            },
+        },
+    ]
+
+    phantom.prompt2(container=container, user=user, message=message, respond_in_mins=30, name="prompt_2", response_types=response_types)
 
     return
 
