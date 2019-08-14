@@ -43,7 +43,7 @@ def decision_1(action=None, success=None, container=None, results=None, handle=N
         container=container,
         action_results=results,
         conditions=[
-            ["lookup_domain_1:action_result.status", "==", "blocked"],
+            ["lookup_domain_1:action_result.status", "=>", "3"],
         ])
 
     # call connected blocks if condition 1 matched
