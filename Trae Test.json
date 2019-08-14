@@ -7,7 +7,6 @@
             "clean": true,
             "code_block": "",
             "description": "",
-            "hash": "8fb4f6f95653eea52a3e473ccc9af903aa9b5f26",
             "joint": {
                 "cells": [
                     {
@@ -490,8 +489,8 @@
                             }
                         },
                         "position": {
-                            "x": 400,
-                            "y": 180
+                            "x": 300,
+                            "y": 80
                         },
                         "previous_function": "",
                         "previous_name": "file_reputation_1",
