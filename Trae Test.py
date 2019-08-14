@@ -64,7 +64,7 @@ def decision_2(action=None, success=None, container=None, results=None, handle=N
         container=container,
         action_results=results,
         conditions=[
-            ["lookup_domain1:summary.total_objects", ">=", "3"],
+            ["lookup_domain_1:summary.total_objects", ">=", "3"],
         ])
 
     # call connected blocks if condition 1 matched
