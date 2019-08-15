@@ -32,7 +32,7 @@ def decision_1(action=None, success=None, container=None, results=None, handle=N
     matched_artifacts_1, matched_results_1 = phantom.condition(
         container=container,
         conditions=[
-            ["artifact:*.cef.fileHashSha256", "==", "artifact:*.cef.fileHashSha256"],
+            ["artifact", "==", "artifact:*.cef.fileHashSha256"],
         ])
 
     # call connected blocks if condition 1 matched
@@ -44,7 +44,7 @@ def decision_1(action=None, success=None, container=None, results=None, handle=N
     matched_artifacts_2, matched_results_2 = phantom.condition(
         container=container,
         conditions=[
-            ["artifact:*.cef.destinationDnsDomain", "==", "artifact:*.cef.destinationDnsDomain"],
+            ["artifact", "==", "artifact:*.cef.destinationDnsDomain"],
         ])
 
     # call connected blocks if condition 2 matched
@@ -56,7 +56,7 @@ def decision_1(action=None, success=None, container=None, results=None, handle=N
     matched_artifacts_3, matched_results_3 = phantom.condition(
         container=container,
         conditions=[
-            ["artifact:*.cef.destinationAddress", "==", "artifact:*.cef.destinationAddress"],
+            ["artifact", "==", "artifact:*.cef.destinationAddress"],
         ])
 
     # call connected blocks if condition 3 matched
@@ -83,7 +83,7 @@ def whois_domain_1(action=None, success=None, container=None, results=None, hand
                 'context': {'artifact_id': container_item[1]},
             })
 
-    phantom.act("whois domain", parameters=parameters, assets=['whois'], name="whois_domain_1")
+    phantom.act("whois domain", parameters=parameters, assets=['whois'], callback=prompt_3, name="whois_domain_1")
 
     return
 
@@ -104,7 +104,7 @@ def whois_ip_1(action=None, success=None, container=None, results=None, handle=N
                 'context': {'artifact_id': container_item[1]},
             })
 
-    phantom.act("whois ip", parameters=parameters, assets=['whois'], name="whois_ip_1")
+    phantom.act("whois ip", parameters=parameters, assets=['whois'], callback=prompt_1, name="whois_ip_1")
 
     return
 
@@ -125,7 +125,70 @@ def file_reputation_1(action=None, success=None, container=None, results=None, h
                 'context': {'artifact_id': container_item[1]},
             })
 
-    phantom.act("file reputation", parameters=parameters, assets=['virustotal_api'], name="file_reputation_1")
+    phantom.act("file reputation", parameters=parameters, assets=['virustotal_api'], callback=prompt_2, name="file_reputation_1")
+
+    return
+
+def prompt_1(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None):
+    phantom.debug('prompt_1() called')
+    
+    # set user and message variables for phantom.prompt call
+    user = "admin"
+    message = """This is an IP"""
+
+    #responses:
+    response_types = [
+        {
+            "prompt": "",
+            "options": {
+                "type": "message",
+            },
+        },
+    ]
+
+    phantom.prompt2(container=container, user=user, message=message, respond_in_mins=30, name="prompt_1", response_types=response_types)
+
+    return
+
+def prompt_2(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None):
+    phantom.debug('prompt_2() called')
+    
+    # set user and message variables for phantom.prompt call
+    user = "admin"
+    message = """This is a file"""
+
+    #responses:
+    response_types = [
+        {
+            "prompt": "",
+            "options": {
+                "type": "message",
+            },
+        },
+    ]
+
+    phantom.prompt2(container=container, user=user, message=message, respond_in_mins=30, name="prompt_2", response_types=response_types)
+
+    return
+
+def prompt_3(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None):
+    phantom.debug('prompt_3() called')
+    
+    # set user and message variables for phantom.prompt call
+    user = "admin"
+    message = """This is a domain"""
+
+    #responses:
+    response_types = [
+        {
+            "prompt": "",
+            "options": {
+                "type": "message",
+            },
+        },
+    ]
+
+    phantom.prompt2(container=container, user=user, message=message, respond_in_mins=30, name="prompt_3", response_types=response_types)
 
     return
 
