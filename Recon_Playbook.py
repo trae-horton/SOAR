@@ -20,62 +20,14 @@ from datetime import datetime, timedelta
 def on_start(container):
     phantom.debug('on_start() called')
     
-    # call 'decision_1' block
-    decision_1(container=container)
+    # call 'whois_ip_1' block
+    whois_ip_1(container=container)
 
-    return
+    # call 'file_reputation_1' block
+    file_reputation_1(container=container)
 
-def decision_1(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None):
-    phantom.debug('decision_1() called')
-
-    # check for 'if' condition 1
-    matched_artifacts_1, matched_results_1 = phantom.condition(
-        container=container,
-        conditions=[
-            ["artifact:*.cef.fileHashMd5", ">=", "1"],
-            ["artifact:*.cef.fileHashSha1", ">=", "1"],
-            ["artifact:*.cef.fileHashSha256", ">=", "1"],
-            ["artifact:*.cef.fileHashSha512", "==", "1"],
-        ],
-        logical_operator='or')
-
-    # call connected blocks if condition 1 matched
-    if matched_artifacts_1 or matched_results_1:
-        file_reputation_1(action=action, success=success, container=container, results=results, handle=handle)
-        return
-
-    # check for 'elif' condition 2
-    matched_artifacts_2, matched_results_2 = phantom.condition(
-        container=container,
-        conditions=[
-            ["artifact:*.cef.destinationDnsDomain", ">=", "1"],
-            ["artifact:*.cef.sourceDnsDomain", ">=", "1"],
-            ["artifact:*.cef.deviceDnsDomain", ">=", "1"],
-        ],
-        logical_operator='or')
-
-    # call connected blocks if condition 2 matched
-    if matched_artifacts_2 or matched_results_2:
-        whois_domain_1(action=action, success=success, container=container, results=results, handle=handle)
-        return
-
-    # check for 'elif' condition 3
-    matched_artifacts_3, matched_results_3 = phantom.condition(
-        container=container,
-        conditions=[
-            ["artifact:*.cef.destinationAddress", ">=", "1"],
-            ["artifact:*.cef.deviceAddress", ">=", "1"],
-            ["artifact:*.cef.sourceAddress", ">=", "1"],
-        ],
-        logical_operator='or')
-
-    # call connected blocks if condition 3 matched
-    if matched_artifacts_3 or matched_results_3:
-        whois_ip_1(action=action, success=success, container=container, results=results, handle=handle)
-        return
-
-    # call connected blocks for 'else' condition 4
-    prompt_4(action=action, success=success, container=container, results=results, handle=handle)
+    # call 'whois_domain_1' block
+    whois_domain_1(container=container)
 
     return
 
@@ -202,27 +154,6 @@ def prompt_3(action=None, success=None, container=None, results=None, handle=Non
     ]
 
     phantom.prompt2(container=container, user=user, message=message, respond_in_mins=30, name="prompt_3", response_types=response_types)
-
-    return
-
-def prompt_4(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None):
-    phantom.debug('prompt_4() called')
-    
-    # set user and message variables for phantom.prompt call
-    user = "admin"
-    message = """ERROR"""
-
-    #responses:
-    response_types = [
-        {
-            "prompt": "",
-            "options": {
-                "type": "message",
-            },
-        },
-    ]
-
-    phantom.prompt2(container=container, user=user, message=message, respond_in_mins=30, name="prompt_4", response_types=response_types)
 
     return
 
