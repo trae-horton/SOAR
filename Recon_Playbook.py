@@ -45,8 +45,8 @@ def decision_1(action=None, success=None, container=None, results=None, handle=N
         container=container,
         conditions=[
             ["artifact:*.cef", "==", "artifact:*.cef.destinationDnsDomain"],
-            ["artifact:*.type", "==", "artifact:*.cef.sourceDnsDomain"],
-            ["artifact:*.type", "==", "artifact:*.cef.deviceDnsDomain"],
+            ["artifact:*.cef", "==", "artifact:*.cef.sourceDnsDomain"],
+            ["artifact:*.cef", "==", "artifact:*.cef.deviceDnsDomain"],
         ],
         logical_operator='or')
 
@@ -60,8 +60,8 @@ def decision_1(action=None, success=None, container=None, results=None, handle=N
         container=container,
         conditions=[
             ["artifact:*.cef", "==", "artifact:*.cef.destinationAddress"],
-            ["artifact:*.type", "==", "artifact:*.cef.deviceAddress"],
-            ["artifact:*.type", "==", "artifact:*.cef.sourceAddress"],
+            ["artifact:*.cef", "==", "artifact:*.cef.deviceAddress"],
+            ["artifact:*.cef", "==", "artifact:*.cef.sourceAddress"],
         ],
         logical_operator='or')
 
