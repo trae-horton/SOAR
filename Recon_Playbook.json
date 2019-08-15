@@ -7,7 +7,7 @@
             "clean": true,
             "code_block": "",
             "description": "This playbook will take the following data and run through recon modules:\n\nDestination IP\nDestination DNS\nSHA256 Hash\n\n\nActions include:\n\nPhantom DNS\nPhantom IP\nVirusTotal",
-            "hash": "559adc48508ee8194d873b6ac054dd50d6fa650d",
+            "hash": "332a41488cd7f7a205caf12acaa3b31421fdacbf",
             "joint": {
                 "cells": [
                     {
@@ -5072,7 +5072,7 @@
                                 }
                             },
                             "g.delete": {
-                                "display": "none"
+                                "display": "block"
                             },
                             "g.delete image": {
                                 "x": 5
@@ -5087,7 +5087,7 @@
                                 "opacity": 1
                             }
                         },
-                        "block_code": "def decision_1(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None):\n    phantom.debug('decision_1() called')\n\n    # check for 'if' condition 1\n    matched_artifacts_1, matched_results_1 = phantom.condition(\n        container=container,\n        conditions=[\n            [\"artifact:*.cef.fileHash\", \"==\", \"*\"],\n        ])\n\n    # call connected blocks if condition 1 matched\n    if matched_artifacts_1 or matched_results_1:\n        file_reputation_1(action=action, success=success, container=container, results=results, handle=handle)\n        return\n\n    # check for 'elif' condition 2\n    matched_artifacts_2, matched_results_2 = phantom.condition(\n        container=container,\n        conditions=[\n            [\"artifact:*.cef.destinationDnsDomain\", \"==\", \"*\"],\n            [\"artifact:*.cef.sourceDnsDomain\", \"==\", \"*\"],\n            [\"artifact:*.cef.deviceDnsDomain\", \"==\", \"*\"],\n        ],\n        logical_operator='or')\n\n    # call connected blocks if condition 2 matched\n    if matched_artifacts_2 or matched_results_2:\n        whois_domain_1(action=action, success=success, container=container, results=results, handle=handle)\n        return\n\n    # check for 'elif' condition 3\n    matched_artifacts_3, matched_results_3 = phantom.condition(\n        container=container,\n        conditions=[\n            [\"artifact:*.cef.destinationAddress\", \"==\", \"*\"],\n            [\"artifact:*.cef.deviceAddress\", \"==\", \"*\"],\n            [\"artifact:*.cef.sourceAddress\", \"==\", \"*\"],\n        ],\n        logical_operator='or')\n\n    # call connected blocks if condition 3 matched\n    if matched_artifacts_3 or matched_results_3:\n        whois_ip_1(action=action, success=success, container=container, results=results, handle=handle)\n        return\n\n    # call connected blocks for 'else' condition 4\n    prompt_4(action=action, success=success, container=container, results=results, handle=handle)\n\n    return",
+                        "block_code": "def decision_1(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None):\n    phantom.debug('decision_1() called')\n\n    # check for 'if' condition 1\n    matched_artifacts_1, matched_results_1 = phantom.condition(\n        container=container,\n        conditions=[\n            [\"artifact:*.cef.fileHash\", \">=\", \"1\"],\n        ])\n\n    # call connected blocks if condition 1 matched\n    if matched_artifacts_1 or matched_results_1:\n        file_reputation_1(action=action, success=success, container=container, results=results, handle=handle)\n        return\n\n    # check for 'elif' condition 2\n    matched_artifacts_2, matched_results_2 = phantom.condition(\n        container=container,\n        conditions=[\n            [\"artifact:*.cef.destinationDnsDomain\", \">=\", \"1\"],\n            [\"artifact:*.cef.sourceDnsDomain\", \">=\", \"1\"],\n            [\"artifact:*.cef.deviceDnsDomain\", \">=\", \"1\"],\n        ],\n        logical_operator='or')\n\n    # call connected blocks if condition 2 matched\n    if matched_artifacts_2 or matched_results_2:\n        whois_domain_1(action=action, success=success, container=container, results=results, handle=handle)\n        return\n\n    # check for 'elif' condition 3\n    matched_artifacts_3, matched_results_3 = phantom.condition(\n        container=container,\n        conditions=[\n            [\"artifact:*.cef.destinationAddress\", \">=\", \"1\"],\n            [\"artifact:*.cef.deviceAddress\", \">=\", \"1\"],\n            [\"artifact:*.cef.sourceAddress\", \">=\", \"1\"],\n        ],\n        logical_operator='or')\n\n    # call connected blocks if condition 3 matched\n    if matched_artifacts_3 or matched_results_3:\n        whois_ip_1(action=action, success=success, container=container, results=results, handle=handle)\n        return\n\n    # call connected blocks for 'else' condition 4\n    prompt_4(action=action, success=success, container=container, results=results, handle=handle)\n\n    return",
                         "callback_code": "",
                         "callback_start": 1,
                         "callsback": false,
@@ -5127,10 +5127,10 @@
                             {
                                 "conditions": [
                                     {
-                                        "comparison": "==",
+                                        "comparison": ">=",
                                         "data_type": "",
                                         "param": "artifact:*.cef.fileHash",
-                                        "value": "*"
+                                        "value": "1"
                                     }
                                 ],
                                 "display": "If",
@@ -5140,22 +5140,22 @@
                             {
                                 "conditions": [
                                     {
-                                        "comparison": "==",
+                                        "comparison": ">=",
                                         "data_type": "",
                                         "param": "artifact:*.cef.destinationDnsDomain",
-                                        "value": "*"
+                                        "value": "1"
                                     },
                                     {
-                                        "comparison": "==",
+                                        "comparison": ">=",
                                         "data_type": "",
                                         "param": "artifact:*.cef.sourceDnsDomain",
-                                        "value": "*"
+                                        "value": "1"
                                     },
                                     {
-                                        "comparison": "==",
+                                        "comparison": ">=",
                                         "data_type": "",
                                         "param": "artifact:*.cef.deviceDnsDomain",
-                                        "value": "*"
+                                        "value": "1"
                                     }
                                 ],
                                 "display": "Else If",
@@ -5165,22 +5165,22 @@
                             {
                                 "conditions": [
                                     {
-                                        "comparison": "==",
+                                        "comparison": ">=",
                                         "data_type": "",
                                         "param": "artifact:*.cef.destinationAddress",
-                                        "value": "*"
+                                        "value": "1"
                                     },
                                     {
-                                        "comparison": "==",
+                                        "comparison": ">=",
                                         "data_type": "",
                                         "param": "artifact:*.cef.deviceAddress",
-                                        "value": "*"
+                                        "value": "1"
                                     },
                                     {
-                                        "comparison": "==",
+                                        "comparison": ">=",
                                         "data_type": "",
                                         "param": "artifact:*.cef.sourceAddress",
-                                        "value": "*"
+                                        "value": "1"
                                     }
                                 ],
                                 "display": "Else If",
@@ -5268,7 +5268,7 @@
                         "status": "",
                         "type": "coa.Decision",
                         "warn": "",
-                        "z": 54
+                        "z": 55
                     }
                 ]
             },
@@ -5277,7 +5277,7 @@
         "schema": 3,
         "version": "4.5.15922"
     },
-    "create_time": "2019-08-15T17:53:31.083784+00:00",
+    "create_time": "2019-08-15T17:56:06.361398+00:00",
     "draft_mode": false,
     "labels": [
         "*"

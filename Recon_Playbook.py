@@ -32,7 +32,7 @@ def decision_1(action=None, success=None, container=None, results=None, handle=N
     matched_artifacts_1, matched_results_1 = phantom.condition(
         container=container,
         conditions=[
-            ["artifact:*.cef.fileHash", "==", "*"],
+            ["artifact:*.cef.fileHash", ">=", "1"],
         ])
 
     # call connected blocks if condition 1 matched
@@ -44,9 +44,9 @@ def decision_1(action=None, success=None, container=None, results=None, handle=N
     matched_artifacts_2, matched_results_2 = phantom.condition(
         container=container,
         conditions=[
-            ["artifact:*.cef.destinationDnsDomain", "==", "*"],
-            ["artifact:*.cef.sourceDnsDomain", "==", "*"],
-            ["artifact:*.cef.deviceDnsDomain", "==", "*"],
+            ["artifact:*.cef.destinationDnsDomain", ">=", "1"],
+            ["artifact:*.cef.sourceDnsDomain", ">=", "1"],
+            ["artifact:*.cef.deviceDnsDomain", ">=", "1"],
         ],
         logical_operator='or')
 
@@ -59,9 +59,9 @@ def decision_1(action=None, success=None, container=None, results=None, handle=N
     matched_artifacts_3, matched_results_3 = phantom.condition(
         container=container,
         conditions=[
-            ["artifact:*.cef.destinationAddress", "==", "*"],
-            ["artifact:*.cef.deviceAddress", "==", "*"],
-            ["artifact:*.cef.sourceAddress", "==", "*"],
+            ["artifact:*.cef.destinationAddress", ">=", "1"],
+            ["artifact:*.cef.deviceAddress", ">=", "1"],
+            ["artifact:*.cef.sourceAddress", ">=", "1"],
         ],
         logical_operator='or')
 
