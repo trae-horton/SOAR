@@ -7,7 +7,7 @@
             "clean": true,
             "code_block": "",
             "description": "This playbook will take the following data and run through recon modules:\n\nDestination IP\nDestination DNS\nSHA256 Hash\n\n\nActions include:\n\nPhantom DNS\nPhantom IP\nVirusTotal",
-            "hash": "9f70c3b6a1a735548775b3ea8227ab285ce89613",
+            "hash": "64c40e6b1690203a122a9871b23f32c3dbe084d6",
             "joint": {
                 "cells": [
                     {
@@ -4778,8 +4778,8 @@
                         "join_code": "# read-only block view not available",
                         "join_optional": [],
                         "join_start": 1,
-                        "line_end": 228,
-                        "line_start": 215,
+                        "line_end": 229,
+                        "line_start": 216,
                         "name": "",
                         "notes": "",
                         "number": 0,
@@ -5037,7 +5037,7 @@
                         "active_keys": {},
                         "active_values": {
                             "assignee": "",
-                            "description": "test",
+                            "description": "format_1:formatted_data",
                             "fields": "",
                             "issue_type": "Task",
                             "priority": "",
@@ -5076,7 +5076,7 @@
                                 "count": 0,
                                 "fields": {
                                     "assignee": "",
-                                    "description": "test",
+                                    "description": "format_1:formatted_data",
                                     "fields": "",
                                     "issue_type": "Task",
                                     "priority": "",
@@ -6341,7 +6341,7 @@
                                 "opacity": 1
                             }
                         },
-                        "block_code": "def create_ticket_1(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None):\n    phantom.debug('create_ticket_1() called')\n    \n    #phantom.debug('Action: {0} {1}'.format(action['name'], ('SUCCEEDED' if success else 'FAILED')))\n    \n    # collect data for 'create_ticket_1' call\n\n    parameters = []\n    \n    # build parameters list for 'create_ticket_1' call\n    parameters.append({\n        'project_key': \"ITSEC\",\n        'summary': \"Test ticket\",\n        'description': \"test\",\n        'issue_type': \"Task\",\n        'priority': \"\",\n        'assignee': \"\",\n        'fields': \"\",\n        'vault_id': \"\",\n    })\n\n    phantom.act(\"create ticket\", parameters=parameters, assets=['atlassian_api'], name=\"create_ticket_1\")\n\n    return",
+                        "block_code": "def create_ticket_1(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None):\n    phantom.debug('create_ticket_1() called')\n    \n    #phantom.debug('Action: {0} {1}'.format(action['name'], ('SUCCEEDED' if success else 'FAILED')))\n    \n    # collect data for 'create_ticket_1' call\n    formatted_data_1 = phantom.get_format_data(name='format_1')\n\n    parameters = []\n    \n    # build parameters list for 'create_ticket_1' call\n    parameters.append({\n        'project_key': \"ITSEC\",\n        'summary': \"Test ticket\",\n        'description': formatted_data_1,\n        'issue_type': \"Task\",\n        'priority': \"\",\n        'assignee': \"\",\n        'fields': \"\",\n        'vault_id': \"\",\n    })\n\n    phantom.act(\"create ticket\", parameters=parameters, assets=['atlassian_api'], name=\"create_ticket_1\")\n\n    return",
                         "callback_code": "",
                         "callback_start": 1,
                         "callsback": true,
@@ -6366,7 +6366,7 @@
                         "join_code": "",
                         "join_optional": [],
                         "join_start": 1,
-                        "line_end": 215,
+                        "line_end": 216,
                         "line_start": 190,
                         "message": "Configuring now",
                         "name": "create ticket",
@@ -6450,7 +6450,7 @@
                         "title": "Generic",
                         "type": "coa.Action",
                         "warn": "",
-                        "z": 96
+                        "z": 97
                     }
                 ]
             },
@@ -6459,7 +6459,7 @@
         "schema": 3,
         "version": "4.5.15922"
     },
-    "create_time": "2019-08-15T18:56:11.230839+00:00",
+    "create_time": "2019-08-15T18:57:03.098053+00:00",
     "draft_mode": false,
     "labels": [
         "*"

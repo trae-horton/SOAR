@@ -193,6 +193,7 @@ def create_ticket_1(action=None, success=None, container=None, results=None, han
     #phantom.debug('Action: {0} {1}'.format(action['name'], ('SUCCEEDED' if success else 'FAILED')))
     
     # collect data for 'create_ticket_1' call
+    formatted_data_1 = phantom.get_format_data(name='format_1')
 
     parameters = []
     
@@ -200,7 +201,7 @@ def create_ticket_1(action=None, success=None, container=None, results=None, han
     parameters.append({
         'project_key': "ITSEC",
         'summary': "Test ticket",
-        'description': "test",
+        'description': formatted_data_1,
         'issue_type': "Task",
         'priority': "",
         'assignee': "",
