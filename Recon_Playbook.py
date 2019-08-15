@@ -45,7 +45,10 @@ def decision_1(action=None, success=None, container=None, results=None, handle=N
         container=container,
         conditions=[
             ["artifact:*.type", "==", "artifact:*.cef.destinationDnsDomain"],
-        ])
+            ["artifact:*.type", "==", "artifact:*.cef.sourceDnsDomain"],
+            ["artifact:*.type", "==", "artifact:*.cef.deviceDnsDomain"],
+        ],
+        logical_operator='or')
 
     # call connected blocks if condition 2 matched
     if matched_artifacts_2 or matched_results_2:

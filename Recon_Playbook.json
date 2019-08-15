@@ -7,7 +7,7 @@
             "clean": true,
             "code_block": "",
             "description": "This playbook will take the following data and run through recon modules:\n\nDestination IP\nDestination DNS\nSHA256 Hash\n\n\nActions include:\n\nPhantom DNS\nPhantom IP\nVirusTotal",
-            "hash": "e531f2b2d9f4e040bddffbdaf6686fdd28fecbb0",
+            "hash": "a98765fe23114b85690058262c57563948638c0a",
             "joint": {
                 "cells": [
                     {
@@ -217,8 +217,8 @@
                         "join_code": "# read-only block view not available",
                         "join_optional": [],
                         "join_start": 1,
-                        "line_end": 232,
-                        "line_start": 219,
+                        "line_end": 235,
+                        "line_start": 222,
                         "name": "",
                         "notes": "",
                         "number": 0,
@@ -853,8 +853,8 @@
                         "join_code": "",
                         "join_optional": [],
                         "join_start": 1,
-                        "line_end": 114,
-                        "line_start": 93,
+                        "line_end": 117,
+                        "line_start": 96,
                         "message": "Configuring now",
                         "name": "whois ip",
                         "notes": "",
@@ -3430,8 +3430,8 @@
                         "join_code": "",
                         "join_optional": [],
                         "join_start": 1,
-                        "line_end": 135,
-                        "line_start": 114,
+                        "line_end": 138,
+                        "line_start": 117,
                         "message": "Configuring now",
                         "name": "file reputation",
                         "notes": "",
@@ -3664,8 +3664,8 @@
                         "join_code": "",
                         "join_optional": [],
                         "join_start": 1,
-                        "line_end": 156,
-                        "line_start": 135,
+                        "line_end": 159,
+                        "line_start": 138,
                         "message": "This is an IP",
                         "name": "prompt",
                         "notes": "",
@@ -3986,8 +3986,8 @@
                         "join_code": "",
                         "join_optional": [],
                         "join_start": 1,
-                        "line_end": 177,
-                        "line_start": 156,
+                        "line_end": 180,
+                        "line_start": 159,
                         "message": "This is a file",
                         "name": "prompt",
                         "notes": "",
@@ -4146,8 +4146,8 @@
                         "join_code": "",
                         "join_optional": [],
                         "join_start": 1,
-                        "line_end": 198,
-                        "line_start": 177,
+                        "line_end": 201,
+                        "line_start": 180,
                         "message": "This is a domain",
                         "name": "prompt",
                         "notes": "",
@@ -4343,8 +4343,8 @@
                         "join_code": "",
                         "join_optional": [],
                         "join_start": 1,
-                        "line_end": 219,
-                        "line_start": 198,
+                        "line_end": 222,
+                        "line_start": 201,
                         "message": "ERROR",
                         "name": "prompt",
                         "notes": "",
@@ -4913,8 +4913,8 @@
                         "join_code": "",
                         "join_optional": [],
                         "join_start": 1,
-                        "line_end": 93,
-                        "line_start": 72,
+                        "line_end": 96,
+                        "line_start": 75,
                         "message": "Configuring now",
                         "name": "whois domain",
                         "notes": "",
@@ -5087,7 +5087,7 @@
                                 "opacity": 1
                             }
                         },
-                        "block_code": "def decision_1(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None):\n    phantom.debug('decision_1() called')\n\n    # check for 'if' condition 1\n    matched_artifacts_1, matched_results_1 = phantom.condition(\n        container=container,\n        conditions=[\n            [\"artifact:*.type\", \"==\", \"artifact:*.cef.fileHash\"],\n        ])\n\n    # call connected blocks if condition 1 matched\n    if matched_artifacts_1 or matched_results_1:\n        file_reputation_1(action=action, success=success, container=container, results=results, handle=handle)\n        return\n\n    # check for 'elif' condition 2\n    matched_artifacts_2, matched_results_2 = phantom.condition(\n        container=container,\n        conditions=[\n            [\"artifact:*.type\", \"==\", \"artifact:*.cef.destinationDnsDomain\"],\n        ])\n\n    # call connected blocks if condition 2 matched\n    if matched_artifacts_2 or matched_results_2:\n        whois_domain_1(action=action, success=success, container=container, results=results, handle=handle)\n        return\n\n    # check for 'elif' condition 3\n    matched_artifacts_3, matched_results_3 = phantom.condition(\n        container=container,\n        conditions=[\n            [\"artifact:*.type\", \"==\", \"artifact:*.cef.destinationAddress\"],\n        ])\n\n    # call connected blocks if condition 3 matched\n    if matched_artifacts_3 or matched_results_3:\n        whois_ip_1(action=action, success=success, container=container, results=results, handle=handle)\n        return\n\n    # call connected blocks for 'else' condition 4\n    prompt_4(action=action, success=success, container=container, results=results, handle=handle)\n\n    return",
+                        "block_code": "def decision_1(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None):\n    phantom.debug('decision_1() called')\n\n    # check for 'if' condition 1\n    matched_artifacts_1, matched_results_1 = phantom.condition(\n        container=container,\n        conditions=[\n            [\"artifact:*.type\", \"==\", \"artifact:*.cef.fileHash\"],\n        ])\n\n    # call connected blocks if condition 1 matched\n    if matched_artifacts_1 or matched_results_1:\n        file_reputation_1(action=action, success=success, container=container, results=results, handle=handle)\n        return\n\n    # check for 'elif' condition 2\n    matched_artifacts_2, matched_results_2 = phantom.condition(\n        container=container,\n        conditions=[\n            [\"artifact:*.type\", \"==\", \"artifact:*.cef.destinationDnsDomain\"],\n            [\"artifact:*.type\", \"==\", \"artifact:*.cef.sourceDnsDomain\"],\n            [\"artifact:*.type\", \"==\", \"artifact:*.cef.deviceDnsDomain\"],\n        ],\n        logical_operator='or')\n\n    # call connected blocks if condition 2 matched\n    if matched_artifacts_2 or matched_results_2:\n        whois_domain_1(action=action, success=success, container=container, results=results, handle=handle)\n        return\n\n    # check for 'elif' condition 3\n    matched_artifacts_3, matched_results_3 = phantom.condition(\n        container=container,\n        conditions=[\n            [\"artifact:*.type\", \"==\", \"artifact:*.cef.destinationAddress\"],\n        ])\n\n    # call connected blocks if condition 3 matched\n    if matched_artifacts_3 or matched_results_3:\n        whois_ip_1(action=action, success=success, container=container, results=results, handle=handle)\n        return\n\n    # call connected blocks for 'else' condition 4\n    prompt_4(action=action, success=success, container=container, results=results, handle=handle)\n\n    return",
                         "callback_code": "",
                         "callback_start": 1,
                         "callsback": false,
@@ -5111,7 +5111,7 @@
                         "join_code": "",
                         "join_optional": [],
                         "join_start": 1,
-                        "line_end": 72,
+                        "line_end": 75,
                         "line_start": 28,
                         "name": "decision",
                         "notes": "",
@@ -5144,10 +5144,22 @@
                                         "data_type": "",
                                         "param": "artifact:*.type",
                                         "value": "artifact:*.cef.destinationDnsDomain"
+                                    },
+                                    {
+                                        "comparison": "==",
+                                        "data_type": "",
+                                        "param": "artifact:*.type",
+                                        "value": "artifact:*.cef.sourceDnsDomain"
+                                    },
+                                    {
+                                        "comparison": "==",
+                                        "data_type": "",
+                                        "param": "artifact:*.type",
+                                        "value": "artifact:*.cef.deviceDnsDomain"
                                     }
                                 ],
                                 "display": "Else If",
-                                "logic": "and",
+                                "logic": "or",
                                 "type": "elif"
                             },
                             {
@@ -5244,7 +5256,7 @@
                         "status": "",
                         "type": "coa.Decision",
                         "warn": "",
-                        "z": 47
+                        "z": 48
                     }
                 ]
             },
@@ -5253,7 +5265,7 @@
         "schema": 3,
         "version": "4.5.15922"
     },
-    "create_time": "2019-08-15T17:15:39.190934+00:00",
+    "create_time": "2019-08-15T17:21:53.664651+00:00",
     "draft_mode": false,
     "labels": [
         "*"
