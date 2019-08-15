@@ -7,153 +7,9 @@
             "clean": true,
             "code_block": "",
             "description": "This playbook will take the following data and run through recon modules:\n\nDestination IP\nDestination DNS\nSHA256 Hash\n\n\nActions include:\n\nPhantom DNS\nPhantom IP\nVirusTotal",
-            "hash": "223789b1cb316f759d321527c7378d9ef0c27214",
+            "hash": "b8a985e58f4319bf7e93481d8fc86944529ba144",
             "joint": {
                 "cells": [
-                    {
-                        "0": "S",
-                        "1": "T",
-                        "2": "A",
-                        "3": "R",
-                        "4": "T",
-                        "active": false,
-                        "angle": 0,
-                        "attrs": {
-                            ".background": {
-                                "fill": "#000000",
-                                "stroke": "#5C6773"
-                            },
-                            ".color-band": {
-                                "fill": "#3C444D"
-                            },
-                            ".outPorts>.port-out": {
-                                "ref": ".background",
-                                "ref-x": 0.5
-                            },
-                            ".outPorts>.port-out>.port-body": {
-                                "port": {
-                                    "id": "out",
-                                    "type": "out"
-                                }
-                            },
-                            ".title": {
-                                "ref-x": 33,
-                                "ref-y": 8,
-                                "text": "START"
-                            },
-                            "g.delete": {
-                                "display": "none"
-                            },
-                            "g.error": {
-                                "opacity": 0
-                            },
-                            "g.icon image": {
-                                "ref-x": 13,
-                                "xlink:href": "/inc/coa/img/block_icon_start.svg"
-                            },
-                            "g.notes": {
-                                "display": "block"
-                            }
-                        },
-                        "block_code": "def on_start(container):\n    phantom.debug('on_start() called')\n    \n    # call 'decision_1' block\n    decision_1(container=container)\n\n    return",
-                        "callback_code": "# read-only block view not available",
-                        "callback_start": 1,
-                        "callsback": false,
-                        "connected_to_start": true,
-                        "connection_name": "",
-                        "connection_type": "",
-                        "custom_callback": "",
-                        "custom_code": "",
-                        "custom_join": "",
-                        "custom_name": "",
-                        "description": "",
-                        "has_custom": false,
-                        "has_custom_block": false,
-                        "has_custom_callback": false,
-                        "has_custom_join": false,
-                        "id": "3e6128e9-6f30-4952-b16e-7b284a154c5d",
-                        "inPorts": [],
-                        "join_code": "# read-only block view not available",
-                        "join_optional": [],
-                        "join_start": 1,
-                        "line_end": 28,
-                        "line_start": 20,
-                        "name": "",
-                        "notes": "",
-                        "number": 0,
-                        "order": 1,
-                        "outPorts": [
-                            "out"
-                        ],
-                        "ports": {
-                            "groups": {
-                                "in": {
-                                    "attrs": {
-                                        ".port-body": {
-                                            "fill": "#fff",
-                                            "magnet": true,
-                                            "r": 10,
-                                            "stroke": "#000"
-                                        },
-                                        ".port-label": {
-                                            "fill": "#000"
-                                        }
-                                    },
-                                    "label": {
-                                        "position": {
-                                            "args": {
-                                                "y": 10
-                                            },
-                                            "name": "left"
-                                        }
-                                    },
-                                    "position": {
-                                        "name": "left"
-                                    }
-                                },
-                                "out": {
-                                    "attrs": {
-                                        ".port-body": {
-                                            "fill": "#fff",
-                                            "magnet": true,
-                                            "r": 10,
-                                            "stroke": "#000"
-                                        },
-                                        ".port-label": {
-                                            "fill": "#000"
-                                        }
-                                    },
-                                    "label": {
-                                        "position": {
-                                            "args": {
-                                                "y": 10
-                                            },
-                                            "name": "right"
-                                        }
-                                    },
-                                    "position": {
-                                        "name": "right"
-                                    }
-                                }
-                            }
-                        },
-                        "position": {
-                            "x": 80,
-                            "y": 260
-                        },
-                        "previous_function": "",
-                        "previous_name": "",
-                        "show_number": true,
-                        "size": {
-                            "height": 54,
-                            "width": 80
-                        },
-                        "status": "",
-                        "title": "START",
-                        "type": "coa.StartEnd",
-                        "warn": false,
-                        "z": 1
-                    },
                     {
                         "0": "E",
                         "1": "N",
@@ -217,8 +73,8 @@
                         "join_code": "# read-only block view not available",
                         "join_optional": [],
                         "join_start": 1,
-                        "line_end": 238,
-                        "line_start": 225,
+                        "line_end": 242,
+                        "line_start": 229,
                         "name": "",
                         "notes": "",
                         "number": 0,
@@ -853,8 +709,8 @@
                         "join_code": "",
                         "join_optional": [],
                         "join_start": 1,
-                        "line_end": 120,
-                        "line_start": 99,
+                        "line_end": 124,
+                        "line_start": 103,
                         "message": "Configuring now",
                         "name": "whois ip",
                         "notes": "",
@@ -3430,8 +3286,8 @@
                         "join_code": "",
                         "join_optional": [],
                         "join_start": 1,
-                        "line_end": 141,
-                        "line_start": 120,
+                        "line_end": 145,
+                        "line_start": 124,
                         "message": "Configuring now",
                         "name": "file reputation",
                         "notes": "",
@@ -3664,8 +3520,8 @@
                         "join_code": "",
                         "join_optional": [],
                         "join_start": 1,
-                        "line_end": 162,
-                        "line_start": 141,
+                        "line_end": 166,
+                        "line_start": 145,
                         "message": "This is an IP",
                         "name": "prompt",
                         "notes": "",
@@ -3986,8 +3842,8 @@
                         "join_code": "",
                         "join_optional": [],
                         "join_start": 1,
-                        "line_end": 183,
-                        "line_start": 162,
+                        "line_end": 187,
+                        "line_start": 166,
                         "message": "This is a file",
                         "name": "prompt",
                         "notes": "",
@@ -4146,8 +4002,8 @@
                         "join_code": "",
                         "join_optional": [],
                         "join_start": 1,
-                        "line_end": 204,
-                        "line_start": 183,
+                        "line_end": 208,
+                        "line_start": 187,
                         "message": "This is a domain",
                         "name": "prompt",
                         "notes": "",
@@ -4343,8 +4199,8 @@
                         "join_code": "",
                         "join_optional": [],
                         "join_start": 1,
-                        "line_end": 225,
-                        "line_start": 204,
+                        "line_end": 229,
+                        "line_start": 208,
                         "message": "ERROR",
                         "name": "prompt",
                         "notes": "",
@@ -4913,8 +4769,8 @@
                         "join_code": "",
                         "join_optional": [],
                         "join_start": 1,
-                        "line_end": 99,
-                        "line_start": 78,
+                        "line_end": 103,
+                        "line_start": 82,
                         "message": "Configuring now",
                         "name": "whois domain",
                         "notes": "",
@@ -4996,6 +4852,150 @@
                         "type": "coa.Action",
                         "warn": false,
                         "z": 46
+                    },
+                    {
+                        "0": "S",
+                        "1": "T",
+                        "2": "A",
+                        "3": "R",
+                        "4": "T",
+                        "active": false,
+                        "angle": 0,
+                        "attrs": {
+                            ".background": {
+                                "fill": "#000000",
+                                "stroke": "#5C6773"
+                            },
+                            ".color-band": {
+                                "fill": "#3C444D"
+                            },
+                            ".outPorts>.port-out": {
+                                "ref": ".background",
+                                "ref-x": 0.5
+                            },
+                            ".outPorts>.port-out>.port-body": {
+                                "port": {
+                                    "id": "out",
+                                    "type": "out"
+                                }
+                            },
+                            ".title": {
+                                "ref-x": 33,
+                                "ref-y": 8,
+                                "text": "START"
+                            },
+                            "g.delete": {
+                                "display": "none"
+                            },
+                            "g.error": {
+                                "opacity": 0
+                            },
+                            "g.icon image": {
+                                "ref-x": 13,
+                                "xlink:href": "/inc/coa/img/block_icon_start.svg"
+                            },
+                            "g.notes": {
+                                "display": "block"
+                            }
+                        },
+                        "block_code": "def on_start(container):\n    phantom.debug('on_start() called')\n    \n    # call 'decision_1' block\n    decision_1(container=container)\n\n    return",
+                        "callback_code": "# read-only block view not available",
+                        "callback_start": 1,
+                        "callsback": false,
+                        "connected_to_start": false,
+                        "connection_name": "",
+                        "connection_type": "",
+                        "custom_callback": "",
+                        "custom_code": "",
+                        "custom_join": "",
+                        "custom_name": "",
+                        "description": "",
+                        "has_custom": false,
+                        "has_custom_block": false,
+                        "has_custom_callback": false,
+                        "has_custom_join": false,
+                        "id": "3e6128e9-6f30-4952-b16e-7b284a154c5d",
+                        "inPorts": [],
+                        "join_code": "# read-only block view not available",
+                        "join_optional": [],
+                        "join_start": 1,
+                        "line_end": 28,
+                        "line_start": 20,
+                        "name": "",
+                        "notes": "",
+                        "number": 0,
+                        "order": 1,
+                        "outPorts": [
+                            "out"
+                        ],
+                        "ports": {
+                            "groups": {
+                                "in": {
+                                    "attrs": {
+                                        ".port-body": {
+                                            "fill": "#fff",
+                                            "magnet": true,
+                                            "r": 10,
+                                            "stroke": "#000"
+                                        },
+                                        ".port-label": {
+                                            "fill": "#000"
+                                        }
+                                    },
+                                    "label": {
+                                        "position": {
+                                            "args": {
+                                                "y": 10
+                                            },
+                                            "name": "left"
+                                        }
+                                    },
+                                    "position": {
+                                        "name": "left"
+                                    }
+                                },
+                                "out": {
+                                    "attrs": {
+                                        ".port-body": {
+                                            "fill": "#fff",
+                                            "magnet": true,
+                                            "r": 10,
+                                            "stroke": "#000"
+                                        },
+                                        ".port-label": {
+                                            "fill": "#000"
+                                        }
+                                    },
+                                    "label": {
+                                        "position": {
+                                            "args": {
+                                                "y": 10
+                                            },
+                                            "name": "right"
+                                        }
+                                    },
+                                    "position": {
+                                        "name": "right"
+                                    }
+                                }
+                            }
+                        },
+                        "position": {
+                            "x": 80,
+                            "y": 260
+                        },
+                        "previous_function": "",
+                        "previous_name": "",
+                        "show_number": true,
+                        "size": {
+                            "height": 54,
+                            "width": 80
+                        },
+                        "status": "",
+                        "title": "START",
+                        "type": "coa.StartEnd",
+                        "warn": false,
+                        "z": 57
                     },
                     {
                         "active": false,
@@ -5087,7 +5087,7 @@
                                 "opacity": 1
                             }
                         },
-                        "block_code": "def decision_1(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None):\n    phantom.debug('decision_1() called')\n\n    # check for 'if' condition 1\n    matched_artifacts_1, matched_results_1 = phantom.condition(\n        container=container,\n        conditions=[\n            [\"artifact:*.cef.fileHash*\", \">=\", \"1\"],\n        ])\n\n    # call connected blocks if condition 1 matched\n    if matched_artifacts_1 or matched_results_1:\n        file_reputation_1(action=action, success=success, container=container, results=results, handle=handle)\n        return\n\n    # check for 'elif' condition 2\n    matched_artifacts_2, matched_results_2 = phantom.condition(\n        container=container,\n        conditions=[\n            [\"artifact:*.cef.destinationDnsDomain\", \">=\", \"1\"],\n            [\"artifact:*.cef.sourceDnsDomain\", \">=\", \"1\"],\n            [\"artifact:*.cef.deviceDnsDomain\", \">=\", \"1\"],\n        ],\n        logical_operator='or')\n\n    # call connected blocks if condition 2 matched\n    if matched_artifacts_2 or matched_results_2:\n        whois_domain_1(action=action, success=success, container=container, results=results, handle=handle)\n        return\n\n    # check for 'elif' condition 3\n    matched_artifacts_3, matched_results_3 = phantom.condition(\n        container=container,\n        conditions=[\n            [\"artifact:*.cef.destinationAddress\", \">=\", \"1\"],\n            [\"artifact:*.cef.deviceAddress\", \">=\", \"1\"],\n            [\"artifact:*.cef.sourceAddress\", \">=\", \"1\"],\n        ],\n        logical_operator='or')\n\n    # call connected blocks if condition 3 matched\n    if matched_artifacts_3 or matched_results_3:\n        whois_ip_1(action=action, success=success, container=container, results=results, handle=handle)\n        return\n\n    # call connected blocks for 'else' condition 4\n    prompt_4(action=action, success=success, container=container, results=results, handle=handle)\n\n    return",
+                        "block_code": "def decision_1(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None):\n    phantom.debug('decision_1() called')\n\n    # check for 'if' condition 1\n    matched_artifacts_1, matched_results_1 = phantom.condition(\n        container=container,\n        conditions=[\n            [\"artifact:*.cef.fileHashMd5\", \">=\", \"1\"],\n            [\"artifact:*.cef.fileHashSha1\", \">=\", \"1\"],\n            [\"artifact:*.cef.fileHashSha256\", \">=\", \"1\"],\n            [\"artifact:*.cef.fileHashSha512\", \"==\", \"1\"],\n        ],\n        logical_operator='or')\n\n    # call connected blocks if condition 1 matched\n    if matched_artifacts_1 or matched_results_1:\n        file_reputation_1(action=action, success=success, container=container, results=results, handle=handle)\n        return\n\n    # check for 'elif' condition 2\n    matched_artifacts_2, matched_results_2 = phantom.condition(\n        container=container,\n        conditions=[\n            [\"artifact:*.cef.destinationDnsDomain\", \">=\", \"1\"],\n            [\"artifact:*.cef.sourceDnsDomain\", \">=\", \"1\"],\n            [\"artifact:*.cef.deviceDnsDomain\", \">=\", \"1\"],\n        ],\n        logical_operator='or')\n\n    # call connected blocks if condition 2 matched\n    if matched_artifacts_2 or matched_results_2:\n        whois_domain_1(action=action, success=success, container=container, results=results, handle=handle)\n        return\n\n    # check for 'elif' condition 3\n    matched_artifacts_3, matched_results_3 = phantom.condition(\n        container=container,\n        conditions=[\n            [\"artifact:*.cef.destinationAddress\", \">=\", \"1\"],\n            [\"artifact:*.cef.deviceAddress\", \">=\", \"1\"],\n            [\"artifact:*.cef.sourceAddress\", \">=\", \"1\"],\n        ],\n        logical_operator='or')\n\n    # call connected blocks if condition 3 matched\n    if matched_artifacts_3 or matched_results_3:\n        whois_ip_1(action=action, success=success, container=container, results=results, handle=handle)\n        return\n\n    # call connected blocks for 'else' condition 4\n    prompt_4(action=action, success=success, container=container, results=results, handle=handle)\n\n    return",
                         "callback_code": "",
                         "callback_start": 1,
                         "callsback": false,
@@ -5111,7 +5111,7 @@
                         "join_code": "",
                         "join_optional": [],
                         "join_start": 1,
-                        "line_end": 78,
+                        "line_end": 82,
                         "line_start": 28,
                         "name": "decision",
                         "notes": "",
@@ -5129,12 +5129,30 @@
                                     {
                                         "comparison": ">=",
                                         "data_type": "",
-                                        "param": "artifact:*.cef.fileHash*",
+                                        "param": "artifact:*.cef.fileHashMd5",
+                                        "value": "1"
+                                    },
+                                    {
+                                        "comparison": ">=",
+                                        "data_type": "",
+                                        "param": "artifact:*.cef.fileHashSha1",
+                                        "value": "1"
+                                    },
+                                    {
+                                        "comparison": ">=",
+                                        "data_type": "",
+                                        "param": "artifact:*.cef.fileHashSha256",
+                                        "value": "1"
+                                    },
+                                    {
+                                        "comparison": "==",
+                                        "data_type": "",
+                                        "param": "artifact:*.cef.fileHashSha512",
                                         "value": "1"
                                     }
                                 ],
                                 "display": "If",
-                                "logic": "and",
+                                "logic": "or",
                                 "type": "if"
                             },
                             {
@@ -5268,7 +5286,7 @@
                         "status": "",
                         "type": "coa.Decision",
                         "warn": "",
-                        "z": 56
+                        "z": 59
                     }
                 ]
             },
@@ -5277,7 +5295,7 @@
         "schema": 3,
         "version": "4.5.15922"
     },
-    "create_time": "2019-08-15T17:58:28.046612+00:00",
+    "create_time": "2019-08-15T18:04:43.140473+00:00",
     "draft_mode": false,
     "labels": [
         "*"

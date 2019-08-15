@@ -32,8 +32,12 @@ def decision_1(action=None, success=None, container=None, results=None, handle=N
     matched_artifacts_1, matched_results_1 = phantom.condition(
         container=container,
         conditions=[
-            ["artifact:*.cef.fileHash*", ">=", "1"],
-        ])
+            ["artifact:*.cef.fileHashMd5", ">=", "1"],
+            ["artifact:*.cef.fileHashSha1", ">=", "1"],
+            ["artifact:*.cef.fileHashSha256", ">=", "1"],
+            ["artifact:*.cef.fileHashSha512", "==", "1"],
+        ],
+        logical_operator='or')
 
     # call connected blocks if condition 1 matched
     if matched_artifacts_1 or matched_results_1:
