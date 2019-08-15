@@ -32,7 +32,7 @@ def decision_1(action=None, success=None, container=None, results=None, handle=N
     matched_artifacts_1, matched_results_1 = phantom.condition(
         container=container,
         conditions=[
-            ["artifact", "==", "artifact:*.cef.fileHashSha256"],
+            ["artifact:*.type", "==", "artifact:*.cef.fileHashSha256"],
         ])
 
     # call connected blocks if condition 1 matched
@@ -44,7 +44,7 @@ def decision_1(action=None, success=None, container=None, results=None, handle=N
     matched_artifacts_2, matched_results_2 = phantom.condition(
         container=container,
         conditions=[
-            ["artifact", "==", "artifact:*.cef.destinationDnsDomain"],
+            ["artifact:*.type", "==", "artifact:*.cef.destinationDnsDomain"],
         ])
 
     # call connected blocks if condition 2 matched
@@ -56,7 +56,7 @@ def decision_1(action=None, success=None, container=None, results=None, handle=N
     matched_artifacts_3, matched_results_3 = phantom.condition(
         container=container,
         conditions=[
-            ["artifact", "==", "artifact:*.cef.destinationAddress"],
+            ["artifact:*.type", "==", "artifact:*.cef.destinationAddress"],
         ])
 
     # call connected blocks if condition 3 matched
