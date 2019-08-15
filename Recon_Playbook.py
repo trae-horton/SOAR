@@ -48,7 +48,7 @@ def whois_domain_1(action=None, success=None, container=None, results=None, hand
                 'context': {'artifact_id': container_item[1]},
             })
 
-    phantom.act("whois domain", parameters=parameters, assets=['whois'], callback=prompt_3, name="whois_domain_1")
+    phantom.act("whois domain", parameters=parameters, assets=['whois'], callback=join_format_1, name="whois_domain_1")
 
     return
 
@@ -69,7 +69,7 @@ def whois_ip_1(action=None, success=None, container=None, results=None, handle=N
                 'context': {'artifact_id': container_item[1]},
             })
 
-    phantom.act("whois ip", parameters=parameters, assets=['whois'], callback=prompt_1, name="whois_ip_1")
+    phantom.act("whois ip", parameters=parameters, assets=['whois'], callback=join_format_1, name="whois_ip_1")
 
     return
 
@@ -90,70 +90,7 @@ def file_reputation_1(action=None, success=None, container=None, results=None, h
                 'context': {'artifact_id': container_item[1]},
             })
 
-    phantom.act("file reputation", parameters=parameters, assets=['virustotal_api'], callback=prompt_2, name="file_reputation_1")
-
-    return
-
-def prompt_1(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None):
-    phantom.debug('prompt_1() called')
-    
-    # set user and message variables for phantom.prompt call
-    user = "admin"
-    message = """This is an IP"""
-
-    #responses:
-    response_types = [
-        {
-            "prompt": "",
-            "options": {
-                "type": "message",
-            },
-        },
-    ]
-
-    phantom.prompt2(container=container, user=user, message=message, respond_in_mins=30, name="prompt_1", response_types=response_types)
-
-    return
-
-def prompt_2(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None):
-    phantom.debug('prompt_2() called')
-    
-    # set user and message variables for phantom.prompt call
-    user = "admin"
-    message = """This is a file"""
-
-    #responses:
-    response_types = [
-        {
-            "prompt": "",
-            "options": {
-                "type": "message",
-            },
-        },
-    ]
-
-    phantom.prompt2(container=container, user=user, message=message, respond_in_mins=30, name="prompt_2", response_types=response_types)
-
-    return
-
-def prompt_3(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None):
-    phantom.debug('prompt_3() called')
-    
-    # set user and message variables for phantom.prompt call
-    user = "admin"
-    message = """This is a domain"""
-
-    #responses:
-    response_types = [
-        {
-            "prompt": "",
-            "options": {
-                "type": "message",
-            },
-        },
-    ]
-
-    phantom.prompt2(container=container, user=user, message=message, respond_in_mins=30, name="prompt_3", response_types=response_types)
+    phantom.act("file reputation", parameters=parameters, assets=['virustotal_api'], callback=join_format_1, name="file_reputation_1")
 
     return
 
@@ -216,6 +153,64 @@ def filter_3(action=None, success=None, container=None, results=None, handle=Non
     # call connected blocks if filtered artifacts or results
     if matched_artifacts_1 or matched_results_1:
         whois_domain_1(action=action, success=success, container=container, results=results, handle=handle, filtered_artifacts=matched_artifacts_1, filtered_results=matched_results_1)
+
+    return
+
+def format_1(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None):
+    phantom.debug('format_1() called')
+    
+    template = """{0}
+{1}
+{2}"""
+
+    # parameter list for template variable replacement
+    parameters = [
+        "file_reputation_1:action_result.data.*.verbose_msg",
+        "whois_ip_1:action_result.message",
+        "whois_domain_1:action_result.message",
+    ]
+
+    phantom.format(container=container, template=template, parameters=parameters, name="format_1")
+
+    create_ticket_1(container=container)
+
+    return
+
+def join_format_1(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None):
+    phantom.debug('join_format_1() called')
+
+    # check if all connected incoming actions are done i.e. have succeeded or failed
+    if phantom.actions_done([ 'file_reputation_1', 'whois_domain_1', 'whois_ip_1' ]):
+        
+        # call connected block "format_1"
+        format_1(container=container, handle=handle)
+    
+    return
+
+def create_ticket_1(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None):
+    phantom.debug('create_ticket_1() called')
+    
+    #phantom.debug('Action: {0} {1}'.format(action['name'], ('SUCCEEDED' if success else 'FAILED')))
+    
+    # collect data for 'create_ticket_1' call
+    formatted_data_1 = phantom.get_format_data(name='format_1__as_list')
+
+    parameters = []
+    
+    # build parameters list for 'create_ticket_1' call
+    for formatted_part_1 in formatted_data_1:
+        parameters.append({
+            'project_key': "ITSEC",
+            'summary': "Test ticket",
+            'description': formatted_part_1,
+            'issue_type': "Task",
+            'priority': "",
+            'assignee': "",
+            'fields': "",
+            'vault_id': "",
+        })
+
+    phantom.act("create ticket", parameters=parameters, assets=['atlassian_api'], name="create_ticket_1")
 
     return
 
