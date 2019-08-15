@@ -64,6 +64,9 @@ def decision_1(action=None, success=None, container=None, results=None, handle=N
         whois_ip_1(action=action, success=success, container=container, results=results, handle=handle)
         return
 
+    # call connected blocks for 'else' condition 4
+    prompt_4(action=action, success=success, container=container, results=results, handle=handle)
+
     return
 
 def whois_domain_1(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None):
@@ -189,6 +192,27 @@ def prompt_3(action=None, success=None, container=None, results=None, handle=Non
     ]
 
     phantom.prompt2(container=container, user=user, message=message, respond_in_mins=30, name="prompt_3", response_types=response_types)
+
+    return
+
+def prompt_4(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None):
+    phantom.debug('prompt_4() called')
+    
+    # set user and message variables for phantom.prompt call
+    user = "admin"
+    message = """ERROR"""
+
+    #responses:
+    response_types = [
+        {
+            "prompt": "",
+            "options": {
+                "type": "message",
+            },
+        },
+    ]
+
+    phantom.prompt2(container=container, user=user, message=message, respond_in_mins=30, name="prompt_4", response_types=response_types)
 
     return
 
