@@ -174,8 +174,6 @@ Domain Info = {2}"""
 
     phantom.format(container=container, template=template, parameters=parameters, name="format_1")
 
-    create_ticket_1(container=container)
-
     return
 
 def join_format_1(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None):
@@ -187,32 +185,6 @@ def join_format_1(action=None, success=None, container=None, results=None, handl
         # call connected block "format_1"
         format_1(container=container, handle=handle)
     
-    return
-
-def create_ticket_1(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None):
-    phantom.debug('create_ticket_1() called')
-    
-    #phantom.debug('Action: {0} {1}'.format(action['name'], ('SUCCEEDED' if success else 'FAILED')))
-    
-    # collect data for 'create_ticket_1' call
-    formatted_data_1 = phantom.get_format_data(name='format_1')
-
-    parameters = []
-    
-    # build parameters list for 'create_ticket_1' call
-    parameters.append({
-        'project_key': "ITSEC",
-        'summary': "Test ticket",
-        'description': formatted_data_1,
-        'issue_type': "Task",
-        'priority': "",
-        'assignee': "",
-        'fields': "",
-        'vault_id': "",
-    })
-
-    phantom.act("create ticket", parameters=parameters, assets=['atlassian_api'], name="create_ticket_1")
-
     return
 
 def on_finish(container, summary):
