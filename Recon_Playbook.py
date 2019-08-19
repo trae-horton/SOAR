@@ -255,7 +255,7 @@ def url_reputation_2(action=None, success=None, container=None, results=None, ha
                 'context': {'artifact_id': container_item[1]},
             })
 
-    phantom.act("url reputation", parameters=parameters, assets=['phishtank'], callback=filter_10, name="url_reputation_2")
+    phantom.act("url reputation", parameters=parameters, assets=['phishtank'], callback=prompt_8, name="url_reputation_2")
 
     return
 
@@ -380,6 +380,53 @@ def filter_11(action=None, success=None, container=None, results=None, handle=No
     # call connected blocks if filtered artifacts or results
     if matched_artifacts_1 or matched_results_1:
         prompt_7(action=action, success=success, container=container, results=results, handle=handle, filtered_artifacts=matched_artifacts_1, filtered_results=matched_results_1)
+
+    return
+
+def prompt_8(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None):
+    phantom.debug('prompt_8() called')
+    
+    # set user and message variables for phantom.prompt call
+    user = "admin"
+    message = """{0}
+
+{1}
+
+{3}
+
+{7}
+
+{6}
+
+{5}
+
+{4}
+
+{2}"""
+
+    # parameter list for template variable replacement
+    parameters = [
+        "url_reputation_2:action_result.status",
+        "url_reputation_2:action_result.parameter.url",
+        "url_reputation_2:action_result.data.*.in_database",
+        "url_reputation_2:action_result.data.*.phish_detail_page",
+        "url_reputation_2:action_result.data.*.phish_id",
+        "url_reputation_2:action_result.data.*.url",
+        "url_reputation_2:action_result.data.*.valid",
+        "url_reputation_2:action_result.data.*.verified",
+    ]
+
+    #responses:
+    response_types = [
+        {
+            "prompt": "",
+            "options": {
+                "type": "message",
+            },
+        },
+    ]
+
+    phantom.prompt2(container=container, user=user, message=message, respond_in_mins=30, name="prompt_8", parameters=parameters, response_types=response_types, callback=filter_10)
 
     return
 
