@@ -334,8 +334,8 @@ def exmerge(action=None, success=None, container=None, results=None, handle=None
     ################################################################################
     ## Custom Code Start
     ################################################################################
-
-    # Write your custom code here...
+    test='testing'
+# Write your custom code here...
 
     ################################################################################
     ## Custom Code End
