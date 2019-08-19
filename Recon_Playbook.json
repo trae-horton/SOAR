@@ -7,7 +7,7 @@
             "clean": true,
             "code_block": "",
             "description": "This playbook will take the following data and run through recon modules:\n\nDestination IP\nDestination DNS\nSHA256 Hash\n\n\nActions include:\n\nPhantom DNS\nPhantom IP\nVirusTotal",
-            "hash": "06da4929633a59aab989059395118c93b18c0c92",
+            "hash": "37fa99a7f750fd49b944031321a48f265fdf21f5",
             "joint": {
                 "cells": [
                     {
@@ -217,8 +217,8 @@
                         "join_code": "# read-only block view not available",
                         "join_optional": [],
                         "join_start": 1,
-                        "line_end": 463,
-                        "line_start": 450,
+                        "line_end": 427,
+                        "line_start": 414,
                         "name": "",
                         "notes": "",
                         "number": 0,
@@ -9676,7 +9676,7 @@
                                 "display": "block"
                             }
                         },
-                        "block_code": "def prompt_8(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None):\n    phantom.debug('prompt_8() called')\n    \n    # set user and message variables for phantom.prompt call\n    user = \"admin\"\n    message = \"\"\"{0}\n\n{1}\n\n{3}\n\n{7}\n\n{6}\n\n{5}\n\n{4}\n\n{2}\n\n+++++++\n\n{12}\n\n{11}\n\n{10}\n\n{9}\n\n{8}\"\"\"\n\n    # parameter list for template variable replacement\n    parameters = [\n        \"url_reputation_2:action_result.status\",\n        \"url_reputation_2:action_result.parameter.url\",\n        \"url_reputation_2:action_result.data.*.in_database\",\n        \"url_reputation_2:action_result.data.*.phish_detail_page\",\n        \"url_reputation_2:action_result.data.*.phish_id\",\n        \"url_reputation_2:action_result.data.*.url\",\n        \"url_reputation_2:action_result.data.*.valid\",\n        \"url_reputation_2:action_result.data.*.verified\",\n        \"url_reputation_2:action_result.data.*.verified_at\",\n        \"url_reputation_2:action_result.summary.In Database\",\n        \"url_reputation_2:action_result.summary.Valid\",\n        \"url_reputation_2:action_result.summary.Verified\",\n        \"url_reputation_2:action_result.message\",\n    ]\n\n    #responses:\n    response_types = [\n        {\n            \"prompt\": \"\",\n            \"options\": {\n                \"type\": \"message\",\n            },\n        },\n    ]\n\n    phantom.prompt2(container=container, user=user, message=message, respond_in_mins=30, name=\"prompt_8\", parameters=parameters, response_types=response_types, callback=filter_10)\n\n    return",
+                        "block_code": "def prompt_8(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None):\n    phantom.debug('prompt_8() called')\n    \n    # set user and message variables for phantom.prompt call\n    user = \"admin\"\n    message = \"\"\"{0}\n\n+++++++\"\"\"\n\n    # parameter list for template variable replacement\n    parameters = [\n        \"url_reputation_2:action_result.summary.Verified\",\n    ]\n\n    #responses:\n    response_types = [\n        {\n            \"prompt\": \"\",\n            \"options\": {\n                \"type\": \"message\",\n            },\n        },\n    ]\n\n    phantom.prompt2(container=container, user=user, message=message, respond_in_mins=30, name=\"prompt_8\", parameters=parameters, response_types=response_types, callback=filter_10)\n\n    return",
                         "callback_code": "",
                         "callback_start": 1,
                         "callsback": true,
@@ -9699,9 +9699,9 @@
                         "join_code": "",
                         "join_optional": [],
                         "join_start": 1,
-                        "line_end": 450,
+                        "line_end": 414,
                         "line_start": 386,
-                        "message": "{0}\n\n{1}\n\n{3}\n\n{7}\n\n{6}\n\n{5}\n\n\n{4}\n\n{2}\n\n+++++++\n\n{12}\n\n{11}\n\n{10}\n\n{9}\n\n{8}",
+                        "message": "{0}\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n+++++++",
                         "name": "prompt",
                         "notes": "",
                         "number": 8,
@@ -9711,69 +9711,9 @@
                         ],
                         "parameters": [
                             {
-                                "position": 0,
-                                "type": "",
-                                "value": "url_reputation_2:action_result.status"
-                            },
-                            {
-                                "position": 1,
-                                "type": "",
-                                "value": "url_reputation_2:action_result.parameter.url"
-                            },
-                            {
-                                "position": 2,
-                                "type": "",
-                                "value": "url_reputation_2:action_result.data.*.in_database"
-                            },
-                            {
-                                "position": 3,
-                                "type": "",
-                                "value": "url_reputation_2:action_result.data.*.phish_detail_page"
-                            },
-                            {
-                                "position": 4,
-                                "type": "",
-                                "value": "url_reputation_2:action_result.data.*.phish_id"
-                            },
-                            {
-                                "position": 5,
-                                "type": "",
-                                "value": "url_reputation_2:action_result.data.*.url"
-                            },
-                            {
-                                "position": 6,
-                                "type": "",
-                                "value": "url_reputation_2:action_result.data.*.valid"
-                            },
-                            {
-                                "position": 7,
-                                "type": "",
-                                "value": "url_reputation_2:action_result.data.*.verified"
-                            },
-                            {
-                                "position": 8,
-                                "type": "",
-                                "value": "url_reputation_2:action_result.data.*.verified_at"
-                            },
-                            {
-                                "position": 9,
-                                "type": "",
-                                "value": "url_reputation_2:action_result.summary.In Database"
-                            },
-                            {
-                                "position": 10,
-                                "type": "",
-                                "value": "url_reputation_2:action_result.summary.Valid"
-                            },
-                            {
                                 "position": 11,
                                 "type": "",
                                 "value": "url_reputation_2:action_result.summary.Verified"
-                            },
-                            {
-                                "position": 12,
-                                "type": "",
-                                "value": "url_reputation_2:action_result.message"
                             }
                         ],
                         "ports": {
@@ -9855,7 +9795,7 @@
                         "status": "",
                         "type": "coa.Prompt",
                         "warn": false,
-                        "z": 407
+                        "z": 408
                     }
                 ]
             },
@@ -9864,7 +9804,7 @@
         "schema": 3,
         "version": "4.5.15922"
     },
-    "create_time": "2019-08-19T20:53:26.103988+00:00",
+    "create_time": "2019-08-19T20:56:41.494680+00:00",
     "draft_mode": false,
     "labels": [
         "*"

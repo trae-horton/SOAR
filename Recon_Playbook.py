@@ -390,47 +390,11 @@ def prompt_8(action=None, success=None, container=None, results=None, handle=Non
     user = "admin"
     message = """{0}
 
-{1}
-
-{3}
-
-{7}
-
-{6}
-
-{5}
-
-{4}
-
-{2}
-
-+++++++
-
-{12}
-
-{11}
-
-{10}
-
-{9}
-
-{8}"""
++++++++"""
 
     # parameter list for template variable replacement
     parameters = [
-        "url_reputation_2:action_result.status",
-        "url_reputation_2:action_result.parameter.url",
-        "url_reputation_2:action_result.data.*.in_database",
-        "url_reputation_2:action_result.data.*.phish_detail_page",
-        "url_reputation_2:action_result.data.*.phish_id",
-        "url_reputation_2:action_result.data.*.url",
-        "url_reputation_2:action_result.data.*.valid",
-        "url_reputation_2:action_result.data.*.verified",
-        "url_reputation_2:action_result.data.*.verified_at",
-        "url_reputation_2:action_result.summary.In Database",
-        "url_reputation_2:action_result.summary.Valid",
         "url_reputation_2:action_result.summary.Verified",
-        "url_reputation_2:action_result.message",
     ]
 
     #responses:
