@@ -117,26 +117,26 @@ def filter_3(action=None, success=None, container=None, results=None, handle=Non
         container=container,
         action_results=results,
         conditions=[
-            ["file_reputation_1:action_result.data.*.positives", ">=", "5"],
+            ["file_reputation_1:action_result.data.*.positives", "<", "5"],
         ],
         name="filter_3:condition_1")
 
     # call connected blocks if filtered artifacts or results
     if matched_artifacts_1 or matched_results_1:
-        join_prompt_1(action=action, success=success, container=container, results=results, handle=handle, filtered_artifacts=matched_artifacts_1, filtered_results=matched_results_1)
+        detonate_file_1(action=action, success=success, container=container, results=results, handle=handle, filtered_artifacts=matched_artifacts_1, filtered_results=matched_results_1)
 
     # collect filtered artifact ids for 'if' condition 2
     matched_artifacts_2, matched_results_2 = phantom.condition(
         container=container,
         action_results=results,
         conditions=[
-            ["file_reputation_1:action_result.data.*.positives", "<=", "4"],
+            ["file_reputation_1:action_result.data.*.positives", ">=", "5"],
         ],
         name="filter_3:condition_2")
 
     # call connected blocks if filtered artifacts or results
     if matched_artifacts_2 or matched_results_2:
-        detonate_file_1(action=action, success=success, container=container, results=results, handle=handle, filtered_artifacts=matched_artifacts_2, filtered_results=matched_results_2)
+        join_prompt_1(action=action, success=success, container=container, results=results, handle=handle, filtered_artifacts=matched_artifacts_2, filtered_results=matched_results_2)
 
     return
 
@@ -260,7 +260,7 @@ def join_prompt_1(action=None, success=None, container=None, results=None, handl
     phantom.debug('join_prompt_1() called')
 
     # check if all connected incoming actions are done i.e. have succeeded or failed
-    if phantom.actions_done([ 'file_reputation_1', 'detonate_file_1' ]):
+    if phantom.actions_done([ 'detonate_file_1', 'file_reputation_1' ]):
         
         # call connected block "prompt_1"
         prompt_1(container=container, handle=handle)
