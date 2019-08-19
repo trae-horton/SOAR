@@ -130,7 +130,7 @@ def prompt_3(action=None, success=None, container=None, results=None, handle=Non
         },
     ]
 
-    phantom.prompt2(container=container, user=user, message=message, respond_in_mins=30, name="prompt_3", parameters=parameters, response_types=response_types, callback=join_prompt_5)
+    phantom.prompt2(container=container, user=user, message=message, respond_in_mins=30, name="prompt_3", parameters=parameters, response_types=response_types)
 
     return
 
@@ -162,7 +162,7 @@ Block Hash?
         },
     ]
 
-    phantom.prompt2(container=container, user=user, message=message, respond_in_mins=30, name="prompt_4", parameters=parameters, response_types=response_types, callback=join_prompt_5)
+    phantom.prompt2(container=container, user=user, message=message, respond_in_mins=30, name="prompt_4", parameters=parameters, response_types=response_types)
 
     return
 
@@ -207,17 +207,6 @@ def prompt_5(action=None, success=None, container=None, results=None, handle=Non
 
     phantom.prompt2(container=container, user=user, message=message, respond_in_mins=30, name="prompt_5", response_types=response_types, callback=filter_9)
 
-    return
-
-def join_prompt_5(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None):
-    phantom.debug('join_prompt_5() called')
-
-    # check if all connected incoming actions are done i.e. have succeeded or failed
-    if phantom.actions_done([ 'prompt_3', 'prompt_4', 'prompt_6', 'prompt_7' ]):
-        
-        # call connected block "prompt_5"
-        prompt_5(container=container, handle=handle)
-    
     return
 
 def filter_9(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None):
@@ -317,7 +306,7 @@ def prompt_6(action=None, success=None, container=None, results=None, handle=Non
         },
     ]
 
-    phantom.prompt2(container=container, user=user, message=message, respond_in_mins=30, name="prompt_6", parameters=parameters, response_types=response_types, callback=join_prompt_5)
+    phantom.prompt2(container=container, user=user, message=message, respond_in_mins=30, name="prompt_6", parameters=parameters, response_types=response_types)
 
     return
 
@@ -361,7 +350,7 @@ def prompt_7(action=None, success=None, container=None, results=None, handle=Non
         },
     ]
 
-    phantom.prompt2(container=container, user=user, message=message, respond_in_mins=30, name="prompt_7", response_types=response_types, callback=join_prompt_5)
+    phantom.prompt2(container=container, user=user, message=message, respond_in_mins=30, name="prompt_7", response_types=response_types)
 
     return
 
