@@ -93,7 +93,7 @@ def File_Filter(action=None, success=None, container=None, results=None, handle=
         container=container,
         action_results=results,
         conditions=[
-            ["file_reputation_1:action_result.data.*.positives", "==", "5"],
+            ["file_reputation_1:action_result.data.*.positives", ">=", "5"],
         ],
         name="File_Filter:condition_2")
 
