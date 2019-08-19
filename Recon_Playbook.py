@@ -84,7 +84,7 @@ def file_reputation_1(action=None, success=None, container=None, results=None, h
                 'context': {'artifact_id': container_item[1]},
             })
 
-    phantom.act("file reputation", parameters=parameters, assets=['virustotal_api'], callback=decision_1, name="file_reputation_1")
+    phantom.act("file reputation", parameters=parameters, assets=['virustotal_api'], callback=File_Filter, name="file_reputation_1")
 
     return
 
@@ -225,34 +225,34 @@ def detonate_file_2(action=None, success=None, container=None, results=None, han
 
     return
 
-def decision_1(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None):
-    phantom.debug('decision_1() called')
+def File_Filter(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None):
+    phantom.debug('File_Filter() called')
 
-    # check for 'if' condition 1
+    # collect filtered artifact ids for 'if' condition 1
     matched_artifacts_1, matched_results_1 = phantom.condition(
         container=container,
         action_results=results,
         conditions=[
             ["file_reputation_1:action_result.data.*.positives", "<", "5"],
-        ])
+        ],
+        name="File_Filter:condition_1")
 
-    # call connected blocks if condition 1 matched
+    # call connected blocks if filtered artifacts or results
     if matched_artifacts_1 or matched_results_1:
-        detonate_file_2(action=action, success=success, container=container, results=results, handle=handle)
-        return
+        detonate_file_2(action=action, success=success, container=container, results=results, handle=handle, filtered_artifacts=matched_artifacts_1, filtered_results=matched_results_1)
 
-    # check for 'elif' condition 2
+    # collect filtered artifact ids for 'if' condition 2
     matched_artifacts_2, matched_results_2 = phantom.condition(
         container=container,
         action_results=results,
         conditions=[
             ["file_reputation_1:action_result.data.*.positives", ">=", "5"],
-        ])
+        ],
+        name="File_Filter:condition_2")
 
-    # call connected blocks if condition 2 matched
+    # call connected blocks if filtered artifacts or results
     if matched_artifacts_2 or matched_results_2:
-        prompt_3(action=action, success=success, container=container, results=results, handle=handle)
-        return
+        prompt_3(action=action, success=success, container=container, results=results, handle=handle, filtered_artifacts=matched_artifacts_2, filtered_results=matched_results_2)
 
     return
 
@@ -261,7 +261,12 @@ def prompt_3(action=None, success=None, container=None, results=None, handle=Non
     
     # set user and message variables for phantom.prompt call
     user = "admin"
-    message = """failed"""
+    message = """{0}"""
+
+    # parameter list for template variable replacement
+    parameters = [
+        "file_reputation_1:action_result.data.*.positives",
+    ]
 
     #responses:
     response_types = [
@@ -273,7 +278,7 @@ def prompt_3(action=None, success=None, container=None, results=None, handle=Non
         },
     ]
 
-    phantom.prompt2(container=container, user=user, message=message, respond_in_mins=30, name="prompt_3", response_types=response_types)
+    phantom.prompt2(container=container, user=user, message=message, respond_in_mins=30, name="prompt_3", parameters=parameters, response_types=response_types)
 
     return
 

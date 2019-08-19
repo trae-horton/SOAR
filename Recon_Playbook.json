@@ -7,7 +7,7 @@
             "clean": true,
             "code_block": "",
             "description": "This playbook will take the following data and run through recon modules:\n\nDestination IP\nDestination DNS\nSHA256 Hash\n\n\nActions include:\n\nPhantom DNS\nPhantom IP\nVirusTotal",
-            "hash": "6f0fa0c8fefda137f3f7b31c8ae235628cec55a7",
+            "hash": "fe558237a62a9d590458b36ddde33393384209d3",
             "joint": {
                 "cells": [
                     {
@@ -2462,7 +2462,7 @@
                         "callback_start": 1,
                         "callsback": false,
                         "connected_to_start": true,
-                        "connection_name": "prompt",
+                        "connection_name": "prompt 3",
                         "connection_type": "action",
                         "custom_callback": "",
                         "custom_code": "",
@@ -2480,8 +2480,8 @@
                         "join_code": "# read-only block view not available",
                         "join_optional": [],
                         "join_start": 1,
-                        "line_end": 293,
-                        "line_start": 280,
+                        "line_end": 298,
+                        "line_start": 285,
                         "name": "",
                         "notes": "",
                         "number": 0,
@@ -2540,8 +2540,8 @@
                             }
                         },
                         "position": {
-                            "x": 2180,
-                            "y": 120
+                            "x": 1600,
+                            "y": 220
                         },
                         "previous_function": "",
                         "previous_name": "",
@@ -9675,7 +9675,7 @@
                                 "opacity": 1
                             },
                             "g.delete": {
-                                "display": "none"
+                                "display": "block"
                             },
                             "g.error": {
                                 "opacity": 0
@@ -9696,7 +9696,7 @@
                                 "opacity": 1
                             }
                         },
-                        "block_code": "def file_reputation_1(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None):\n    phantom.debug('file_reputation_1() called')\n\n    # collect data for 'file_reputation_1' call\n    container_data = phantom.collect2(container=container, datapath=['artifact:*.cef.fileHashSha256', 'artifact:*.id'])\n\n    parameters = []\n    \n    # build parameters list for 'file_reputation_1' call\n    for container_item in container_data:\n        if container_item[0]:\n            parameters.append({\n                'hash': container_item[0],\n                # context (artifact id) is added to associate results with the artifact\n                'context': {'artifact_id': container_item[1]},\n            })\n\n    phantom.act(\"file reputation\", parameters=parameters, assets=['virustotal_api'], callback=decision_1, name=\"file_reputation_1\")\n\n    return",
+                        "block_code": "def file_reputation_1(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None):\n    phantom.debug('file_reputation_1() called')\n\n    # collect data for 'file_reputation_1' call\n    container_data = phantom.collect2(container=container, datapath=['artifact:*.cef.fileHashSha256', 'artifact:*.id'])\n\n    parameters = []\n    \n    # build parameters list for 'file_reputation_1' call\n    for container_item in container_data:\n        if container_item[0]:\n            parameters.append({\n                'hash': container_item[0],\n                # context (artifact id) is added to associate results with the artifact\n                'context': {'artifact_id': container_item[1]},\n            })\n\n    phantom.act(\"file reputation\", parameters=parameters, assets=['virustotal_api'], callback=File_Filter, name=\"file_reputation_1\")\n\n    return",
                         "callback_code": "",
                         "callback_start": 91,
                         "callsback": true,
@@ -9804,47 +9804,6 @@
                         "type": "coa.Action",
                         "warn": false,
                         "z": 199
-                    },
-                    {
-                        "attrs": {
-                            ".connection": {
-                                "stroke": "#818D99",
-                                "stroke-width": 2
-                            },
-                            ".marker-target": {
-                                "d": "M 10 0 L 0 5 L 10 10 z",
-                                "fill": "#818D99",
-                                "stroke": "#818D99"
-                            }
-                        },
-                        "connector": {
-                            "args": {
-                                "radius": 5
-                            },
-                            "name": "rounded"
-                        },
-                        "endDirections": [
-                            "left"
-                        ],
-                        "id": "16e85dec-58f1-454b-85fa-39146087566f",
-                        "router": {
-                            "name": "metro"
-                        },
-                        "source": {
-                            "id": "e6bb47ba-f8ff-4da7-a32c-e81eb2d05087",
-                            "port": "out-1",
-                            "selector": "g:nth-child(1) > g:nth-child(2) > g:nth-child(1) > circle:nth-child(1)"
-                        },
-                        "startDirections": [
-                            "right"
-                        ],
-                        "target": {
-                            "id": "b2b3cc90-eaa8-4733-a1f6-bf1b8401d04b",
-                            "port": null,
-                            "selector": "g:nth-child(1) > g:nth-child(1) > g:nth-child(1) > circle:nth-child(1)"
-                        },
-                        "type": "link",
-                        "z": 240
                     },
                     {
                         "action": "detonate file",
@@ -12397,12 +12356,93 @@
                         "z": 243
                     },
                     {
+                        "attrs": {
+                            ".connection": {
+                                "stroke": "#818D99",
+                                "stroke-width": 2
+                            },
+                            ".marker-target": {
+                                "d": "M 10 0 L 0 5 L 10 10 z",
+                                "fill": "#818D99",
+                                "stroke": "#818D99"
+                            }
+                        },
+                        "connector": {
+                            "args": {
+                                "radius": 5
+                            },
+                            "name": "rounded"
+                        },
+                        "endDirections": [
+                            "left"
+                        ],
+                        "id": "1ea3174b-c952-468a-8c04-b7f5299024e2",
+                        "router": {
+                            "name": "metro"
+                        },
+                        "source": {
+                            "id": "827d8ffa-ccc9-45ff-8cb5-7257455962cd",
+                            "port": null,
+                            "selector": "g:nth-child(1) > g:nth-child(2) > g:nth-child(1) > circle:nth-child(1)"
+                        },
+                        "startDirections": [
+                            "right"
+                        ],
+                        "target": {
+                            "id": "63b8cbc1-038f-48e5-aa8c-b4a09997499d",
+                            "selector": ".port-body[type=\"input\"]"
+                        },
+                        "type": "link",
+                        "z": 251
+                    },
+                    {
+                        "attrs": {
+                            ".connection": {
+                                "stroke": "#818D99",
+                                "stroke-width": 2
+                            },
+                            ".marker-target": {
+                                "d": "M 10 0 L 0 5 L 10 10 z",
+                                "fill": "#818D99",
+                                "stroke": "#818D99"
+                            }
+                        },
+                        "connector": {
+                            "args": {
+                                "radius": 5
+                            },
+                            "name": "rounded"
+                        },
+                        "endDirections": [
+                            "left"
+                        ],
+                        "id": "95f0009e-5e13-4b59-8bb8-fcac148511cd",
+                        "router": {
+                            "name": "metro"
+                        },
+                        "source": {
+                            "id": "63b8cbc1-038f-48e5-aa8c-b4a09997499d",
+                            "port": "out-1",
+                            "selector": "g:nth-child(1) > g:nth-child(2) > g:nth-child(1) > circle:nth-child(1)"
+                        },
+                        "startDirections": [
+                            "right"
+                        ],
+                        "target": {
+                            "id": "b2b3cc90-eaa8-4733-a1f6-bf1b8401d04b",
+                            "port": null,
+                            "selector": "g:nth-child(1) > g:nth-child(1) > g:nth-child(1) > circle:nth-child(1)"
+                        },
+                        "type": "link",
+                        "z": 255
+                    },
+                    {
                         "active": false,
                         "angle": 0,
                         "attrs": {
                             ".background": {
                                 "fill": "#000000",
-                                "stroke": "#637282",
+                                "stroke": "#5C6773",
                                 "transform": "rotate(45 30 70)"
                             },
                             ".inPorts>.port-0>.port-body": {
@@ -12412,7 +12452,7 @@
                                 }
                             },
                             ".number": {
-                                "text": 1
+                                "text": 7
                             },
                             ".outPorts>.port-0": {
                                 "port": {
@@ -12443,7 +12483,7 @@
                                 }
                             },
                             "g.delete": {
-                                "display": "none"
+                                "display": "block"
                             },
                             "g.error": {
                                 "opacity": 0
@@ -12453,12 +12493,9 @@
                             },
                             "g.notes": {
                                 "display": "block"
-                            },
-                            "g.notes image": {
-                                "opacity": 1
                             }
                         },
-                        "block_code": "def decision_1(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None):\n    phantom.debug('decision_1() called')\n\n    # check for 'if' condition 1\n    matched_artifacts_1, matched_results_1 = phantom.condition(\n        container=container,\n        action_results=results,\n        conditions=[\n            [\"file_reputation_1:action_result.data.*.positives\", \"<\", \"5\"],\n        ])\n\n    # call connected blocks if condition 1 matched\n    if matched_artifacts_1 or matched_results_1:\n        detonate_file_2(action=action, success=success, container=container, results=results, handle=handle)\n        return\n\n    # check for 'elif' condition 2\n    matched_artifacts_2, matched_results_2 = phantom.condition(\n        container=container,\n        action_results=results,\n        conditions=[\n            [\"file_reputation_1:action_result.data.*.positives\", \">=\", \"5\"],\n        ])\n\n    # call connected blocks if condition 2 matched\n    if matched_artifacts_2 or matched_results_2:\n        prompt_3(action=action, success=success, container=container, results=results, handle=handle)\n        return\n\n    return",
+                        "block_code": "def File_Filter(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None):\n    phantom.debug('File_Filter() called')\n\n    # collect filtered artifact ids for 'if' condition 1\n    matched_artifacts_1, matched_results_1 = phantom.condition(\n        container=container,\n        action_results=results,\n        conditions=[\n            [\"file_reputation_1:action_result.data.*.positives\", \"<\", \"5\"],\n        ],\n        name=\"File_Filter:condition_1\")\n\n    # call connected blocks if filtered artifacts or results\n    if matched_artifacts_1 or matched_results_1:\n        detonate_file_2(action=action, success=success, container=container, results=results, handle=handle, filtered_artifacts=matched_artifacts_1, filtered_results=matched_results_1)\n\n    # collect filtered artifact ids for 'if' condition 2\n    matched_artifacts_2, matched_results_2 = phantom.condition(\n        container=container,\n        action_results=results,\n        conditions=[\n            [\"file_reputation_1:action_result.data.*.positives\", \">=\", \"5\"],\n        ],\n        name=\"File_Filter:condition_2\")\n\n    # call connected blocks if filtered artifacts or results\n    if matched_artifacts_2 or matched_results_2:\n        prompt_3(action=action, success=success, container=container, results=results, handle=handle, filtered_artifacts=matched_artifacts_2, filtered_results=matched_results_2)\n\n    return",
                         "callback_code": "",
                         "callback_start": 1,
                         "callsback": false,
@@ -12468,14 +12505,13 @@
                         "custom_callback": "",
                         "custom_code": "",
                         "custom_join": "",
-                        "custom_name": "",
+                        "custom_name": "File_Filter",
                         "description": "",
-                        "hasElse": false,
                         "has_custom": false,
                         "has_custom_block": false,
                         "has_custom_callback": false,
                         "has_custom_join": false,
-                        "id": "e6bb47ba-f8ff-4da7-a32c-e81eb2d05087",
+                        "id": "63b8cbc1-038f-48e5-aa8c-b4a09997499d",
                         "inPorts": [
                             "in"
                         ],
@@ -12484,9 +12520,9 @@
                         "join_start": 1,
                         "line_end": 259,
                         "line_start": 228,
-                        "name": "decision",
+                        "name": "filter",
                         "notes": "",
-                        "number": 1,
+                        "number": 7,
                         "order": 11,
                         "outPorts": [
                             "out-1",
@@ -12515,9 +12551,9 @@
                                         "value": "5"
                                     }
                                 ],
-                                "display": "Else If",
+                                "display": "If",
                                 "logic": "and",
-                                "type": "elif"
+                                "type": "if"
                             }
                         ],
                         "ports": {
@@ -12577,17 +12613,99 @@
                             "y": 180
                         },
                         "previous_function": "",
-                        "previous_name": "decision_1",
+                        "previous_name": "File_Filter",
                         "show_number": true,
                         "size": {
                             "height": 82,
                             "width": 82
                         },
-                        "state": "decision",
+                        "state": "filter",
                         "status": "",
-                        "type": "coa.Decision",
+                        "type": "coa.Filter",
                         "warn": "",
-                        "z": 244
+                        "z": 257
+                    },
+                    {
+                        "attrs": {
+                            ".connection": {
+                                "stroke": "#818D99",
+                                "stroke-width": 2
+                            },
+                            ".marker-target": {
+                                "d": "M 10 0 L 0 5 L 10 10 z",
+                                "fill": "#818D99",
+                                "stroke": "#818D99"
+                            }
+                        },
+                        "connector": {
+                            "args": {
+                                "radius": 5
+                            },
+                            "name": "rounded"
+                        },
+                        "endDirections": [
+                            "left"
+                        ],
+                        "id": "02fe110f-435b-4c41-b0b8-70d9d51cfe58",
+                        "router": {
+                            "name": "metro"
+                        },
+                        "source": {
+                            "id": "63b8cbc1-038f-48e5-aa8c-b4a09997499d",
+                            "port": "out-2",
+                            "selector": "g:nth-child(1) > g:nth-child(2) > g:nth-child(2) > circle:nth-child(1)"
+                        },
+                        "startDirections": [
+                            "right"
+                        ],
+                        "target": {
+                            "id": "671a3d1a-ad3e-45d0-9d14-e22c927e14d2",
+                            "port": null,
+                            "selector": "g:nth-child(1) > g:nth-child(1) > g:nth-child(1) > circle:nth-child(1)"
+                        },
+                        "type": "link",
+                        "z": 262
+                    },
+                    {
+                        "attrs": {
+                            ".connection": {
+                                "stroke": "#818D99",
+                                "stroke-width": 2
+                            },
+                            ".marker-target": {
+                                "d": "M 10 0 L 0 5 L 10 10 z",
+                                "fill": "#818D99",
+                                "stroke": "#818D99"
+                            }
+                        },
+                        "connector": {
+                            "args": {
+                                "radius": 5
+                            },
+                            "name": "rounded"
+                        },
+                        "endDirections": [
+                            "left"
+                        ],
+                        "id": "26368c36-d879-4c12-a86b-0b37a7143b7c",
+                        "router": {
+                            "name": "metro"
+                        },
+                        "source": {
+                            "id": "671a3d1a-ad3e-45d0-9d14-e22c927e14d2",
+                            "port": null,
+                            "selector": "g:nth-child(1) > g:nth-child(2) > g:nth-child(1) > circle:nth-child(1)"
+                        },
+                        "startDirections": [
+                            "right"
+                        ],
+                        "target": {
+                            "id": "8e2e6004-30c5-4a43-8292-f239c1f58209",
+                            "port": null,
+                            "selector": "g:nth-child(1) > g:nth-child(1) > g:nth-child(1) > circle:nth-child(1)"
+                        },
+                        "type": "link",
+                        "z": 264
                     },
                     {
                         "active": false,
@@ -12632,12 +12750,9 @@
                             },
                             "g.notes": {
                                 "display": "block"
-                            },
-                            "g.notes image": {
-                                "opacity": 1
                             }
                         },
-                        "block_code": "def prompt_3(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None):\n    phantom.debug('prompt_3() called')\n    \n    # set user and message variables for phantom.prompt call\n    user = \"admin\"\n    message = \"\"\"failed\"\"\"\n\n    #responses:\n    response_types = [\n        {\n            \"prompt\": \"\",\n            \"options\": {\n                \"type\": \"message\",\n            },\n        },\n    ]\n\n    phantom.prompt2(container=container, user=user, message=message, respond_in_mins=30, name=\"prompt_3\", response_types=response_types)\n\n    return",
+                        "block_code": "def prompt_3(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None):\n    phantom.debug('prompt_3() called')\n    \n    # set user and message variables for phantom.prompt call\n    user = \"admin\"\n    message = \"\"\"{0}\"\"\"\n\n    # parameter list for template variable replacement\n    parameters = [\n        \"file_reputation_1:action_result.data.*.positives\",\n    ]\n\n    #responses:\n    response_types = [\n        {\n            \"prompt\": \"\",\n            \"options\": {\n                \"type\": \"message\",\n            },\n        },\n    ]\n\n    phantom.prompt2(container=container, user=user, message=message, respond_in_mins=30, name=\"prompt_3\", parameters=parameters, response_types=response_types)\n\n    return",
                         "callback_code": "",
                         "callback_start": 1,
                         "callsback": true,
@@ -12653,16 +12768,16 @@
                         "has_custom_block": false,
                         "has_custom_callback": false,
                         "has_custom_join": false,
-                        "id": "e7d5c444-42a8-4a56-bf1f-5ced4252f662",
+                        "id": "671a3d1a-ad3e-45d0-9d14-e22c927e14d2",
                         "inPorts": [
                             "in"
                         ],
                         "join_code": "",
                         "join_optional": [],
-                        "join_start": 280,
-                        "line_end": 280,
+                        "join_start": 1,
+                        "line_end": 285,
                         "line_start": 259,
-                        "message": "failed",
+                        "message": "{0}",
                         "name": "prompt",
                         "notes": "",
                         "number": 3,
@@ -12670,7 +12785,13 @@
                         "outPorts": [
                             "out"
                         ],
-                        "parameters": [],
+                        "parameters": [
+                            {
+                                "position": 0,
+                                "type": "",
+                                "value": "file_reputation_1:action_result.data.*.positives"
+                            }
+                        ],
                         "ports": {
                             "groups": {
                                 "in": {
@@ -12724,8 +12845,8 @@
                             }
                         },
                         "position": {
-                            "x": 900,
-                            "y": 360
+                            "x": 860,
+                            "y": 380
                         },
                         "previous_function": "",
                         "previous_name": "prompt_3",
@@ -12741,7 +12862,7 @@
                                 "response_type": "message"
                             }
                         ],
-                        "show_number": false,
+                        "show_number": true,
                         "size": {
                             "height": 80,
                             "width": 80
@@ -12750,130 +12871,7 @@
                         "status": "",
                         "type": "coa.Prompt",
                         "warn": false,
-                        "z": 247
-                    },
-                    {
-                        "attrs": {
-                            ".connection": {
-                                "stroke": "#818D99",
-                                "stroke-width": 2
-                            },
-                            ".marker-target": {
-                                "d": "M 10 0 L 0 5 L 10 10 z",
-                                "fill": "#818D99",
-                                "stroke": "#818D99"
-                            }
-                        },
-                        "connector": {
-                            "args": {
-                                "radius": 5
-                            },
-                            "name": "rounded"
-                        },
-                        "endDirections": [
-                            "left"
-                        ],
-                        "id": "427c2d66-21f4-49fe-a1dc-d3e7ba68147e",
-                        "router": {
-                            "name": "metro"
-                        },
-                        "source": {
-                            "id": "827d8ffa-ccc9-45ff-8cb5-7257455962cd",
-                            "port": null,
-                            "selector": "g:nth-child(1) > g:nth-child(2) > g:nth-child(1) > circle:nth-child(1)"
-                        },
-                        "startDirections": [
-                            "right"
-                        ],
-                        "target": {
-                            "id": "e6bb47ba-f8ff-4da7-a32c-e81eb2d05087",
-                            "port": "in",
-                            "selector": "g:nth-child(1) > g:nth-child(1) > g:nth-child(1) > circle:nth-child(1)"
-                        },
-                        "type": "link",
-                        "z": 248
-                    },
-                    {
-                        "attrs": {
-                            ".connection": {
-                                "stroke": "#818D99",
-                                "stroke-width": 2
-                            },
-                            ".marker-target": {
-                                "d": "M 10 0 L 0 5 L 10 10 z",
-                                "fill": "#818D99",
-                                "stroke": "#818D99"
-                            }
-                        },
-                        "connector": {
-                            "args": {
-                                "radius": 5
-                            },
-                            "name": "rounded"
-                        },
-                        "endDirections": [
-                            "left"
-                        ],
-                        "id": "55d7bfdf-30cb-4740-9863-81d18af8466b",
-                        "router": {
-                            "name": "metro"
-                        },
-                        "source": {
-                            "id": "e6bb47ba-f8ff-4da7-a32c-e81eb2d05087",
-                            "port": "out-2",
-                            "selector": "g:nth-child(1) > g:nth-child(2) > g:nth-child(2) > circle:nth-child(1)"
-                        },
-                        "startDirections": [
-                            "right"
-                        ],
-                        "target": {
-                            "id": "e7d5c444-42a8-4a56-bf1f-5ced4252f662",
-                            "port": null,
-                            "selector": "g:nth-child(1) > g:nth-child(1) > g:nth-child(1) > circle:nth-child(1)"
-                        },
-                        "type": "link",
-                        "z": 249
-                    },
-                    {
-                        "attrs": {
-                            ".connection": {
-                                "stroke": "#818D99",
-                                "stroke-width": 2
-                            },
-                            ".marker-target": {
-                                "d": "M 10 0 L 0 5 L 10 10 z",
-                                "fill": "#818D99",
-                                "stroke": "#818D99"
-                            }
-                        },
-                        "connector": {
-                            "args": {
-                                "radius": 5
-                            },
-                            "name": "rounded"
-                        },
-                        "endDirections": [
-                            "left"
-                        ],
-                        "id": "37c01b52-0813-4de6-88c3-789f8896f0d1",
-                        "router": {
-                            "name": "metro"
-                        },
-                        "source": {
-                            "id": "e7d5c444-42a8-4a56-bf1f-5ced4252f662",
-                            "port": null,
-                            "selector": "g:nth-child(1) > g:nth-child(2) > g:nth-child(1) > circle:nth-child(1)"
-                        },
-                        "startDirections": [
-                            "right"
-                        ],
-                        "target": {
-                            "id": "8e2e6004-30c5-4a43-8292-f239c1f58209",
-                            "port": null,
-                            "selector": "g:nth-child(1) > g:nth-child(1) > g:nth-child(1) > circle:nth-child(1)"
-                        },
-                        "type": "link",
-                        "z": 250
+                        "z": 265
                     }
                 ]
             },
@@ -12882,7 +12880,7 @@
         "schema": 3,
         "version": "4.5.15922"
     },
-    "create_time": "2019-08-19T17:39:28.716349+00:00",
+    "create_time": "2019-08-19T17:42:05.082778+00:00",
     "draft_mode": false,
     "labels": [
         "*"
