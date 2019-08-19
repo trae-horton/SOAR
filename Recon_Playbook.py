@@ -242,11 +242,6 @@ def prompt_1(action=None, success=None, container=None, results=None, handle=Non
     user = "admin"
     message = """test"""
 
-    # parameter list for template variable replacement
-    parameters = [
-        "format_1:formatted_data",
-    ]
-
     #responses:
     response_types = [
         {
@@ -257,7 +252,7 @@ def prompt_1(action=None, success=None, container=None, results=None, handle=Non
         },
     ]
 
-    phantom.prompt2(container=container, user=user, message=message, respond_in_mins=30, name="prompt_1", parameters=parameters, response_types=response_types)
+    phantom.prompt2(container=container, user=user, message=message, respond_in_mins=30, name="prompt_1", response_types=response_types)
 
     return
 
