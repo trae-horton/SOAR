@@ -7,7 +7,7 @@
             "clean": true,
             "code_block": "",
             "description": "This playbook will take the following data and run through recon modules:\n\nDestination IP\nDestination DNS\nSHA256 Hash\n\n\nActions include:\n\nPhantom DNS\nPhantom IP\nVirusTotal",
-            "hash": "bdf9c4e9acd8543be3645c3e1e6bba48a2ff468a",
+            "hash": "907c6e3d0e6f32b662f47346559df32b790fb9d8",
             "joint": {
                 "cells": [
                     {
@@ -4859,7 +4859,7 @@
                                 "opacity": 1
                             }
                         },
-                        "block_code": "def format_1(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None):\n    phantom.debug('format_1() called')\n    \n    template = \"\"\"File Reputation = {0}\n\nWhois IP = {1}\n\nWhois Domain = {2}\n\nURL Reputation = {3}\"\"\"\n\n    # parameter list for template variable replacement\n    parameters = [\n        \"file_reputation_1:action_result.status\",\n        \"whois_ip_1:action_result.message\",\n        \"whois_domain_1:action_result.message\",\n        \"file_reputation_1:action_result.status\",\n    ]\n\n    phantom.format(container=container, template=template, parameters=parameters, name=\"format_1\")\n\n    prompt_1(container=container)\n\n    return",
+                        "block_code": "def format_1(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None):\n    phantom.debug('format_1() called')\n    \n    template = \"\"\"File Reputation = {0}\n\nWhois IP = {1}\n\nWhois Domain = {2}\n\nURL Reputation = {3}\"\"\"\n\n    # parameter list for template variable replacement\n    parameters = [\n        \"file_reputation_1:action_result.data.*.positives\",\n        \"whois_ip_1:action_result.message\",\n        \"whois_domain_1:action_result.message\",\n        \"file_reputation_1:action_result.status\",\n    ]\n\n    phantom.format(container=container, template=template, parameters=parameters, name=\"format_1\")\n\n    prompt_1(container=container)\n\n    return",
                         "callback_code": "",
                         "callback_start": 1,
                         "callsback": false,
@@ -4897,7 +4897,7 @@
                             {
                                 "position": 0,
                                 "type": "",
-                                "value": "file_reputation_1:action_result.status"
+                                "value": "file_reputation_1:action_result.data.*.positives"
                             },
                             {
                                 "position": 1,
@@ -4984,7 +4984,7 @@
                         "title": "format",
                         "type": "coa.Format",
                         "warn": false,
-                        "z": 115
+                        "z": 116
                     }
                 ]
             },
@@ -4993,7 +4993,7 @@
         "schema": 3,
         "version": "4.5.15922"
     },
-    "create_time": "2019-08-19T13:39:15.584259+00:00",
+    "create_time": "2019-08-19T13:43:08.418666+00:00",
     "draft_mode": false,
     "labels": [
         "*"
