@@ -267,7 +267,7 @@ def filter_10(action=None, success=None, container=None, results=None, handle=No
         container=container,
         action_results=results,
         conditions=[
-            ["url_reputation_2:action_result.data.*.positives", ">", "1"],
+            ["url_reputation_2:action_result.data.*.positives", ">=", "1"],
         ],
         name="filter_10:condition_1")
 
@@ -280,7 +280,7 @@ def filter_10(action=None, success=None, container=None, results=None, handle=No
         container=container,
         action_results=results,
         conditions=[
-            ["url_reputation_2:action_result.data.*.response_code", "<=", 0],
+            ["url_reputation_2:action_result.data.*.response_code", "==", 0],
         ],
         name="filter_10:condition_2")
 
