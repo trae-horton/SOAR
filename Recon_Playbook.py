@@ -23,6 +23,9 @@ def on_start(container):
     # call 'file_reputation_1' block
     file_reputation_1(container=container)
 
+    # call 'whois_domain_1' block
+    whois_domain_1(container=container)
+
     return
 
 def whois_domain_1(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None):
@@ -240,7 +243,8 @@ def prompt_3(action=None, success=None, container=None, results=None, handle=Non
     
     # set user and message variables for phantom.prompt call
     user = "admin"
-    message = """{0}"""
+    message = """Block Hash?
+{0}"""
 
     # parameter list for template variable replacement
     parameters = [
@@ -261,7 +265,7 @@ def prompt_3(action=None, success=None, container=None, results=None, handle=Non
         },
     ]
 
-    phantom.prompt2(container=container, user=user, message=message, respond_in_mins=30, name="prompt_3", parameters=parameters, response_types=response_types, callback=prompt_5)
+    phantom.prompt2(container=container, user=user, message=message, respond_in_mins=30, name="prompt_3", parameters=parameters, response_types=response_types, callback=join_prompt_5)
 
     return
 
@@ -270,7 +274,8 @@ def prompt_4(action=None, success=None, container=None, results=None, handle=Non
     
     # set user and message variables for phantom.prompt call
     user = "admin"
-    message = """detonated
+    message = """Detonated
+Block Hash?
 {0}"""
 
     # parameter list for template variable replacement
@@ -292,7 +297,7 @@ def prompt_4(action=None, success=None, container=None, results=None, handle=Non
         },
     ]
 
-    phantom.prompt2(container=container, user=user, message=message, respond_in_mins=30, name="prompt_4", parameters=parameters, response_types=response_types)
+    phantom.prompt2(container=container, user=user, message=message, respond_in_mins=30, name="prompt_4", parameters=parameters, response_types=response_types, callback=join_prompt_5)
 
     return
 
@@ -319,7 +324,7 @@ def prompt_5(action=None, success=None, container=None, results=None, handle=Non
     
     # set user and message variables for phantom.prompt call
     user = "admin"
-    message = """please help"""
+    message = """Exmerge?"""
 
     #responses:
     response_types = [
@@ -335,7 +340,36 @@ def prompt_5(action=None, success=None, container=None, results=None, handle=Non
         },
     ]
 
-    phantom.prompt2(container=container, user=user, message=message, respond_in_mins=30, name="prompt_5", response_types=response_types)
+    phantom.prompt2(container=container, user=user, message=message, respond_in_mins=30, name="prompt_5", response_types=response_types, callback=filter_9)
+
+    return
+
+def join_prompt_5(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None):
+    phantom.debug('join_prompt_5() called')
+
+    # check if all connected incoming actions are done i.e. have succeeded or failed
+    if phantom.actions_done([ 'prompt_3', 'prompt_4' ]):
+        
+        # call connected block "prompt_5"
+        prompt_5(container=container, handle=handle)
+    
+    return
+
+def filter_9(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None):
+    phantom.debug('filter_9() called')
+
+    # collect filtered artifact ids for 'if' condition 1
+    matched_artifacts_1, matched_results_1 = phantom.condition(
+        container=container,
+        action_results=results,
+        conditions=[
+            ["prompt_5:action_result.summary.responses.0", "==", "Yes"],
+        ],
+        name="filter_9:condition_1")
+
+    # call connected blocks if filtered artifacts or results
+    if matched_artifacts_1 or matched_results_1:
+        pass
 
     return
 
