@@ -7,7 +7,7 @@
             "clean": true,
             "code_block": "",
             "description": "This playbook will take the following data and run through recon modules:\n\nDestination IP\nDestination DNS\nSHA256 Hash\n\n\nActions include:\n\nPhantom DNS\nPhantom IP\nVirusTotal",
-            "hash": "a9a00f7c7c936ec48200a5b75211e2796c519bcb",
+            "hash": "d03bec189929605f14c50cfb092331024731a8dc",
             "joint": {
                 "cells": [
                     {
@@ -448,8 +448,8 @@
                         "join_code": "",
                         "join_optional": [],
                         "join_start": 1,
-                        "line_end": 76,
-                        "line_start": 55,
+                        "line_end": 79,
+                        "line_start": 58,
                         "message": "Configuring now",
                         "name": "whois ip",
                         "notes": "",
@@ -2988,8 +2988,8 @@
                         "join_code": "",
                         "join_optional": [],
                         "join_start": 97,
-                        "line_end": 97,
-                        "line_start": 76,
+                        "line_end": 100,
+                        "line_start": 79,
                         "message": "Configuring now",
                         "name": "file reputation",
                         "notes": "",
@@ -3509,8 +3509,8 @@
                         "join_code": "",
                         "join_optional": [],
                         "join_start": 1,
-                        "line_end": 55,
-                        "line_start": 34,
+                        "line_end": 58,
+                        "line_start": 37,
                         "message": "Configuring now",
                         "name": "whois domain",
                         "notes": "",
@@ -3638,7 +3638,7 @@
                                 "display": "block"
                             }
                         },
-                        "block_code": "def on_start(container):\n    phantom.debug('on_start() called')\n    \n    # call 'filter_1' block\n    filter_1(container=container)\n\n    # call 'filter_2' block\n    filter_2(container=container)\n\n    # call 'filter_3' block\n    filter_3(container=container)\n\n    return",
+                        "block_code": "def on_start(container):\n    phantom.debug('on_start() called')\n    \n    # call 'filter_1' block\n    filter_1(container=container)\n\n    # call 'filter_2' block\n    filter_2(container=container)\n\n    # call 'filter_3' block\n    filter_3(container=container)\n\n    # call 'url_reputation_1' block\n    url_reputation_1(container=container)\n\n    return",
                         "callback_code": "# read-only block view not available",
                         "callback_start": 1,
                         "callsback": false,
@@ -3659,7 +3659,7 @@
                         "join_code": "# read-only block view not available",
                         "join_optional": [],
                         "join_start": 1,
-                        "line_end": 34,
+                        "line_end": 37,
                         "line_start": 20,
                         "name": "",
                         "notes": "",
@@ -3721,7 +3721,7 @@
                             }
                         },
                         "position": {
-                            "x": 80,
+                            "x": -140,
                             "y": 260
                         },
                         "previous_function": "",
@@ -4023,6 +4023,9 @@
                             },
                             "g.notes": {
                                 "display": "block"
+                            },
+                            "g.notes image": {
+                                "opacity": 1
                             }
                         },
                         "block_code": "def filter_1(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None):\n    phantom.debug('filter_1() called')\n\n    # collect filtered artifact ids for 'if' condition 1\n    matched_artifacts_1, matched_results_1 = phantom.condition(\n        container=container,\n        conditions=[\n            [\"artifact:*.cef.fileHash\", \">=\", \"1\"],\n            [\"artifact:*.cef.fileHashMd5\", \">=\", \"1\"],\n            [\"artifact:*.cef.fileHashSha1\", \">=\", \"1\"],\n            [\"artifact:*.cef.fileHashSha256\", \">=\", \"1\"],\n            [\"artifact:*.cef.fileHashSha512\", \"==\", \"1\"],\n        ],\n        logical_operator='or',\n        name=\"filter_1:condition_1\")\n\n    # call connected blocks if filtered artifacts or results\n    if matched_artifacts_1 or matched_results_1:\n        file_reputation_1(action=action, success=success, container=container, results=results, handle=handle, filtered_artifacts=matched_artifacts_1, filtered_results=matched_results_1)\n\n    return",
@@ -4048,8 +4051,8 @@
                         "join_code": "",
                         "join_optional": [],
                         "join_start": 1,
-                        "line_end": 119,
-                        "line_start": 97,
+                        "line_end": 122,
+                        "line_start": 100,
                         "name": "filter",
                         "notes": "",
                         "number": 1,
@@ -4162,7 +4165,7 @@
                         "state": "filter",
                         "status": "",
                         "type": "coa.Filter",
-                        "warn": "",
+                        "warn": false,
                         "z": 72
                     },
                     {
@@ -4208,6 +4211,9 @@
                             },
                             "g.notes": {
                                 "display": "block"
+                            },
+                            "g.notes image": {
+                                "opacity": 1
                             }
                         },
                         "block_code": "def filter_2(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None):\n    phantom.debug('filter_2() called')\n\n    # collect filtered artifact ids for 'if' condition 1\n    matched_artifacts_1, matched_results_1 = phantom.condition(\n        container=container,\n        conditions=[\n            [\"artifact:*.cef.destinationAddress\", \">=\", \"1\"],\n            [\"artifact:*.cef.deviceAddress\", \">=\", \"1\"],\n            [\"artifact:*.cef.sourceAddress\", \">=\", \"1\"],\n        ],\n        logical_operator='or',\n        name=\"filter_2:condition_1\")\n\n    # call connected blocks if filtered artifacts or results\n    if matched_artifacts_1 or matched_results_1:\n        whois_ip_1(action=action, success=success, container=container, results=results, handle=handle, filtered_artifacts=matched_artifacts_1, filtered_results=matched_results_1)\n\n    return",
@@ -4233,8 +4239,8 @@
                         "join_code": "",
                         "join_optional": [],
                         "join_start": 1,
-                        "line_end": 139,
-                        "line_start": 119,
+                        "line_end": 142,
+                        "line_start": 122,
                         "name": "filter",
                         "notes": "",
                         "number": 2,
@@ -4335,7 +4341,7 @@
                         "state": "filter",
                         "status": "",
                         "type": "coa.Filter",
-                        "warn": "",
+                        "warn": false,
                         "z": 73
                     },
                     {
@@ -4381,6 +4387,9 @@
                             },
                             "g.notes": {
                                 "display": "block"
+                            },
+                            "g.notes image": {
+                                "opacity": 1
                             }
                         },
                         "block_code": "def filter_3(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None):\n    phantom.debug('filter_3() called')\n\n    # collect filtered artifact ids for 'if' condition 1\n    matched_artifacts_1, matched_results_1 = phantom.condition(\n        container=container,\n        conditions=[\n            [\"artifact:*.cef.destinationDnsDomain\", \">=\", \"1\"],\n            [\"artifact:*.cef.deviceDnsDomain\", \">=\", \"1\"],\n            [\"artifact:*.cef.sourceDnsDomain\", \">=\", \"1\"],\n        ],\n        logical_operator='or',\n        name=\"filter_3:condition_1\")\n\n    # call connected blocks if filtered artifacts or results\n    if matched_artifacts_1 or matched_results_1:\n        whois_domain_1(action=action, success=success, container=container, results=results, handle=handle, filtered_artifacts=matched_artifacts_1, filtered_results=matched_results_1)\n\n    return",
@@ -4406,8 +4415,8 @@
                         "join_code": "",
                         "join_optional": [],
                         "join_start": 1,
-                        "line_end": 159,
-                        "line_start": 139,
+                        "line_end": 162,
+                        "line_start": 142,
                         "name": "filter",
                         "notes": "",
                         "number": 3,
@@ -4508,7 +4517,7 @@
                         "state": "filter",
                         "status": "",
                         "type": "coa.Filter",
-                        "warn": "",
+                        "warn": false,
                         "z": 74
                     },
                     {
@@ -4679,7 +4688,7 @@
                         "callback_start": 1,
                         "callsback": false,
                         "connected_to_start": true,
-                        "connection_name": "file reputation, whois domain, whois ip",
+                        "connection_name": "file reputation, whois domain, whois ip, url reputation",
                         "connection_type": "action",
                         "custom_callback": "",
                         "custom_code": "",
@@ -4697,12 +4706,12 @@
                         "join_code": "# read-only block view not available",
                         "join_optional": [],
                         "join_start": 1,
-                        "line_end": 203,
-                        "line_start": 190,
+                        "line_end": 227,
+                        "line_start": 214,
                         "name": "",
                         "notes": "",
                         "number": 0,
-                        "order": 9,
+                        "order": 10,
                         "outPorts": [],
                         "ports": {
                             "groups": {
@@ -4814,6 +4823,9 @@
                             ".title": {
                                 "text": "format"
                             },
+                            "g.code image": {
+                                "opacity": 1
+                            },
                             "g.delete": {
                                 "display": "none"
                             },
@@ -4825,6 +4837,9 @@
                             },
                             "g.notes": {
                                 "display": "block"
+                            },
+                            "g.notes image": {
+                                "opacity": 1
                             }
                         },
                         "block_code": "def format_1(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None):\n    phantom.debug('format_1() called')\n    \n    template = \"\"\"File Info = {0}\n\nIP Info = {1}\n\nDomain Info = {2}\"\"\"\n\n    # parameter list for template variable replacement\n    parameters = [\n        \"file_reputation_1:action_result.data.*.verbose_msg\",\n        \"whois_ip_1:action_result.message\",\n        \"whois_domain_1:action_result.message\",\n    ]\n\n    phantom.format(container=container, template=template, parameters=parameters, name=\"format_1\")\n\n    return",
@@ -4832,7 +4847,7 @@
                         "callback_start": 1,
                         "callsback": false,
                         "connected_to_start": true,
-                        "connection_name": "file reputation, whois domain, whois ip",
+                        "connection_name": "file reputation, whois domain, whois ip, url reputation",
                         "connection_type": "action",
                         "custom_callback": "",
                         "custom_code": "",
@@ -4848,11 +4863,11 @@
                         "inPorts": [
                             "in"
                         ],
-                        "join_code": "def join_format_1(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None):\n    phantom.debug('join_format_1() called')\n\n    # check if all connected incoming actions are done i.e. have succeeded or failed\n    if phantom.actions_done([ 'file_reputation_1', 'whois_domain_1', 'whois_ip_1' ]):\n        \n        # call connected block \"format_1\"\n        format_1(container=container, handle=handle)\n    \n    return",
+                        "join_code": "def join_format_1(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None):\n    phantom.debug('join_format_1() called')\n\n    # check if all connected incoming actions are done i.e. have succeeded or failed\n    if phantom.actions_done([ 'file_reputation_1', 'whois_domain_1', 'whois_ip_1', 'url_reputation_1' ]):\n        \n        # call connected block \"format_1\"\n        format_1(container=container, handle=handle)\n    \n    return",
                         "join_optional": [],
-                        "join_start": 179,
-                        "line_end": 190,
-                        "line_start": 159,
+                        "join_start": 182,
+                        "line_end": 193,
+                        "line_start": 162,
                         "message": "Configuring now",
                         "name": "format",
                         "notes": "",
@@ -4989,6 +5004,436 @@
                         },
                         "type": "link",
                         "z": 99
+                    },
+                    {
+                        "attrs": {
+                            ".connection": {
+                                "stroke": "#818D99",
+                                "stroke-width": 2
+                            },
+                            ".marker-target": {
+                                "d": "M 10 0 L 0 5 L 10 10 z",
+                                "fill": "#818D99",
+                                "stroke": "#818D99"
+                            }
+                        },
+                        "connector": {
+                            "args": {
+                                "radius": 5
+                            },
+                            "name": "rounded"
+                        },
+                        "endDirections": [
+                            "left"
+                        ],
+                        "id": "f20f4830-e7eb-4b49-86b6-df245791d417",
+                        "router": {
+                            "name": "metro"
+                        },
+                        "source": {
+                            "id": "3e6128e9-6f30-4952-b16e-7b284a154c5d",
+                            "port": null,
+                            "selector": "g:nth-child(1) > g:nth-child(2) > g:nth-child(1) > circle:nth-child(1)"
+                        },
+                        "startDirections": [
+                            "right"
+                        ],
+                        "target": {
+                            "id": "c95e0165-7f12-4e67-8e4a-92afb0cc0c77",
+                            "selector": ".port-body[type=\"input\"]"
+                        },
+                        "type": "link",
+                        "z": 100
+                    },
+                    {
+                        "action": "url reputation",
+                        "action_type": "investigate",
+                        "active": false,
+                        "active_keys": {},
+                        "active_values": {
+                            "url": "artifact:*.cef.requestURL"
+                        },
+                        "angle": 0,
+                        "app": "PhishTank",
+                        "appid": "c193026d-46cf-4f17-b4b9-f22525d2d87e",
+                        "approver": "",
+                        "assets": [
+                            {
+                                "action": "url reputation",
+                                "actions": [
+                                    "url reputation",
+                                    "test connectivity"
+                                ],
+                                "active": true,
+                                "app_name": "PhishTank",
+                                "app_version": "1.0.19",
+                                "appid": "c193026d-46cf-4f17-b4b9-f22525d2d87e",
+                                "asset_name": "phishtank",
+                                "config_type": "asset",
+                                "count": 0,
+                                "fields": {
+                                    "url": "artifact:*.cef.requestURL"
+                                },
+                                "has_app": true,
+                                "id": 3,
+                                "loaded": false,
+                                "missing": false,
+                                "name": "phishtank",
+                                "output": [
+                                    {
+                                        "data_path": "action_result.status",
+                                        "data_type": "string",
+                                        "example_values": [
+                                            "success"
+                                        ]
+                                    },
+                                    {
+                                        "contains": [
+                                            "url"
+                                        ],
+                                        "data_path": "action_result.parameter.url",
+                                        "data_type": "string",
+                                        "example_values": [
+                                            "http://www.splunk.com"
+                                        ]
+                                    },
+                                    {
+                                        "column_name": "In Database",
+                                        "column_order": 3,
+                                        "data_path": "action_result.data.*.in_database",
+                                        "data_type": "boolean",
+                                        "example_values": [
+                                            false,
+                                            true
+                                        ]
+                                    },
+                                    {
+                                        "column_name": "Detail URL",
+                                        "column_order": 5,
+                                        "contains": [
+                                            "url"
+                                        ],
+                                        "data_path": "action_result.data.*.phish_detail_page",
+                                        "data_type": "string",
+                                        "example_values": [
+                                            "http://www.phishtank.com/phish_detail.php?phish_id=62001"
+                                        ]
+                                    },
+                                    {
+                                        "column_name": "phish_id",
+                                        "column_order": 2,
+                                        "data_path": "action_result.data.*.phish_id",
+                                        "data_type": "string",
+                                        "example_values": [
+                                            "62771"
+                                        ]
+                                    },
+                                    {
+                                        "column_name": "URL",
+                                        "column_order": 0,
+                                        "contains": [
+                                            "url"
+                                        ],
+                                        "data_path": "action_result.data.*.url",
+                                        "data_type": "string",
+                                        "example_values": [
+                                            "http://www.splunk.com"
+                                        ]
+                                    },
+                                    {
+                                        "column_name": "VALID",
+                                        "column_order": 1,
+                                        "data_path": "action_result.data.*.valid",
+                                        "data_type": "boolean",
+                                        "example_values": [
+                                            false,
+                                            true
+                                        ]
+                                    },
+                                    {
+                                        "column_name": "Verified",
+                                        "column_order": 4,
+                                        "data_path": "action_result.data.*.verified",
+                                        "data_type": "boolean",
+                                        "example_values": [
+                                            false,
+                                            true
+                                        ]
+                                    },
+                                    {
+                                        "data_path": "action_result.data.*.verified_at",
+                                        "data_type": "string",
+                                        "example_values": [
+                                            "2006-09-01T02:32:23+00:00"
+                                        ]
+                                    },
+                                    {
+                                        "data_path": "action_result.summary.In Database",
+                                        "data_type": "boolean",
+                                        "example_values": [
+                                            false,
+                                            true
+                                        ]
+                                    },
+                                    {
+                                        "data_path": "action_result.summary.Valid",
+                                        "data_type": "boolean",
+                                        "example_values": [
+                                            false,
+                                            true
+                                        ]
+                                    },
+                                    {
+                                        "data_path": "action_result.summary.Verified",
+                                        "data_type": "boolean",
+                                        "example_values": [
+                                            false,
+                                            true
+                                        ]
+                                    },
+                                    {
+                                        "data_path": "action_result.message",
+                                        "data_type": "string",
+                                        "example_values": [
+                                            "In database: True, Verified: False, Valid: False"
+                                        ]
+                                    },
+                                    {
+                                        "data_path": "summary.total_objects",
+                                        "data_type": "numeric",
+                                        "example_values": [
+                                            1
+                                        ]
+                                    },
+                                    {
+                                        "data_path": "summary.total_objects_successful",
+                                        "data_type": "numeric",
+                                        "example_values": [
+                                            1
+                                        ]
+                                    }
+                                ],
+                                "parameters": {
+                                    "url": {
+                                        "contains": [
+                                            "url"
+                                        ],
+                                        "data_type": "string",
+                                        "default": null,
+                                        "description": "URL to query for Phishing information",
+                                        "key": "url",
+                                        "primary": true,
+                                        "required": true
+                                    }
+                                },
+                                "product_name": "PhishTank",
+                                "product_vendor": "OpenDNS",
+                                "targets": "3",
+                                "type": "investigative"
+                            }
+                        ],
+                        "attrs": {
+                            ".action": {
+                                "text": "url reputation"
+                            },
+                            ".background": {
+                                "fill": "#000000",
+                                "stroke": "#5C6773"
+                            },
+                            ".color-band": {
+                                "fill": "#3C444D"
+                            },
+                            ".inPorts>.port-in": {
+                                "ref": ".background",
+                                "ref-x": 0.5
+                            },
+                            ".inPorts>.port-in>.port-body": {
+                                "port": {
+                                    "id": "in",
+                                    "type": "in"
+                                }
+                            },
+                            ".message": {
+                                "opacity": 0,
+                                "ref-x": 5,
+                                "ref-y": 105,
+                                "text": "Configuring now"
+                            },
+                            ".outPorts>.port-out": {
+                                "ref": ".background",
+                                "ref-x": 0.5
+                            },
+                            ".outPorts>.port-out>.port-body": {
+                                "port": {
+                                    "id": "out",
+                                    "type": "out"
+                                }
+                            },
+                            ".title": {
+                                "text": "Investigate"
+                            },
+                            "g.delete": {
+                                "display": "none"
+                            },
+                            "g.error": {
+                                "opacity": 0
+                            },
+                            "g.icon image": {
+                                "xlink:href": "/inc/coa/img/block_icon_investigate.svg"
+                            },
+                            "g.notes": {
+                                "display": "block"
+                            }
+                        },
+                        "block_code": "def url_reputation_1(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None):\n    phantom.debug('url_reputation_1() called')\n\n    # collect data for 'url_reputation_1' call\n    container_data = phantom.collect2(container=container, datapath=['artifact:*.cef.requestURL', 'artifact:*.id'])\n\n    parameters = []\n    \n    # build parameters list for 'url_reputation_1' call\n    for container_item in container_data:\n        if container_item[0]:\n            parameters.append({\n                'url': container_item[0],\n                # context (artifact id) is added to associate results with the artifact\n                'context': {'artifact_id': container_item[1]},\n            })\n\n    phantom.act(\"url reputation\", parameters=parameters, assets=['phishtank'], callback=join_format_1, name=\"url_reputation_1\")\n\n    return",
+                        "callback_code": "",
+                        "callback_start": 1,
+                        "callsback": true,
+                        "color": "",
+                        "connected_to_start": true,
+                        "connection_name": "",
+                        "connection_type": "",
+                        "custom_callback": "",
+                        "custom_code": "",
+                        "custom_join": "",
+                        "custom_name": "",
+                        "delay": 0,
+                        "description": "",
+                        "has_custom": false,
+                        "has_custom_block": false,
+                        "has_custom_callback": false,
+                        "has_custom_join": false,
+                        "id": "c95e0165-7f12-4e67-8e4a-92afb0cc0c77",
+                        "inPorts": [
+                            "in"
+                        ],
+                        "join_code": "",
+                        "join_optional": [],
+                        "join_start": 1,
+                        "line_end": 214,
+                        "line_start": 193,
+                        "message": "Configuring now",
+                        "name": "url reputation",
+                        "notes": "",
+                        "number": 1,
+                        "order": 9,
+                        "outPorts": [
+                            "out"
+                        ],
+                        "ports": {
+                            "groups": {
+                                "in": {
+                                    "attrs": {
+                                        ".port-body": {
+                                            "fill": "#fff",
+                                            "magnet": true,
+                                            "r": 10,
+                                            "stroke": "#000"
+                                        },
+                                        ".port-label": {
+                                            "fill": "#000"
+                                        }
+                                    },
+                                    "label": {
+                                        "position": {
+                                            "args": {
+                                                "y": 10
+                                            },
+                                            "name": "left"
+                                        }
+                                    },
+                                    "position": {
+                                        "name": "left"
+                                    }
+                                },
+                                "out": {
+                                    "attrs": {
+                                        ".port-body": {
+                                            "fill": "#fff",
+                                            "magnet": true,
+                                            "r": 10,
+                                            "stroke": "#000"
+                                        },
+                                        ".port-label": {
+                                            "fill": "#000"
+                                        }
+                                    },
+                                    "label": {
+                                        "position": {
+                                            "args": {
+                                                "y": 10
+                                            },
+                                            "name": "right"
+                                        }
+                                    },
+                                    "position": {
+                                        "name": "right"
+                                    }
+                                }
+                            }
+                        },
+                        "position": {
+                            "x": 460,
+                            "y": -80
+                        },
+                        "previous_function": "",
+                        "previous_name": "url_reputation_1",
+                        "required_params": {
+                            "url": true
+                        },
+                        "reviewer": "",
+                        "show_number": false,
+                        "size": {
+                            "height": 100,
+                            "width": 180
+                        },
+                        "state": "app_action_assets",
+                        "status": "",
+                        "title": "Investigate",
+                        "type": "coa.Action",
+                        "warn": "",
+                        "z": 103
+                    },
+                    {
+                        "attrs": {
+                            ".connection": {
+                                "stroke": "#818D99",
+                                "stroke-width": 2
+                            },
+                            ".marker-target": {
+                                "d": "M 10 0 L 0 5 L 10 10 z",
+                                "fill": "#818D99",
+                                "stroke": "#818D99"
+                            }
+                        },
+                        "connector": {
+                            "args": {
+                                "radius": 5
+                            },
+                            "name": "rounded"
+                        },
+                        "endDirections": [
+                            "left"
+                        ],
+                        "id": "6fd78487-4ebb-4805-936d-659feed5c242",
+                        "router": {
+                            "name": "metro"
+                        },
+                        "source": {
+                            "id": "c95e0165-7f12-4e67-8e4a-92afb0cc0c77",
+                            "port": null,
+                            "selector": "g:nth-child(1) > g:nth-child(2) > g:nth-child(1) > circle:nth-child(1)"
+                        },
+                        "startDirections": [
+                            "right"
+                        ],
+                        "target": {
+                            "id": "78e7813b-d518-48c2-a27a-139da3322898",
+                            "port": null,
+                            "selector": "g:nth-child(1) > g:nth-child(1) > g:nth-child(1) > circle:nth-child(1)"
+                        },
+                        "type": "link",
+                        "z": 104
                     }
                 ]
             },
@@ -4997,7 +5442,7 @@
         "schema": 3,
         "version": "4.5.15922"
     },
-    "create_time": "2019-08-15T18:59:44.851305+00:00",
+    "create_time": "2019-08-19T12:49:04.844557+00:00",
     "draft_mode": false,
     "labels": [
         "*"

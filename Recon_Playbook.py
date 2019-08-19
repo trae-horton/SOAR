@@ -29,6 +29,9 @@ def on_start(container):
     # call 'filter_3' block
     filter_3(container=container)
 
+    # call 'url_reputation_1' block
+    url_reputation_1(container=container)
+
     return
 
 def whois_domain_1(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None):
@@ -180,11 +183,32 @@ def join_format_1(action=None, success=None, container=None, results=None, handl
     phantom.debug('join_format_1() called')
 
     # check if all connected incoming actions are done i.e. have succeeded or failed
-    if phantom.actions_done([ 'file_reputation_1', 'whois_domain_1', 'whois_ip_1' ]):
+    if phantom.actions_done([ 'file_reputation_1', 'whois_domain_1', 'whois_ip_1', 'url_reputation_1' ]):
         
         # call connected block "format_1"
         format_1(container=container, handle=handle)
     
+    return
+
+def url_reputation_1(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None):
+    phantom.debug('url_reputation_1() called')
+
+    # collect data for 'url_reputation_1' call
+    container_data = phantom.collect2(container=container, datapath=['artifact:*.cef.requestURL', 'artifact:*.id'])
+
+    parameters = []
+    
+    # build parameters list for 'url_reputation_1' call
+    for container_item in container_data:
+        if container_item[0]:
+            parameters.append({
+                'url': container_item[0],
+                # context (artifact id) is added to associate results with the artifact
+                'context': {'artifact_id': container_item[1]},
+            })
+
+    phantom.act("url reputation", parameters=parameters, assets=['phishtank'], callback=join_format_1, name="url_reputation_1")
+
     return
 
 def on_finish(container, summary):
