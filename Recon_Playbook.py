@@ -136,7 +136,7 @@ def filter_3(action=None, success=None, container=None, results=None, handle=Non
 
     # call connected blocks if filtered artifacts or results
     if matched_artifacts_2 or matched_results_2:
-        prompt_2(action=action, success=success, container=container, results=results, handle=handle, filtered_artifacts=matched_artifacts_2, filtered_results=matched_results_2)
+        join_hunt_file(action=action, success=success, container=container, results=results, handle=handle, filtered_artifacts=matched_artifacts_2, filtered_results=matched_results_2)
 
     return
 
@@ -273,8 +273,36 @@ def detonate_file_2(action=None, success=None, container=None, results=None, han
                 'context': {'artifact_id': filtered_results_item_1[1]},
             })
 
-    phantom.act("detonate file", parameters=parameters, assets=['virustotal_api'], name="detonate_file_2")
+    phantom.act("detonate file", parameters=parameters, assets=['virustotal_api'], callback=join_hunt_file, name="detonate_file_2")
 
+    return
+
+def hunt_file(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None):
+    phantom.debug('hunt_file() called')
+    input_parameter_0 = ""
+
+    ################################################################################
+    ## Custom Code Start
+    ################################################################################
+
+    # Write your custom code here...
+
+    ################################################################################
+    ## Custom Code End
+    ################################################################################
+    prompt_2(container=container)
+
+    return
+
+def join_hunt_file(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None):
+    phantom.debug('join_hunt_file() called')
+
+    # check if all connected incoming actions are done i.e. have succeeded or failed
+    if phantom.actions_done([ 'detonate_file_2', 'file_reputation_1' ]):
+        
+        # call connected block "hunt_file"
+        hunt_file(container=container, handle=handle)
+    
     return
 
 def on_finish(container, summary):
