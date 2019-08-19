@@ -221,7 +221,7 @@ def detonate_file_2(action=None, success=None, container=None, results=None, han
                 'context': {'artifact_id': results_item_1[1]},
             })
 
-    phantom.act("detonate file", parameters=parameters, assets=['virustotal_api'], name="detonate_file_2")
+    phantom.act("detonate file", parameters=parameters, assets=['virustotal_api'], callback=prompt_4, name="detonate_file_2")
 
     return
 
@@ -279,6 +279,33 @@ def prompt_3(action=None, success=None, container=None, results=None, handle=Non
     ]
 
     phantom.prompt2(container=container, user=user, message=message, respond_in_mins=30, name="prompt_3", parameters=parameters, response_types=response_types)
+
+    return
+
+def prompt_4(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None):
+    phantom.debug('prompt_4() called')
+    
+    # set user and message variables for phantom.prompt call
+    user = "admin"
+    message = """detonated
+{0}"""
+
+    # parameter list for template variable replacement
+    parameters = [
+        "detonate_file_2:action_result.status",
+    ]
+
+    #responses:
+    response_types = [
+        {
+            "prompt": "",
+            "options": {
+                "type": "message",
+            },
+        },
+    ]
+
+    phantom.prompt2(container=container, user=user, message=message, respond_in_mins=30, name="prompt_4", parameters=parameters, response_types=response_types)
 
     return
 
