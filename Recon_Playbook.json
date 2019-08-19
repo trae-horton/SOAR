@@ -7,7 +7,7 @@
             "clean": true,
             "code_block": "",
             "description": "This playbook will take the following data and run through recon modules:\n\nDestination IP\nDestination DNS\nSHA256 Hash\n\n\nActions include:\n\nPhantom DNS\nPhantom IP\nVirusTotal",
-            "hash": "070505a51ccfaa5b5003568c4ba65788f0e44018",
+            "hash": "e2074ebe4780e734a6ffc5030eb171ee2ec88ac6",
             "joint": {
                 "cells": [
                     {
@@ -217,8 +217,8 @@
                         "join_code": "# read-only block view not available",
                         "join_optional": [],
                         "join_start": 1,
-                        "line_end": 388,
-                        "line_start": 375,
+                        "line_end": 399,
+                        "line_start": 386,
                         "name": "",
                         "notes": "",
                         "number": 0,
@@ -277,8 +277,8 @@
                             }
                         },
                         "position": {
-                            "x": 1800,
-                            "y": 220
+                            "x": 1680,
+                            "y": 340
                         },
                         "previous_function": "",
                         "previous_name": "",
@@ -544,7 +544,7 @@
                         "attrs": {
                             ".background": {
                                 "fill": "#000000",
-                                "stroke": "#E6984E",
+                                "stroke": "#5C6773",
                                 "transform": "rotate(45 30 70)"
                             },
                             ".inPorts>.port-0>.port-body": {
@@ -574,7 +574,7 @@
                                 "display": "none"
                             },
                             "g.error": {
-                                "opacity": 1
+                                "opacity": 0
                             },
                             "g.error image": {
                                 "xlink:href": "/inc/coa/img/block_icon_warn.svg"
@@ -606,8 +606,8 @@
                         "join_code": "",
                         "join_optional": [],
                         "join_start": 1,
-                        "line_end": 230,
-                        "line_start": 212,
+                        "line_end": 241,
+                        "line_start": 223,
                         "name": "filter",
                         "notes": "",
                         "number": 9,
@@ -683,8 +683,8 @@
                             }
                         },
                         "position": {
-                            "x": 1580,
-                            "y": 240
+                            "x": 1540,
+                            "y": 320
                         },
                         "previous_function": "",
                         "previous_name": "filter_9",
@@ -694,7 +694,7 @@
                             "width": 82
                         },
                         "state": "filter",
-                        "status": "warn",
+                        "status": "",
                         "type": "coa.Filter",
                         "warn": "",
                         "z": 302
@@ -949,7 +949,7 @@
                                 "opacity": 1
                             }
                         },
-                        "block_code": "def prompt_4(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None):\n    phantom.debug('prompt_4() called')\n    \n    # set user and message variables for phantom.prompt call\n    user = \"admin\"\n    message = \"\"\"Detonated\nBlock Hash?\n{0}\"\"\"\n\n    # parameter list for template variable replacement\n    parameters = [\n        \"detonate_file_2:action_result.data.*.positives\",\n    ]\n\n    #responses:\n    response_types = [\n        {\n            \"prompt\": \"\",\n            \"options\": {\n                \"type\": \"list\",\n                \"choices\": [\n                    \"Yes\",\n                    \"No\",\n                ]\n            },\n        },\n    ]\n\n    phantom.prompt2(container=container, user=user, message=message, respond_in_mins=30, name=\"prompt_4\", parameters=parameters, response_types=response_types)\n\n    return",
+                        "block_code": "def prompt_4(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None):\n    phantom.debug('prompt_4() called')\n    \n    # set user and message variables for phantom.prompt call\n    user = \"admin\"\n    message = \"\"\"Detonated\nBlock Hash?\n{0}\"\"\"\n\n    # parameter list for template variable replacement\n    parameters = [\n        \"detonate_file_2:action_result.data.*.positives\",\n    ]\n\n    #responses:\n    response_types = [\n        {\n            \"prompt\": \"\",\n            \"options\": {\n                \"type\": \"list\",\n                \"choices\": [\n                    \"Yes\",\n                    \"No\",\n                ]\n            },\n        },\n    ]\n\n    phantom.prompt2(container=container, user=user, message=message, respond_in_mins=30, name=\"prompt_4\", parameters=parameters, response_types=response_types, callback=join_prompt_5)\n\n    return",
                         "callback_code": "",
                         "callback_start": 299,
                         "callsback": true,
@@ -1121,7 +1121,7 @@
                                 "opacity": 1
                             }
                         },
-                        "block_code": "def prompt_3(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None):\n    phantom.debug('prompt_3() called')\n    \n    # set user and message variables for phantom.prompt call\n    user = \"admin\"\n    message = \"\"\"Block Hash?\n{0}\"\"\"\n\n    # parameter list for template variable replacement\n    parameters = [\n        \"file_reputation_1:action_result.data.*.positives\",\n    ]\n\n    #responses:\n    response_types = [\n        {\n            \"prompt\": \"\",\n            \"options\": {\n                \"type\": \"list\",\n                \"choices\": [\n                    \"Yes\",\n                    \"No\",\n                ]\n            },\n        },\n    ]\n\n    phantom.prompt2(container=container, user=user, message=message, respond_in_mins=30, name=\"prompt_3\", parameters=parameters, response_types=response_types)\n\n    return",
+                        "block_code": "def prompt_3(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None):\n    phantom.debug('prompt_3() called')\n    \n    # set user and message variables for phantom.prompt call\n    user = \"admin\"\n    message = \"\"\"Block Hash?\n{0}\"\"\"\n\n    # parameter list for template variable replacement\n    parameters = [\n        \"file_reputation_1:action_result.data.*.positives\",\n    ]\n\n    #responses:\n    response_types = [\n        {\n            \"prompt\": \"\",\n            \"options\": {\n                \"type\": \"list\",\n                \"choices\": [\n                    \"Yes\",\n                    \"No\",\n                ]\n            },\n        },\n    ]\n\n    phantom.prompt2(container=container, user=user, message=message, respond_in_mins=30, name=\"prompt_3\", parameters=parameters, response_types=response_types, callback=join_prompt_5)\n\n    return",
                         "callback_code": "",
                         "callback_start": 268,
                         "callsback": true,
@@ -1252,7 +1252,7 @@
                         "attrs": {
                             ".background": {
                                 "fill": "#000000",
-                                "stroke": "#E6984E"
+                                "stroke": "#5C6773"
                             },
                             ".inPorts>.port-in": {
                                 "ref": ".background",
@@ -1281,7 +1281,7 @@
                                 "display": "none"
                             },
                             "g.error": {
-                                "opacity": 1
+                                "opacity": 0
                             },
                             "g.error image": {
                                 "xlink:href": "/inc/coa/img/block_icon_warn.svg"
@@ -1295,8 +1295,8 @@
                         "callback_start": 342,
                         "callsback": true,
                         "connected_to_start": true,
-                        "connection_name": "",
-                        "connection_type": "",
+                        "connection_name": "prompt 4, prompt 3, prompt 6, prompt 7",
+                        "connection_type": "action",
                         "custom_callback": "",
                         "custom_code": "",
                         "custom_join": "",
@@ -1310,10 +1310,10 @@
                         "inPorts": [
                             "in"
                         ],
-                        "join_code": "",
+                        "join_code": "def join_prompt_5(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None):\n    phantom.debug('join_prompt_5() called')\n\n    # check if all connected incoming actions are done i.e. have succeeded or failed\n    if phantom.actions_done([ 'prompt_4', 'prompt_3', 'prompt_6', 'prompt_7' ]):\n        \n        # call connected block \"prompt_5\"\n        prompt_5(container=container, handle=handle)\n    \n    return",
                         "join_optional": [],
                         "join_start": 212,
-                        "line_end": 212,
+                        "line_end": 223,
                         "line_start": 187,
                         "message": "Exmerge?",
                         "name": "prompt",
@@ -1377,8 +1377,8 @@
                             }
                         },
                         "position": {
-                            "x": 1420,
-                            "y": 240
+                            "x": 1400,
+                            "y": 320
                         },
                         "previous_function": "",
                         "previous_name": "prompt_5",
@@ -1403,7 +1403,7 @@
                             "width": 80
                         },
                         "state": "prompt",
-                        "status": "warn",
+                        "status": "",
                         "type": "coa.Prompt",
                         "warn": false,
                         "z": 339
@@ -7871,8 +7871,8 @@
                         "join_code": "",
                         "join_optional": [],
                         "join_start": 1,
-                        "line_end": 336,
-                        "line_start": 313,
+                        "line_end": 347,
+                        "line_start": 324,
                         "message": "Configuring now",
                         "name": "detonate url",
                         "notes": "",
@@ -9289,8 +9289,8 @@
                         "join_code": "",
                         "join_optional": [],
                         "join_start": 1,
-                        "line_end": 251,
-                        "line_start": 230,
+                        "line_end": 262,
+                        "line_start": 241,
                         "message": "Configuring now",
                         "name": "url reputation",
                         "notes": "",
@@ -9598,7 +9598,7 @@
                                 }
                             },
                             "g.delete": {
-                                "display": "block"
+                                "display": "none"
                             },
                             "g.error": {
                                 "opacity": 0
@@ -9610,7 +9610,7 @@
                                 "display": "block"
                             }
                         },
-                        "block_code": "def prompt_6(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None):\n    phantom.debug('prompt_6() called')\n    \n    # set user and message variables for phantom.prompt call\n    user = \"admin\"\n    message = \"\"\"testing positive\n{0}\"\"\"\n\n    # parameter list for template variable replacement\n    parameters = [\n        \"url_reputation_2:action_result.data.*.positives\",\n    ]\n\n    #responses:\n    response_types = [\n        {\n            \"prompt\": \"\",\n            \"options\": {\n                \"type\": \"list\",\n                \"choices\": [\n                    \"Yes\",\n                    \"No\",\n                ]\n            },\n        },\n    ]\n\n    phantom.prompt2(container=container, user=user, message=message, respond_in_mins=30, name=\"prompt_6\", parameters=parameters, response_types=response_types)\n\n    return",
+                        "block_code": "def prompt_6(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None):\n    phantom.debug('prompt_6() called')\n    \n    # set user and message variables for phantom.prompt call\n    user = \"admin\"\n    message = \"\"\"testing positive\n{0}\"\"\"\n\n    # parameter list for template variable replacement\n    parameters = [\n        \"url_reputation_2:action_result.data.*.positives\",\n    ]\n\n    #responses:\n    response_types = [\n        {\n            \"prompt\": \"\",\n            \"options\": {\n                \"type\": \"list\",\n                \"choices\": [\n                    \"Yes\",\n                    \"No\",\n                ]\n            },\n        },\n    ]\n\n    phantom.prompt2(container=container, user=user, message=message, respond_in_mins=30, name=\"prompt_6\", parameters=parameters, response_types=response_types, callback=join_prompt_5)\n\n    return",
                         "callback_code": "",
                         "callback_start": 1,
                         "callsback": true,
@@ -9633,8 +9633,8 @@
                         "join_code": "",
                         "join_optional": [],
                         "join_start": 1,
-                        "line_end": 313,
-                        "line_start": 282,
+                        "line_end": 324,
+                        "line_start": 293,
                         "message": "testing positive\n{0}",
                         "name": "prompt",
                         "notes": "",
@@ -9816,8 +9816,8 @@
                         "join_code": "",
                         "join_optional": [],
                         "join_start": 1,
-                        "line_end": 282,
-                        "line_start": 251,
+                        "line_end": 293,
+                        "line_start": 262,
                         "name": "filter",
                         "notes": "",
                         "number": 10,
@@ -9968,7 +9968,7 @@
                                 "display": "block"
                             }
                         },
-                        "block_code": "def prompt_7(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None):\n    phantom.debug('prompt_7() called')\n    \n    # set user and message variables for phantom.prompt call\n    user = \"admin\"\n    message = \"\"\"detinated URL\"\"\"\n\n    #responses:\n    response_types = [\n        {\n            \"prompt\": \"\",\n            \"options\": {\n                \"type\": \"message\",\n            },\n        },\n    ]\n\n    phantom.prompt2(container=container, user=user, message=message, respond_in_mins=30, name=\"prompt_7\", response_types=response_types)\n\n    return",
+                        "block_code": "def prompt_7(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None):\n    phantom.debug('prompt_7() called')\n    \n    # set user and message variables for phantom.prompt call\n    user = \"admin\"\n    message = \"\"\"detinated URL\"\"\"\n\n    #responses:\n    response_types = [\n        {\n            \"prompt\": \"\",\n            \"options\": {\n                \"type\": \"message\",\n            },\n        },\n    ]\n\n    phantom.prompt2(container=container, user=user, message=message, respond_in_mins=30, name=\"prompt_7\", response_types=response_types, callback=join_prompt_5)\n\n    return",
                         "callback_code": "",
                         "callback_start": 1,
                         "callsback": true,
@@ -9991,8 +9991,8 @@
                         "join_code": "",
                         "join_optional": [],
                         "join_start": 1,
-                        "line_end": 357,
-                        "line_start": 336,
+                        "line_end": 368,
+                        "line_start": 347,
                         "message": "detinated URL",
                         "name": "prompt",
                         "notes": "",
@@ -10355,8 +10355,8 @@
                         "join_code": "",
                         "join_optional": [],
                         "join_start": 1,
-                        "line_end": 375,
-                        "line_start": 357,
+                        "line_end": 386,
+                        "line_start": 368,
                         "name": "filter",
                         "notes": "",
                         "number": 11,
@@ -10488,6 +10488,170 @@
                         },
                         "type": "link",
                         "z": 394
+                    },
+                    {
+                        "attrs": {
+                            ".connection": {
+                                "stroke": "#818D99",
+                                "stroke-width": 2
+                            },
+                            ".marker-target": {
+                                "d": "M 10 0 L 0 5 L 10 10 z",
+                                "fill": "#818D99",
+                                "stroke": "#818D99"
+                            }
+                        },
+                        "connector": {
+                            "args": {
+                                "radius": 5
+                            },
+                            "name": "rounded"
+                        },
+                        "endDirections": [
+                            "left"
+                        ],
+                        "id": "3d57f6d1-aea9-4981-9b7e-6b244d787ed4",
+                        "router": {
+                            "name": "metro"
+                        },
+                        "source": {
+                            "id": "19ba8cf4-66aa-4960-bf7c-572d43fba429",
+                            "port": null,
+                            "selector": "g:nth-child(1) > g:nth-child(2) > g:nth-child(1) > circle:nth-child(1)"
+                        },
+                        "startDirections": [
+                            "right"
+                        ],
+                        "target": {
+                            "id": "20509b25-ebc3-4ead-94b6-2b0c9b542079",
+                            "port": null,
+                            "selector": "g:nth-child(1) > g:nth-child(1) > g:nth-child(1) > circle:nth-child(1)"
+                        },
+                        "type": "link",
+                        "z": 395
+                    },
+                    {
+                        "attrs": {
+                            ".connection": {
+                                "stroke": "#818D99",
+                                "stroke-width": 2
+                            },
+                            ".marker-target": {
+                                "d": "M 10 0 L 0 5 L 10 10 z",
+                                "fill": "#818D99",
+                                "stroke": "#818D99"
+                            }
+                        },
+                        "connector": {
+                            "args": {
+                                "radius": 5
+                            },
+                            "name": "rounded"
+                        },
+                        "endDirections": [
+                            "left"
+                        ],
+                        "id": "614eeffc-626e-448e-9a4f-fa685287522e",
+                        "router": {
+                            "name": "metro"
+                        },
+                        "source": {
+                            "id": "671a3d1a-ad3e-45d0-9d14-e22c927e14d2",
+                            "port": null,
+                            "selector": "g:nth-child(1) > g:nth-child(2) > g:nth-child(1) > circle:nth-child(1)"
+                        },
+                        "startDirections": [
+                            "right"
+                        ],
+                        "target": {
+                            "id": "20509b25-ebc3-4ead-94b6-2b0c9b542079",
+                            "port": null,
+                            "selector": "g:nth-child(1) > g:nth-child(1) > g:nth-child(1) > circle:nth-child(1)"
+                        },
+                        "type": "link",
+                        "z": 396
+                    },
+                    {
+                        "attrs": {
+                            ".connection": {
+                                "stroke": "#818D99",
+                                "stroke-width": 2
+                            },
+                            ".marker-target": {
+                                "d": "M 10 0 L 0 5 L 10 10 z",
+                                "fill": "#818D99",
+                                "stroke": "#818D99"
+                            }
+                        },
+                        "connector": {
+                            "args": {
+                                "radius": 5
+                            },
+                            "name": "rounded"
+                        },
+                        "endDirections": [
+                            "left"
+                        ],
+                        "id": "523849bd-5eda-4957-9d0d-7ef183f68518",
+                        "router": {
+                            "name": "metro"
+                        },
+                        "source": {
+                            "id": "ffcc843b-e0ac-4d06-8edc-03b07e355d78",
+                            "port": null,
+                            "selector": "g:nth-child(1) > g:nth-child(2) > g:nth-child(1) > circle:nth-child(1)"
+                        },
+                        "startDirections": [
+                            "right"
+                        ],
+                        "target": {
+                            "id": "20509b25-ebc3-4ead-94b6-2b0c9b542079",
+                            "port": null,
+                            "selector": "g:nth-child(1) > g:nth-child(1) > g:nth-child(1) > circle:nth-child(1)"
+                        },
+                        "type": "link",
+                        "z": 397
+                    },
+                    {
+                        "attrs": {
+                            ".connection": {
+                                "stroke": "#818D99",
+                                "stroke-width": 2
+                            },
+                            ".marker-target": {
+                                "d": "M 10 0 L 0 5 L 10 10 z",
+                                "fill": "#818D99",
+                                "stroke": "#818D99"
+                            }
+                        },
+                        "connector": {
+                            "args": {
+                                "radius": 5
+                            },
+                            "name": "rounded"
+                        },
+                        "endDirections": [
+                            "left"
+                        ],
+                        "id": "5c907318-3e83-4f56-816f-5d51975d533e",
+                        "router": {
+                            "name": "metro"
+                        },
+                        "source": {
+                            "id": "b93aa31e-7508-4f29-8b5e-fc7a7e9f834d",
+                            "port": null,
+                            "selector": "g:nth-child(1) > g:nth-child(2) > g:nth-child(1) > circle:nth-child(1)"
+                        },
+                        "startDirections": [
+                            "right"
+                        ],
+                        "target": {
+                            "id": "20509b25-ebc3-4ead-94b6-2b0c9b542079",
+                            "port": null,
+                            "selector": "g:nth-child(1) > g:nth-child(1) > g:nth-child(1) > circle:nth-child(1)"
+                        },
+                        "type": "link",
+                        "z": 398
                     }
                 ]
             },
@@ -10496,7 +10660,7 @@
         "schema": 3,
         "version": "4.5.15922"
     },
-    "create_time": "2019-08-19T19:58:37.836942+00:00",
+    "create_time": "2019-08-19T20:00:21.441576+00:00",
     "draft_mode": false,
     "labels": [
         "*"
