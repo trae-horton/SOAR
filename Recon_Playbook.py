@@ -257,7 +257,7 @@ def prompt_3(action=None, success=None, container=None, results=None, handle=Non
         },
     ]
 
-    phantom.prompt2(container=container, user=user, message=message, respond_in_mins=30, name="prompt_3", parameters=parameters, response_types=response_types, callback=join_task_1)
+    phantom.prompt2(container=container, user=user, message=message, respond_in_mins=30, name="prompt_3", parameters=parameters, response_types=response_types, callback=join_create_ticket_1)
 
     return
 
@@ -284,7 +284,7 @@ def prompt_4(action=None, success=None, container=None, results=None, handle=Non
         },
     ]
 
-    phantom.prompt2(container=container, user=user, message=message, respond_in_mins=30, name="prompt_4", parameters=parameters, response_types=response_types, callback=join_task_1)
+    phantom.prompt2(container=container, user=user, message=message, respond_in_mins=30, name="prompt_4", parameters=parameters, response_types=response_types, callback=join_create_ticket_1)
 
     return
 
@@ -306,25 +306,39 @@ def filter_8(action=None, success=None, container=None, results=None, handle=Non
 
     return
 
-def task_1(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None):
-    phantom.debug('task_1() called')
+def create_ticket_1(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None):
+    phantom.debug('create_ticket_1() called')
     
-    # set user and message variables for phantom.task call
-    user = "admin"
-    message = "exmerge"
+    #phantom.debug('Action: {0} {1}'.format(action['name'], ('SUCCEEDED' if success else 'FAILED')))
+    
+    # collect data for 'create_ticket_1' call
 
-    phantom.task(user=user, message=message, respond_in_mins=30, name="task_1")
+    parameters = []
+    
+    # build parameters list for 'create_ticket_1' call
+    parameters.append({
+        'project_key': "ITSEC",
+        'summary': "Exmerge",
+        'description': "data",
+        'issue_type': "Type",
+        'priority': "",
+        'assignee': "",
+        'fields': "",
+        'vault_id': "",
+    })
+
+    phantom.act("create ticket", parameters=parameters, assets=['atlassian_api'], name="create_ticket_1")
 
     return
 
-def join_task_1(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None):
-    phantom.debug('join_task_1() called')
+def join_create_ticket_1(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None):
+    phantom.debug('join_create_ticket_1() called')
 
     # check if all connected incoming actions are done i.e. have succeeded or failed
-    if phantom.actions_done([ 'prompt_4', 'prompt_3' ]):
+    if phantom.actions_done([ 'prompt_3', 'prompt_4' ]):
         
-        # call connected block "task_1"
-        task_1(container=container, handle=handle)
+        # call connected block "create_ticket_1"
+        create_ticket_1(container=container, handle=handle)
     
     return
 
