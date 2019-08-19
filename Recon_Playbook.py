@@ -232,6 +232,7 @@ def File_Filter(action=None, success=None, container=None, results=None, handle=
     # call connected blocks if filtered artifacts or results
     if matched_artifacts_2 or matched_results_2:
         prompt_3(action=action, success=success, container=container, results=results, handle=handle, filtered_artifacts=matched_artifacts_2, filtered_results=matched_results_2)
+        join_create_ticket_1(action=action, success=success, container=container, results=results, handle=handle, filtered_artifacts=matched_artifacts_2, filtered_results=matched_results_2)
 
     return
 
@@ -257,7 +258,7 @@ def prompt_3(action=None, success=None, container=None, results=None, handle=Non
         },
     ]
 
-    phantom.prompt2(container=container, user=user, message=message, respond_in_mins=30, name="prompt_3", parameters=parameters, response_types=response_types, callback=join_create_ticket_1)
+    phantom.prompt2(container=container, user=user, message=message, respond_in_mins=30, name="prompt_3", parameters=parameters, response_types=response_types)
 
     return
 
@@ -335,7 +336,7 @@ def join_create_ticket_1(action=None, success=None, container=None, results=None
     phantom.debug('join_create_ticket_1() called')
 
     # check if all connected incoming actions are done i.e. have succeeded or failed
-    if phantom.actions_done([ 'prompt_3', 'prompt_4' ]):
+    if phantom.actions_done([ 'prompt_4', 'file_reputation_1' ]):
         
         # call connected block "create_ticket_1"
         create_ticket_1(container=container, handle=handle)
