@@ -231,7 +231,7 @@ def File_Filter(action=None, success=None, container=None, results=None, handle=
 
     # call connected blocks if filtered artifacts or results
     if matched_artifacts_2 or matched_results_2:
-        prompt_3(action=action, success=success, container=container, results=results, handle=handle, filtered_artifacts=matched_artifacts_2, filtered_results=matched_results_2)
+        join_prompt_3(action=action, success=success, container=container, results=results, handle=handle, filtered_artifacts=matched_artifacts_2, filtered_results=matched_results_2)
 
     return
 
@@ -257,35 +257,19 @@ def prompt_3(action=None, success=None, container=None, results=None, handle=Non
         },
     ]
 
-    phantom.prompt2(container=container, user=user, message=message, respond_in_mins=30, name="prompt_3", parameters=parameters, response_types=response_types, callback=join_prompt_5)
+    phantom.prompt2(container=container, user=user, message=message, respond_in_mins=30, name="prompt_3", parameters=parameters, response_types=response_types)
 
     return
 
-def prompt_4(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None):
-    phantom.debug('prompt_4() called')
+def join_prompt_3(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None):
+    phantom.debug('join_prompt_3() called')
+
+    # check if all connected incoming actions are done i.e. have succeeded or failed
+    if phantom.actions_done([ 'file_reputation_1', 'detonate_file_2' ]):
+        
+        # call connected block "prompt_3"
+        prompt_3(container=container, handle=handle)
     
-    # set user and message variables for phantom.prompt call
-    user = "admin"
-    message = """detonated
-{0}"""
-
-    # parameter list for template variable replacement
-    parameters = [
-        "detonate_file_2:action_result.data.*.positives",
-    ]
-
-    #responses:
-    response_types = [
-        {
-            "prompt": "",
-            "options": {
-                "type": "message",
-            },
-        },
-    ]
-
-    phantom.prompt2(container=container, user=user, message=message, respond_in_mins=30, name="prompt_4", parameters=parameters, response_types=response_types, callback=join_prompt_5)
-
     return
 
 def filter_8(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None):
@@ -302,40 +286,8 @@ def filter_8(action=None, success=None, container=None, results=None, handle=Non
 
     # call connected blocks if filtered artifacts or results
     if matched_artifacts_1 or matched_results_1:
-        prompt_4(action=action, success=success, container=container, results=results, handle=handle, filtered_artifacts=matched_artifacts_1, filtered_results=matched_results_1)
+        join_prompt_3(action=action, success=success, container=container, results=results, handle=handle, filtered_artifacts=matched_artifacts_1, filtered_results=matched_results_1)
 
-    return
-
-def prompt_5(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None):
-    phantom.debug('prompt_5() called')
-    
-    # set user and message variables for phantom.prompt call
-    user = "admin"
-    message = """Exmerge"""
-
-    #responses:
-    response_types = [
-        {
-            "prompt": "",
-            "options": {
-                "type": "message",
-            },
-        },
-    ]
-
-    phantom.prompt2(container=container, user=user, message=message, respond_in_mins=30, name="prompt_5", response_types=response_types)
-
-    return
-
-def join_prompt_5(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None):
-    phantom.debug('join_prompt_5() called')
-
-    # check if all connected incoming actions are done i.e. have succeeded or failed
-    if phantom.actions_done([ 'prompt_4', 'prompt_3' ]):
-        
-        # call connected block "prompt_5"
-        prompt_5(container=container, handle=handle)
-    
     return
 
 def on_finish(container, summary):
