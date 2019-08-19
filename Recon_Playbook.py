@@ -252,7 +252,11 @@ def prompt_3(action=None, success=None, container=None, results=None, handle=Non
         {
             "prompt": "",
             "options": {
-                "type": "message",
+                "type": "list",
+                "choices": [
+                    "Yes",
+                    "No",
+                ]
             },
         },
     ]
@@ -279,7 +283,11 @@ def prompt_4(action=None, success=None, container=None, results=None, handle=Non
         {
             "prompt": "",
             "options": {
-                "type": "message",
+                "type": "list",
+                "choices": [
+                    "Yes",
+                    "No",
+                ]
             },
         },
     ]
