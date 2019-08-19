@@ -109,27 +109,6 @@ def url_reputation_1(action=None, success=None, container=None, results=None, ha
 
     return
 
-def detonate_file_1(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None):
-    phantom.debug('detonate_file_1() called')
-
-    # collect data for 'detonate_file_1' call
-    container_data = phantom.collect2(container=container, datapath=['artifact:*.cef.fileHashSha1', 'artifact:*.id'])
-
-    parameters = []
-    
-    # build parameters list for 'detonate_file_1' call
-    for container_item in container_data:
-        if container_item[0]:
-            parameters.append({
-                'vault_id': container_item[0],
-                # context (artifact id) is added to associate results with the artifact
-                'context': {'artifact_id': container_item[1]},
-            })
-
-    phantom.act("detonate file", parameters=parameters, assets=['virustotal_api'], name="detonate_file_1")
-
-    return
-
 def filter_5(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None):
     phantom.debug('filter_5() called')
 
@@ -278,7 +257,7 @@ def prompt_3(action=None, success=None, container=None, results=None, handle=Non
         },
     ]
 
-    phantom.prompt2(container=container, user=user, message=message, respond_in_mins=30, name="prompt_3", parameters=parameters, response_types=response_types, callback=join_exmerge)
+    phantom.prompt2(container=container, user=user, message=message, respond_in_mins=30, name="prompt_3", parameters=parameters, response_types=response_types, callback=join_prompt_5)
 
     return
 
@@ -305,7 +284,7 @@ def prompt_4(action=None, success=None, container=None, results=None, handle=Non
         },
     ]
 
-    phantom.prompt2(container=container, user=user, message=message, respond_in_mins=30, name="prompt_4", parameters=parameters, response_types=response_types, callback=join_exmerge)
+    phantom.prompt2(container=container, user=user, message=message, respond_in_mins=30, name="prompt_4", parameters=parameters, response_types=response_types, callback=join_prompt_5)
 
     return
 
@@ -327,34 +306,6 @@ def filter_8(action=None, success=None, container=None, results=None, handle=Non
 
     return
 
-def exmerge(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None):
-    phantom.debug('exmerge() called')
-    input_parameter_0 = ""
-
-    ################################################################################
-    ## Custom Code Start
-    ################################################################################
-    test='testing'
-# Write your custom code here...
-
-    ################################################################################
-    ## Custom Code End
-    ################################################################################
-    prompt_5(container=container)
-
-    return
-
-def join_exmerge(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None):
-    phantom.debug('join_exmerge() called')
-
-    # check if all connected incoming actions are done i.e. have succeeded or failed
-    if phantom.actions_done([ 'prompt_3', 'prompt_4' ]):
-        
-        # call connected block "exmerge"
-        exmerge(container=container, handle=handle)
-    
-    return
-
 def prompt_5(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None):
     phantom.debug('prompt_5() called')
     
@@ -374,6 +325,17 @@ def prompt_5(action=None, success=None, container=None, results=None, handle=Non
 
     phantom.prompt2(container=container, user=user, message=message, respond_in_mins=30, name="prompt_5", response_types=response_types)
 
+    return
+
+def join_prompt_5(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None):
+    phantom.debug('join_prompt_5() called')
+
+    # check if all connected incoming actions are done i.e. have succeeded or failed
+    if phantom.actions_done([ 'prompt_4', 'prompt_3' ]):
+        
+        # call connected block "prompt_5"
+        prompt_5(container=container, handle=handle)
+    
     return
 
 def on_finish(container, summary):
