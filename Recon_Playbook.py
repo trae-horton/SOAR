@@ -110,7 +110,7 @@ URL Reputation = {3}"""
 
     # parameter list for template variable replacement
     parameters = [
-        "file_reputation_1:action_result.data.*.verbose_msg",
+        "file_reputation_1:action_result.status",
         "whois_ip_1:action_result.message",
         "whois_domain_1:action_result.message",
         "file_reputation_1:action_result.status",

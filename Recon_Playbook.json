@@ -7,7 +7,7 @@
             "clean": true,
             "code_block": "",
             "description": "This playbook will take the following data and run through recon modules:\n\nDestination IP\nDestination DNS\nSHA256 Hash\n\n\nActions include:\n\nPhantom DNS\nPhantom IP\nVirusTotal",
-            "hash": "15997d2ad08e1bf1a55a6a0ac5ac0d266bc33e92",
+            "hash": "bdf9c4e9acd8543be3645c3e1e6bba48a2ff468a",
             "joint": {
                 "cells": [
                     {
@@ -4142,7 +4142,7 @@
                         },
                         "block_code": "def url_reputation_1(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None):\n    phantom.debug('url_reputation_1() called')\n\n    # collect data for 'url_reputation_1' call\n    container_data = phantom.collect2(container=container, datapath=['artifact:*.cef.requestURL', 'artifact:*.id'])\n\n    parameters = []\n    \n    # build parameters list for 'url_reputation_1' call\n    for container_item in container_data:\n        if container_item[0]:\n            parameters.append({\n                'url': container_item[0],\n                # context (artifact id) is added to associate results with the artifact\n                'context': {'artifact_id': container_item[1]},\n            })\n\n    phantom.act(\"url reputation\", parameters=parameters, assets=['phishtank'], callback=join_format_1, name=\"url_reputation_1\")\n\n    return",
                         "callback_code": "",
-                        "callback_start": 1,
+                        "callback_start": 157,
                         "callsback": true,
                         "color": "",
                         "connected_to_start": true,
@@ -4859,7 +4859,7 @@
                                 "opacity": 1
                             }
                         },
-                        "block_code": "def format_1(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None):\n    phantom.debug('format_1() called')\n    \n    template = \"\"\"File Reputation = {0}\n\nWhois IP = {1}\n\nWhois Domain = {2}\n\nURL Reputation = {3}\"\"\"\n\n    # parameter list for template variable replacement\n    parameters = [\n        \"file_reputation_1:action_result.data.*.verbose_msg\",\n        \"whois_ip_1:action_result.message\",\n        \"whois_domain_1:action_result.message\",\n        \"file_reputation_1:action_result.status\",\n    ]\n\n    phantom.format(container=container, template=template, parameters=parameters, name=\"format_1\")\n\n    prompt_1(container=container)\n\n    return",
+                        "block_code": "def format_1(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None):\n    phantom.debug('format_1() called')\n    \n    template = \"\"\"File Reputation = {0}\n\nWhois IP = {1}\n\nWhois Domain = {2}\n\nURL Reputation = {3}\"\"\"\n\n    # parameter list for template variable replacement\n    parameters = [\n        \"file_reputation_1:action_result.status\",\n        \"whois_ip_1:action_result.message\",\n        \"whois_domain_1:action_result.message\",\n        \"file_reputation_1:action_result.status\",\n    ]\n\n    phantom.format(container=container, template=template, parameters=parameters, name=\"format_1\")\n\n    prompt_1(container=container)\n\n    return",
                         "callback_code": "",
                         "callback_start": 1,
                         "callsback": false,
@@ -4897,7 +4897,7 @@
                             {
                                 "position": 0,
                                 "type": "",
-                                "value": "file_reputation_1:action_result.data.*.verbose_msg"
+                                "value": "file_reputation_1:action_result.status"
                             },
                             {
                                 "position": 1,
@@ -4968,8 +4968,8 @@
                             }
                         },
                         "position": {
-                            "x": 720,
-                            "y": 100
+                            "x": 800,
+                            "y": 60
                         },
                         "previous_function": "",
                         "previous_name": "format_1",
@@ -4984,7 +4984,7 @@
                         "title": "format",
                         "type": "coa.Format",
                         "warn": false,
-                        "z": 114
+                        "z": 115
                     }
                 ]
             },
@@ -4993,7 +4993,7 @@
         "schema": 3,
         "version": "4.5.15922"
     },
-    "create_time": "2019-08-19T13:25:50.514397+00:00",
+    "create_time": "2019-08-19T13:39:15.584259+00:00",
     "draft_mode": false,
     "labels": [
         "*"
