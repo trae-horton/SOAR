@@ -136,7 +136,7 @@ def filter_3(action=None, success=None, container=None, results=None, handle=Non
 
     # call connected blocks if filtered artifacts or results
     if matched_artifacts_2 or matched_results_2:
-        join_format_2(action=action, success=success, container=container, results=results, handle=handle, filtered_artifacts=matched_artifacts_2, filtered_results=matched_results_2)
+        join_prompt_2(action=action, success=success, container=container, results=results, handle=handle, filtered_artifacts=matched_artifacts_2, filtered_results=matched_results_2)
 
     return
 
@@ -252,35 +252,8 @@ def detonate_file_2(action=None, success=None, container=None, results=None, han
                 'context': {'artifact_id': filtered_results_item_1[1]},
             })
 
-    phantom.act("detonate file", parameters=parameters, assets=['virustotal_api'], callback=join_format_2, name="detonate_file_2")
+    phantom.act("detonate file", parameters=parameters, assets=['virustotal_api'], callback=join_prompt_2, name="detonate_file_2")
 
-    return
-
-def format_2(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None):
-    phantom.debug('format_2() called')
-    
-    template = """{0}"""
-
-    # parameter list for template variable replacement
-    parameters = [
-        "file_reputation_1:action_result.data.*.positives",
-    ]
-
-    phantom.format(container=container, template=template, parameters=parameters, name="format_2")
-
-    prompt_2(container=container)
-
-    return
-
-def join_format_2(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None):
-    phantom.debug('join_format_2() called')
-
-    # check if all connected incoming actions are done i.e. have succeeded or failed
-    if phantom.actions_done([ 'file_reputation_1', 'detonate_file_2' ]):
-        
-        # call connected block "format_2"
-        format_2(container=container, handle=handle)
-    
     return
 
 def prompt_2(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None):
@@ -288,12 +261,7 @@ def prompt_2(action=None, success=None, container=None, results=None, handle=Non
     
     # set user and message variables for phantom.prompt call
     user = "admin"
-    message = """{0}"""
-
-    # parameter list for template variable replacement
-    parameters = [
-        "format_2:formatted_data",
-    ]
+    message = """test"""
 
     #responses:
     response_types = [
@@ -305,8 +273,19 @@ def prompt_2(action=None, success=None, container=None, results=None, handle=Non
         },
     ]
 
-    phantom.prompt2(container=container, user=user, message=message, respond_in_mins=30, name="prompt_2", parameters=parameters, response_types=response_types)
+    phantom.prompt2(container=container, user=user, message=message, respond_in_mins=30, name="prompt_2", response_types=response_types)
 
+    return
+
+def join_prompt_2(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None):
+    phantom.debug('join_prompt_2() called')
+
+    # check if all connected incoming actions are done i.e. have succeeded or failed
+    if phantom.actions_done([ 'file_reputation_1', 'detonate_file_2' ]):
+        
+        # call connected block "prompt_2"
+        prompt_2(container=container, handle=handle)
+    
     return
 
 def on_finish(container, summary):
