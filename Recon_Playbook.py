@@ -113,7 +113,7 @@ URL Reputation = {3}"""
         "file_reputation_1:action_result.data.*.verbose_msg",
         "whois_ip_1:action_result.message",
         "whois_domain_1:action_result.message",
-        "url_reputation_1:action_result.message",
+        "file_reputation_1:action_result.status",
     ]
 
     phantom.format(container=container, template=template, parameters=parameters, name="format_1")
