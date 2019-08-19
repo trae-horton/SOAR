@@ -20,17 +20,8 @@ from datetime import datetime, timedelta
 def on_start(container):
     phantom.debug('on_start() called')
     
-    # call 'url_reputation_1' block
-    url_reputation_1(container=container)
-
-    # call 'whois_ip_1' block
-    whois_ip_1(container=container)
-
     # call 'file_reputation_1' block
     file_reputation_1(container=container)
-
-    # call 'whois_domain_1' block
-    whois_domain_1(container=container)
 
     return
 
