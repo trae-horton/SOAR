@@ -7,7 +7,7 @@
             "clean": true,
             "code_block": "",
             "description": "This playbook will take the following data and run through recon modules:\n\nDestination IP\nDestination DNS\nSHA256 Hash\n\n\nActions include:\n\nPhantom DNS\nPhantom IP\nVirusTotal",
-            "hash": "948ddb6e34d156086338a2e3d6ba19d6e6762680",
+            "hash": "6f0fa0c8fefda137f3f7b31c8ae235628cec55a7",
             "joint": {
                 "cells": [
                     {
@@ -2480,8 +2480,8 @@
                         "join_code": "# read-only block view not available",
                         "join_optional": [],
                         "join_start": 1,
-                        "line_end": 288,
-                        "line_start": 275,
+                        "line_end": 293,
+                        "line_start": 280,
                         "name": "",
                         "notes": "",
                         "number": 0,
@@ -9696,7 +9696,7 @@
                                 "opacity": 1
                             }
                         },
-                        "block_code": "def file_reputation_1(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None):\n    phantom.debug('file_reputation_1() called')\n\n    # collect data for 'file_reputation_1' call\n    container_data = phantom.collect2(container=container, datapath=['artifact:*.cef.fileHashSha256', 'artifact:*.id'])\n\n    parameters = []\n    \n    # build parameters list for 'file_reputation_1' call\n    for container_item in container_data:\n        if container_item[0]:\n            parameters.append({\n                'hash': container_item[0],\n                # context (artifact id) is added to associate results with the artifact\n                'context': {'artifact_id': container_item[1]},\n            })\n\n    phantom.act(\"file reputation\", parameters=parameters, assets=['virustotal_api'], callback=prompt_3, name=\"file_reputation_1\")\n\n    return",
+                        "block_code": "def file_reputation_1(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None):\n    phantom.debug('file_reputation_1() called')\n\n    # collect data for 'file_reputation_1' call\n    container_data = phantom.collect2(container=container, datapath=['artifact:*.cef.fileHashSha256', 'artifact:*.id'])\n\n    parameters = []\n    \n    # build parameters list for 'file_reputation_1' call\n    for container_item in container_data:\n        if container_item[0]:\n            parameters.append({\n                'hash': container_item[0],\n                # context (artifact id) is added to associate results with the artifact\n                'context': {'artifact_id': container_item[1]},\n            })\n\n    phantom.act(\"file reputation\", parameters=parameters, assets=['virustotal_api'], callback=decision_1, name=\"file_reputation_1\")\n\n    return",
                         "callback_code": "",
                         "callback_start": 91,
                         "callsback": true,
@@ -12225,7 +12225,7 @@
                             },
                             ".background": {
                                 "fill": "#000000",
-                                "stroke": "#E6984E"
+                                "stroke": "#5C6773"
                             },
                             ".color-band": {
                                 "fill": "#3C444D"
@@ -12269,7 +12269,7 @@
                                 "display": "none"
                             },
                             "g.error": {
-                                "opacity": 1
+                                "opacity": 0
                             },
                             "g.error image": {
                                 "xlink:href": "/inc/coa/img/block_icon_warn.svg"
@@ -12287,14 +12287,14 @@
                                 "opacity": 1
                             }
                         },
-                        "block_code": "def detonate_file_2(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None):\n    phantom.debug('detonate_file_2() called')\n\n    # collect data for 'detonate_file_2' call\n    results_data_1 = phantom.collect2(container=container, datapath=['file_reputation_1:action_result.data.*.positives', 'file_reputation_1:action_result.parameter.context.artifact_id'], action_results=results)\n\n    parameters = []\n    \n    # build parameters list for 'detonate_file_2' call\n    for results_item_1 in results_data_1:\n        if results_item_1[0]:\n            parameters.append({\n                'vault_id': results_item_1[0],\n                # context (artifact id) is added to associate results with the artifact\n                'context': {'artifact_id': results_item_1[1]},\n            })\n\n    phantom.act(\"detonate file\", parameters=parameters, assets=['virustotal_api'], name=\"detonate_file_2\")\n\n    return",
+                        "block_code": "def detonate_file_2(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None):\n    phantom.debug('detonate_file_2() called')\n    \n    #phantom.debug('Action: {0} {1}'.format(action['name'], ('SUCCEEDED' if success else 'FAILED')))\n    \n    # collect data for 'detonate_file_2' call\n    results_data_1 = phantom.collect2(container=container, datapath=['file_reputation_1:action_result.data.*.positives', 'file_reputation_1:action_result.parameter.context.artifact_id'], action_results=results)\n\n    parameters = []\n    \n    # build parameters list for 'detonate_file_2' call\n    for results_item_1 in results_data_1:\n        if results_item_1[0]:\n            parameters.append({\n                'vault_id': results_item_1[0],\n                # context (artifact id) is added to associate results with the artifact\n                'context': {'artifact_id': results_item_1[1]},\n            })\n\n    phantom.act(\"detonate file\", parameters=parameters, assets=['virustotal_api'], name=\"detonate_file_2\")\n\n    return",
                         "callback_code": "",
                         "callback_start": 228,
                         "callsback": true,
                         "color": "",
                         "connected_to_start": true,
-                        "connection_name": "",
-                        "connection_type": "",
+                        "connection_name": "file reputation",
+                        "connection_type": "action",
                         "custom_callback": "",
                         "custom_code": "",
                         "custom_join": "",
@@ -12312,7 +12312,7 @@
                         "join_code": "",
                         "join_optional": [],
                         "join_start": 1,
-                        "line_end": 226,
+                        "line_end": 228,
                         "line_start": 205,
                         "message": "Configuring now",
                         "name": "detonate file",
@@ -12390,10 +12390,10 @@
                             "width": 180
                         },
                         "state": "app_action_assets",
-                        "status": "warn",
+                        "status": "",
                         "title": "Investigate",
                         "type": "coa.Action",
-                        "warn": "",
+                        "warn": false,
                         "z": 243
                     },
                     {
@@ -12402,7 +12402,7 @@
                         "attrs": {
                             ".background": {
                                 "fill": "#000000",
-                                "stroke": "#E6984E",
+                                "stroke": "#637282",
                                 "transform": "rotate(45 30 70)"
                             },
                             ".inPorts>.port-0>.port-body": {
@@ -12446,22 +12446,25 @@
                                 "display": "none"
                             },
                             "g.error": {
-                                "opacity": 1
+                                "opacity": 0
                             },
                             "g.error image": {
                                 "xlink:href": "/inc/coa/img/block_icon_warn.svg"
                             },
                             "g.notes": {
                                 "display": "block"
+                            },
+                            "g.notes image": {
+                                "opacity": 1
                             }
                         },
-                        "block_code": "def decision_1(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None):\n    phantom.debug('decision_1() called')\n\n    # check for 'if' condition 1\n    matched_artifacts_1, matched_results_1 = phantom.condition(\n        container=container,\n        conditions=[\n            [\"file_reputation_1:action_result.data.*.positives\", \"<\", \"5\"],\n        ])\n\n    # call connected blocks if condition 1 matched\n    if matched_artifacts_1 or matched_results_1:\n        detonate_file_2(action=action, success=success, container=container, results=results, handle=handle)\n        return\n\n    # check for 'elif' condition 2\n    matched_artifacts_2, matched_results_2 = phantom.condition(\n        container=container,\n        conditions=[\n            [\"file_reputation_1:action_result.data.*.positives\", \">=\", \"5\"],\n        ])\n\n    # call connected blocks if condition 2 matched\n    if matched_artifacts_2 or matched_results_2:\n        return\n\n    return",
+                        "block_code": "def decision_1(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None):\n    phantom.debug('decision_1() called')\n\n    # check for 'if' condition 1\n    matched_artifacts_1, matched_results_1 = phantom.condition(\n        container=container,\n        action_results=results,\n        conditions=[\n            [\"file_reputation_1:action_result.data.*.positives\", \"<\", \"5\"],\n        ])\n\n    # call connected blocks if condition 1 matched\n    if matched_artifacts_1 or matched_results_1:\n        detonate_file_2(action=action, success=success, container=container, results=results, handle=handle)\n        return\n\n    # check for 'elif' condition 2\n    matched_artifacts_2, matched_results_2 = phantom.condition(\n        container=container,\n        action_results=results,\n        conditions=[\n            [\"file_reputation_1:action_result.data.*.positives\", \">=\", \"5\"],\n        ])\n\n    # call connected blocks if condition 2 matched\n    if matched_artifacts_2 or matched_results_2:\n        prompt_3(action=action, success=success, container=container, results=results, handle=handle)\n        return\n\n    return",
                         "callback_code": "",
                         "callback_start": 1,
                         "callsback": false,
                         "connected_to_start": true,
-                        "connection_name": "",
-                        "connection_type": "",
+                        "connection_name": "file reputation",
+                        "connection_type": "action",
                         "custom_callback": "",
                         "custom_code": "",
                         "custom_join": "",
@@ -12479,8 +12482,8 @@
                         "join_code": "",
                         "join_optional": [],
                         "join_start": 1,
-                        "line_end": 254,
-                        "line_start": 226,
+                        "line_end": 259,
+                        "line_start": 228,
                         "name": "decision",
                         "notes": "",
                         "number": 1,
@@ -12581,7 +12584,7 @@
                             "width": 82
                         },
                         "state": "decision",
-                        "status": "warn",
+                        "status": "",
                         "type": "coa.Decision",
                         "warn": "",
                         "z": 244
@@ -12629,6 +12632,9 @@
                             },
                             "g.notes": {
                                 "display": "block"
+                            },
+                            "g.notes image": {
+                                "opacity": 1
                             }
                         },
                         "block_code": "def prompt_3(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None):\n    phantom.debug('prompt_3() called')\n    \n    # set user and message variables for phantom.prompt call\n    user = \"admin\"\n    message = \"\"\"failed\"\"\"\n\n    #responses:\n    response_types = [\n        {\n            \"prompt\": \"\",\n            \"options\": {\n                \"type\": \"message\",\n            },\n        },\n    ]\n\n    phantom.prompt2(container=container, user=user, message=message, respond_in_mins=30, name=\"prompt_3\", response_types=response_types)\n\n    return",
@@ -12654,8 +12660,8 @@
                         "join_code": "",
                         "join_optional": [],
                         "join_start": 276,
-                        "line_end": 275,
-                        "line_start": 254,
+                        "line_end": 280,
+                        "line_start": 259,
                         "message": "failed",
                         "name": "prompt",
                         "notes": "",
@@ -12718,8 +12724,8 @@
                             }
                         },
                         "position": {
-                            "x": 1340,
-                            "y": 320
+                            "x": 900,
+                            "y": 360
                         },
                         "previous_function": "",
                         "previous_name": "prompt_3",
@@ -12767,12 +12773,12 @@
                         "endDirections": [
                             "left"
                         ],
-                        "id": "b98da9a2-8eb2-461f-9fd0-60377e969621",
+                        "id": "427c2d66-21f4-49fe-a1dc-d3e7ba68147e",
                         "router": {
                             "name": "metro"
                         },
                         "source": {
-                            "id": "e7d5c444-42a8-4a56-bf1f-5ced4252f662",
+                            "id": "827d8ffa-ccc9-45ff-8cb5-7257455962cd",
                             "port": null,
                             "selector": "g:nth-child(1) > g:nth-child(2) > g:nth-child(1) > circle:nth-child(1)"
                         },
@@ -12780,7 +12786,48 @@
                             "right"
                         ],
                         "target": {
-                            "id": "8e2e6004-30c5-4a43-8292-f239c1f58209",
+                            "id": "e6bb47ba-f8ff-4da7-a32c-e81eb2d05087",
+                            "port": "in",
+                            "selector": "g:nth-child(1) > g:nth-child(1) > g:nth-child(1) > circle:nth-child(1)"
+                        },
+                        "type": "link",
+                        "z": 248
+                    },
+                    {
+                        "attrs": {
+                            ".connection": {
+                                "stroke": "#818D99",
+                                "stroke-width": 2
+                            },
+                            ".marker-target": {
+                                "d": "M 10 0 L 0 5 L 10 10 z",
+                                "fill": "#818D99",
+                                "stroke": "#818D99"
+                            }
+                        },
+                        "connector": {
+                            "args": {
+                                "radius": 5
+                            },
+                            "name": "rounded"
+                        },
+                        "endDirections": [
+                            "left"
+                        ],
+                        "id": "55d7bfdf-30cb-4740-9863-81d18af8466b",
+                        "router": {
+                            "name": "metro"
+                        },
+                        "source": {
+                            "id": "e6bb47ba-f8ff-4da7-a32c-e81eb2d05087",
+                            "port": "out-2",
+                            "selector": "g:nth-child(1) > g:nth-child(2) > g:nth-child(2) > circle:nth-child(1)"
+                        },
+                        "startDirections": [
+                            "right"
+                        ],
+                        "target": {
+                            "id": "e7d5c444-42a8-4a56-bf1f-5ced4252f662",
                             "port": null,
                             "selector": "g:nth-child(1) > g:nth-child(1) > g:nth-child(1) > circle:nth-child(1)"
                         },
@@ -12808,12 +12855,12 @@
                         "endDirections": [
                             "left"
                         ],
-                        "id": "9ffe92f4-e4e6-44d3-85a0-4604c09fca2d",
+                        "id": "37c01b52-0813-4de6-88c3-789f8896f0d1",
                         "router": {
                             "name": "metro"
                         },
                         "source": {
-                            "id": "827d8ffa-ccc9-45ff-8cb5-7257455962cd",
+                            "id": "e7d5c444-42a8-4a56-bf1f-5ced4252f662",
                             "port": null,
                             "selector": "g:nth-child(1) > g:nth-child(2) > g:nth-child(1) > circle:nth-child(1)"
                         },
@@ -12821,7 +12868,7 @@
                             "right"
                         ],
                         "target": {
-                            "id": "e7d5c444-42a8-4a56-bf1f-5ced4252f662",
+                            "id": "8e2e6004-30c5-4a43-8292-f239c1f58209",
                             "port": null,
                             "selector": "g:nth-child(1) > g:nth-child(1) > g:nth-child(1) > circle:nth-child(1)"
                         },
@@ -12835,7 +12882,7 @@
         "schema": 3,
         "version": "4.5.15922"
     },
-    "create_time": "2019-08-19T17:16:31.964827+00:00",
+    "create_time": "2019-08-19T17:38:20.014110+00:00",
     "draft_mode": false,
     "labels": [
         "*"

@@ -84,7 +84,7 @@ def file_reputation_1(action=None, success=None, container=None, results=None, h
                 'context': {'artifact_id': container_item[1]},
             })
 
-    phantom.act("file reputation", parameters=parameters, assets=['virustotal_api'], callback=prompt_3, name="file_reputation_1")
+    phantom.act("file reputation", parameters=parameters, assets=['virustotal_api'], callback=decision_1, name="file_reputation_1")
 
     return
 
@@ -204,7 +204,9 @@ def filter_6(action=None, success=None, container=None, results=None, handle=Non
 
 def detonate_file_2(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None):
     phantom.debug('detonate_file_2() called')
-
+    
+    #phantom.debug('Action: {0} {1}'.format(action['name'], ('SUCCEEDED' if success else 'FAILED')))
+    
     # collect data for 'detonate_file_2' call
     results_data_1 = phantom.collect2(container=container, datapath=['file_reputation_1:action_result.data.*.positives', 'file_reputation_1:action_result.parameter.context.artifact_id'], action_results=results)
 
@@ -229,6 +231,7 @@ def decision_1(action=None, success=None, container=None, results=None, handle=N
     # check for 'if' condition 1
     matched_artifacts_1, matched_results_1 = phantom.condition(
         container=container,
+        action_results=results,
         conditions=[
             ["file_reputation_1:action_result.data.*.positives", "<", "5"],
         ])
@@ -241,12 +244,14 @@ def decision_1(action=None, success=None, container=None, results=None, handle=N
     # check for 'elif' condition 2
     matched_artifacts_2, matched_results_2 = phantom.condition(
         container=container,
+        action_results=results,
         conditions=[
             ["file_reputation_1:action_result.data.*.positives", ">=", "5"],
         ])
 
     # call connected blocks if condition 2 matched
     if matched_artifacts_2 or matched_results_2:
+        prompt_3(action=action, success=success, container=container, results=results, handle=handle)
         return
 
     return
