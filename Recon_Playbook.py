@@ -286,7 +286,7 @@ def filter_10(action=None, success=None, container=None, results=None, handle=No
 
     # call connected blocks if filtered artifacts or results
     if matched_artifacts_2 or matched_results_2:
-        prompt_7(action=action, success=success, container=container, results=results, handle=handle, filtered_artifacts=matched_artifacts_2, filtered_results=matched_results_2)
+        detonate_url_2(action=action, success=success, container=container, results=results, handle=handle, filtered_artifacts=matched_artifacts_2, filtered_results=matched_results_2)
 
     return
 
@@ -321,34 +321,47 @@ def prompt_6(action=None, success=None, container=None, results=None, handle=Non
 
     return
 
+def detonate_url_2(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None):
+    phantom.debug('detonate_url_2() called')
+    
+    #phantom.debug('Action: {0} {1}'.format(action['name'], ('SUCCEEDED' if success else 'FAILED')))
+    
+    # collect data for 'detonate_url_2' call
+    container_data = phantom.collect2(container=container, datapath=['artifact:*.cef.requestURL', 'artifact:*.id'])
+
+    parameters = []
+    
+    # build parameters list for 'detonate_url_2' call
+    for container_item in container_data:
+        if container_item[0]:
+            parameters.append({
+                'url': container_item[0],
+                # context (artifact id) is added to associate results with the artifact
+                'context': {'artifact_id': container_item[1]},
+            })
+
+    phantom.act("detonate url", parameters=parameters, assets=['virustotal_api'], callback=prompt_7, name="detonate_url_2")
+
+    return
+
 def prompt_7(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None):
     phantom.debug('prompt_7() called')
     
     # set user and message variables for phantom.prompt call
     user = "admin"
-    message = """detonate url
-{0}"""
-
-    # parameter list for template variable replacement
-    parameters = [
-        "filtered-data:filter_10:condition_2:url_reputation_2:action_result.data.*.positives",
-    ]
+    message = """detinated URL"""
 
     #responses:
     response_types = [
         {
             "prompt": "",
             "options": {
-                "type": "list",
-                "choices": [
-                    "Yes",
-                    "No",
-                ]
+                "type": "message",
             },
         },
     ]
 
-    phantom.prompt2(container=container, user=user, message=message, respond_in_mins=30, name="prompt_7", parameters=parameters, response_types=response_types)
+    phantom.prompt2(container=container, user=user, message=message, respond_in_mins=30, name="prompt_7", response_types=response_types)
 
     return
 
