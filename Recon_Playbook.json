@@ -3721,7 +3721,7 @@
                             }
                         },
                         "position": {
-                            "x": -140,
+                            "x": -80,
                             "y": 260
                         },
                         "previous_function": "",
@@ -4946,8 +4946,8 @@
                             }
                         },
                         "position": {
-                            "x": 900,
-                            "y": 280
+                            "x": 880,
+                            "y": 240
                         },
                         "previous_function": "",
                         "previous_name": "format_1",
@@ -5026,7 +5026,7 @@
                         "endDirections": [
                             "left"
                         ],
-                        "id": "f20f4830-e7eb-4b49-86b6-df245791d417",
+                        "id": "e3288d91-9815-4a60-a5f3-d948137181e6",
                         "router": {
                             "name": "metro"
                         },
@@ -5039,7 +5039,7 @@
                             "right"
                         ],
                         "target": {
-                            "id": "c95e0165-7f12-4e67-8e4a-92afb0cc0c77",
+                            "id": "cd031f99-58a6-4dfa-9dbf-1440127dc534",
                             "selector": ".port-body[type=\"input\"]"
                         },
                         "type": "link",
@@ -5303,7 +5303,7 @@
                         "has_custom_block": false,
                         "has_custom_callback": false,
                         "has_custom_join": false,
-                        "id": "c95e0165-7f12-4e67-8e4a-92afb0cc0c77",
+                        "id": "cd031f99-58a6-4dfa-9dbf-1440127dc534",
                         "inPorts": [
                             "in"
                         ],
@@ -5374,7 +5374,7 @@
                         },
                         "position": {
                             "x": 460,
-                            "y": -80
+                            "y": -100
                         },
                         "previous_function": "",
                         "previous_name": "url_reputation_1",
@@ -5392,7 +5392,7 @@
                         "title": "Investigate",
                         "type": "coa.Action",
                         "warn": "",
-                        "z": 103
+                        "z": 102
                     },
                     {
                         "attrs": {
@@ -5415,12 +5415,12 @@
                         "endDirections": [
                             "left"
                         ],
-                        "id": "6fd78487-4ebb-4805-936d-659feed5c242",
+                        "id": "7d639349-5da2-4bd1-ad90-7bc33e928c49",
                         "router": {
                             "name": "metro"
                         },
                         "source": {
-                            "id": "c95e0165-7f12-4e67-8e4a-92afb0cc0c77",
+                            "id": "cd031f99-58a6-4dfa-9dbf-1440127dc534",
                             "port": null,
                             "selector": "g:nth-child(1) > g:nth-child(2) > g:nth-child(1) > circle:nth-child(1)"
                         },
@@ -5433,7 +5433,7 @@
                             "selector": "g:nth-child(1) > g:nth-child(1) > g:nth-child(1) > circle:nth-child(1)"
                         },
                         "type": "link",
-                        "z": 104
+                        "z": 103
                     }
                 ]
             },
@@ -5442,7 +5442,7 @@
         "schema": 3,
         "version": "4.5.15922"
     },
-    "create_time": "2019-08-19T12:49:04.844557+00:00",
+    "create_time": "2019-08-19T12:52:31.182844+00:00",
     "draft_mode": false,
     "labels": [
         "*"
