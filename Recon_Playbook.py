@@ -88,39 +88,6 @@ def file_reputation_1(action=None, success=None, container=None, results=None, h
 
     return
 
-def format_1(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None):
-    phantom.debug('format_1() called')
-    
-    template = """File Reputation = {0}
-
-Whois IP = 
-
-Whois Domain = 
-
-URL Reputation ="""
-
-    # parameter list for template variable replacement
-    parameters = [
-        "file_reputation_1:action_result.status",
-    ]
-
-    phantom.format(container=container, template=template, parameters=parameters, name="format_1")
-
-    prompt_1(container=container)
-
-    return
-
-def join_format_1(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None):
-    phantom.debug('join_format_1() called')
-
-    # check if all connected incoming actions are done i.e. have succeeded or failed
-    if phantom.actions_done([ 'file_reputation_1', 'detonate_file_1' ]):
-        
-        # call connected block "format_1"
-        format_1(container=container, handle=handle)
-    
-    return
-
 def url_reputation_1(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None):
     phantom.debug('url_reputation_1() called')
 
@@ -156,7 +123,7 @@ def filter_3(action=None, success=None, container=None, results=None, handle=Non
 
     # call connected blocks if filtered artifacts or results
     if matched_artifacts_1 or matched_results_1:
-        join_format_1(action=action, success=success, container=container, results=results, handle=handle, filtered_artifacts=matched_artifacts_1, filtered_results=matched_results_1)
+        join_prompt_1(action=action, success=success, container=container, results=results, handle=handle, filtered_artifacts=matched_artifacts_1, filtered_results=matched_results_1)
 
     # collect filtered artifact ids for 'if' condition 2
     matched_artifacts_2, matched_results_2 = phantom.condition(
@@ -192,7 +159,7 @@ def detonate_file_1(action=None, success=None, container=None, results=None, han
                 'context': {'artifact_id': container_item[1]},
             })
 
-    phantom.act("detonate file", parameters=parameters, assets=['virustotal_api'], callback=join_format_1, name="detonate_file_1")
+    phantom.act("detonate file", parameters=parameters, assets=['virustotal_api'], callback=join_prompt_1, name="detonate_file_1")
 
     return
 
@@ -273,7 +240,7 @@ def prompt_1(action=None, success=None, container=None, results=None, handle=Non
     
     # set user and message variables for phantom.prompt call
     user = "admin"
-    message = """{0}"""
+    message = """test"""
 
     # parameter list for template variable replacement
     parameters = [
@@ -292,6 +259,17 @@ def prompt_1(action=None, success=None, container=None, results=None, handle=Non
 
     phantom.prompt2(container=container, user=user, message=message, respond_in_mins=30, name="prompt_1", parameters=parameters, response_types=response_types)
 
+    return
+
+def join_prompt_1(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None):
+    phantom.debug('join_prompt_1() called')
+
+    # check if all connected incoming actions are done i.e. have succeeded or failed
+    if phantom.actions_done([ 'file_reputation_1', 'detonate_file_1' ]):
+        
+        # call connected block "prompt_1"
+        prompt_1(container=container, handle=handle)
+    
     return
 
 def on_finish(container, summary):
