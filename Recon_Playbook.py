@@ -221,7 +221,7 @@ def detonate_file_2(action=None, success=None, container=None, results=None, han
                 'context': {'artifact_id': results_item_1[1]},
             })
 
-    phantom.act("detonate file", parameters=parameters, assets=['virustotal_api'], name="detonate_file_2")
+    phantom.act("detonate file", parameters=parameters, assets=['virustotal_api'], callback=join_prompt_3, name="detonate_file_2")
 
     return
 
@@ -251,7 +251,7 @@ def decision_1(action=None, success=None, container=None, results=None, handle=N
 
     # call connected blocks if condition 2 matched
     if matched_artifacts_2 or matched_results_2:
-        prompt_3(action=action, success=success, container=container, results=results, handle=handle)
+        join_prompt_3(action=action, success=success, container=container, results=results, handle=handle)
         return
 
     return
@@ -275,6 +275,17 @@ def prompt_3(action=None, success=None, container=None, results=None, handle=Non
 
     phantom.prompt2(container=container, user=user, message=message, respond_in_mins=30, name="prompt_3", response_types=response_types)
 
+    return
+
+def join_prompt_3(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None):
+    phantom.debug('join_prompt_3() called')
+
+    # check if all connected incoming actions are done i.e. have succeeded or failed
+    if phantom.actions_done([ 'file_reputation_1', 'detonate_file_2' ]):
+        
+        # call connected block "prompt_3"
+        prompt_3(container=container, handle=handle)
+    
     return
 
 def on_finish(container, summary):
