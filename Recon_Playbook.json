@@ -7,7 +7,7 @@
             "clean": true,
             "code_block": "",
             "description": "This playbook will take the following data and run through recon modules:\n\nDestination IP\nDestination DNS\nSHA256 Hash\n\n\nActions include:\n\nPhantom DNS\nPhantom IP\nVirusTotal",
-            "hash": "e2074ebe4780e734a6ffc5030eb171ee2ec88ac6",
+            "hash": "6d5dd9e90c409248ded3c3a3fa2fa93569a6d296",
             "joint": {
                 "cells": [
                     {
@@ -7956,1424 +7956,6 @@
                         "z": 367
                     },
                     {
-                        "action": "url reputation",
-                        "action_type": "investigate",
-                        "active": false,
-                        "active_keys": {},
-                        "active_values": {
-                            "url": "artifact:*.cef.requestURL"
-                        },
-                        "angle": 0,
-                        "app": "VirusTotal",
-                        "appid": "11f676a4-f3d4-4db0-8587-f4e942c07c7c",
-                        "approver": "",
-                        "assets": [
-                            {
-                                "action": "url reputation",
-                                "actions": [
-                                    "detonate url",
-                                    "detonate file",
-                                    "get report",
-                                    "get file",
-                                    "ip reputation",
-                                    "domain reputation",
-                                    "url reputation",
-                                    "file reputation",
-                                    "test connectivity"
-                                ],
-                                "active": true,
-                                "app_name": "VirusTotal",
-                                "app_version": "1.2.52",
-                                "appid": "11f676a4-f3d4-4db0-8587-f4e942c07c7c",
-                                "asset_name": "virustotal_api",
-                                "config_type": "asset",
-                                "count": 0,
-                                "fields": {
-                                    "url": "artifact:*.cef.requestURL"
-                                },
-                                "has_app": true,
-                                "id": 6,
-                                "loaded": false,
-                                "missing": false,
-                                "name": "virustotal_api",
-                                "output": [
-                                    {
-                                        "data_path": "action_result.status",
-                                        "data_type": "string",
-                                        "example_values": [
-                                            "success"
-                                        ]
-                                    },
-                                    {
-                                        "contains": [
-                                            "url"
-                                        ],
-                                        "data_path": "action_result.parameter.url",
-                                        "data_type": "string",
-                                        "example_values": [
-                                            "https://www.test.com"
-                                        ]
-                                    },
-                                    {
-                                        "data_path": "action_result.data.*.filescan_id",
-                                        "data_type": "string"
-                                    },
-                                    {
-                                        "contains": [
-                                            "url"
-                                        ],
-                                        "data_path": "action_result.data.*.permalink",
-                                        "data_type": "string",
-                                        "example_values": [
-                                            "https://www.test.com/url/d0e196a0c25d35dd0a84593cbae0f38333aa58529936444ea26453eab28dfc86/analysis/1549011607/"
-                                        ]
-                                    },
-                                    {
-                                        "data_path": "action_result.data.*.positives",
-                                        "data_type": "numeric",
-                                        "example_values": [
-                                            0
-                                        ]
-                                    },
-                                    {
-                                        "column_name": "Url",
-                                        "column_order": 0,
-                                        "contains": [
-                                            "url"
-                                        ],
-                                        "data_path": "action_result.data.*.resource",
-                                        "data_type": "string",
-                                        "example_values": [
-                                            "https://www.test.com"
-                                        ]
-                                    },
-                                    {
-                                        "data_path": "action_result.data.*.response_code",
-                                        "data_type": "numeric",
-                                        "example_values": [
-                                            1
-                                        ]
-                                    },
-                                    {
-                                        "data_path": "action_result.data.*.scan_date",
-                                        "data_type": "string",
-                                        "example_values": [
-                                            "2019-02-01 09:00:07"
-                                        ]
-                                    },
-                                    {
-                                        "contains": [
-                                            "virustotal scan id"
-                                        ],
-                                        "data_path": "action_result.data.*.scan_id",
-                                        "data_type": "string",
-                                        "example_values": [
-                                            "d0e196a0c25d35dd0a84593cbae0f38333aa58529936444ea26453eab28dfc86-1549011607"
-                                        ]
-                                    },
-                                    {
-                                        "data_path": "action_result.data.*.scans.*.detected",
-                                        "data_type": "boolean"
-                                    },
-                                    {
-                                        "data_path": "action_result.data.*.scans.*.result",
-                                        "data_type": "string"
-                                    },
-                                    {
-                                        "data_path": "action_result.data.*.scans.ADMINUSLabs.detected",
-                                        "data_type": "boolean",
-                                        "example_values": [
-                                            true,
-                                            false
-                                        ]
-                                    },
-                                    {
-                                        "data_path": "action_result.data.*.scans.ADMINUSLabs.result",
-                                        "data_type": "string",
-                                        "example_values": [
-                                            "clean site"
-                                        ]
-                                    },
-                                    {
-                                        "data_path": "action_result.data.*.scans.AegisLab WebGuard.detected",
-                                        "data_type": "boolean",
-                                        "example_values": [
-                                            true,
-                                            false
-                                        ]
-                                    },
-                                    {
-                                        "data_path": "action_result.data.*.scans.AegisLab WebGuard.result",
-                                        "data_type": "string",
-                                        "example_values": [
-                                            "clean site"
-                                        ]
-                                    },
-                                    {
-                                        "data_path": "action_result.data.*.scans.AlienVault.detected",
-                                        "data_type": "boolean",
-                                        "example_values": [
-                                            true,
-                                            false
-                                        ]
-                                    },
-                                    {
-                                        "data_path": "action_result.data.*.scans.AlienVault.result",
-                                        "data_type": "string",
-                                        "example_values": [
-                                            "clean site"
-                                        ]
-                                    },
-                                    {
-                                        "data_path": "action_result.data.*.scans.Antiy-AVL.detected",
-                                        "data_type": "boolean",
-                                        "example_values": [
-                                            true,
-                                            false
-                                        ]
-                                    },
-                                    {
-                                        "data_path": "action_result.data.*.scans.Antiy-AVL.result",
-                                        "data_type": "string",
-                                        "example_values": [
-                                            "clean site"
-                                        ]
-                                    },
-                                    {
-                                        "data_path": "action_result.data.*.scans.AutoShun.detected",
-                                        "data_type": "boolean",
-                                        "example_values": [
-                                            true,
-                                            false
-                                        ]
-                                    },
-                                    {
-                                        "data_path": "action_result.data.*.scans.AutoShun.result",
-                                        "data_type": "string",
-                                        "example_values": [
-                                            "unrated site"
-                                        ]
-                                    },
-                                    {
-                                        "data_path": "action_result.data.*.scans.Avira.detected",
-                                        "data_type": "boolean",
-                                        "example_values": [
-                                            true,
-                                            false
-                                        ]
-                                    },
-                                    {
-                                        "data_path": "action_result.data.*.scans.Avira.result",
-                                        "data_type": "string",
-                                        "example_values": [
-                                            "clean site"
-                                        ]
-                                    },
-                                    {
-                                        "data_path": "action_result.data.*.scans.Baidu-International.detected",
-                                        "data_type": "boolean",
-                                        "example_values": [
-                                            true,
-                                            false
-                                        ]
-                                    },
-                                    {
-                                        "data_path": "action_result.data.*.scans.Baidu-International.result",
-                                        "data_type": "string",
-                                        "example_values": [
-                                            "clean site"
-                                        ]
-                                    },
-                                    {
-                                        "data_path": "action_result.data.*.scans.BitDefender.detected",
-                                        "data_type": "boolean",
-                                        "example_values": [
-                                            true,
-                                            false
-                                        ]
-                                    },
-                                    {
-                                        "data_path": "action_result.data.*.scans.BitDefender.result",
-                                        "data_type": "string",
-                                        "example_values": [
-                                            "clean site"
-                                        ]
-                                    },
-                                    {
-                                        "data_path": "action_result.data.*.scans.Blueliv.detected",
-                                        "data_type": "boolean",
-                                        "example_values": [
-                                            true,
-                                            false
-                                        ]
-                                    },
-                                    {
-                                        "data_path": "action_result.data.*.scans.Blueliv.result",
-                                        "data_type": "string",
-                                        "example_values": [
-                                            "clean site"
-                                        ]
-                                    },
-                                    {
-                                        "data_path": "action_result.data.*.scans.C-SIRT.detected",
-                                        "data_type": "boolean",
-                                        "example_values": [
-                                            true,
-                                            false
-                                        ]
-                                    },
-                                    {
-                                        "data_path": "action_result.data.*.scans.C-SIRT.result",
-                                        "data_type": "string",
-                                        "example_values": [
-                                            "clean site"
-                                        ]
-                                    },
-                                    {
-                                        "data_path": "action_result.data.*.scans.CLEAN MX.detected",
-                                        "data_type": "boolean",
-                                        "example_values": [
-                                            true,
-                                            false
-                                        ]
-                                    },
-                                    {
-                                        "data_path": "action_result.data.*.scans.CLEAN MX.result",
-                                        "data_type": "string",
-                                        "example_values": [
-                                            "clean site"
-                                        ]
-                                    },
-                                    {
-                                        "data_path": "action_result.data.*.scans.Certly.detected",
-                                        "data_type": "boolean",
-                                        "example_values": [
-                                            true,
-                                            false
-                                        ]
-                                    },
-                                    {
-                                        "data_path": "action_result.data.*.scans.Certly.result",
-                                        "data_type": "string",
-                                        "example_values": [
-                                            "clean site"
-                                        ]
-                                    },
-                                    {
-                                        "data_path": "action_result.data.*.scans.Comodo Site Inspector.detected",
-                                        "data_type": "boolean",
-                                        "example_values": [
-                                            true,
-                                            false
-                                        ]
-                                    },
-                                    {
-                                        "data_path": "action_result.data.*.scans.Comodo Site Inspector.result",
-                                        "data_type": "string",
-                                        "example_values": [
-                                            "clean site"
-                                        ]
-                                    },
-                                    {
-                                        "data_path": "action_result.data.*.scans.CyRadar.detected",
-                                        "data_type": "boolean",
-                                        "example_values": [
-                                            true,
-                                            false
-                                        ]
-                                    },
-                                    {
-                                        "data_path": "action_result.data.*.scans.CyRadar.result",
-                                        "data_type": "string",
-                                        "example_values": [
-                                            "clean site"
-                                        ]
-                                    },
-                                    {
-                                        "data_path": "action_result.data.*.scans.CyberCrime.detected",
-                                        "data_type": "boolean",
-                                        "example_values": [
-                                            true,
-                                            false
-                                        ]
-                                    },
-                                    {
-                                        "data_path": "action_result.data.*.scans.CyberCrime.result",
-                                        "data_type": "string",
-                                        "example_values": [
-                                            "clean site"
-                                        ]
-                                    },
-                                    {
-                                        "data_path": "action_result.data.*.scans.DNS8.detected",
-                                        "data_type": "boolean",
-                                        "example_values": [
-                                            true,
-                                            false
-                                        ]
-                                    },
-                                    {
-                                        "data_path": "action_result.data.*.scans.DNS8.result",
-                                        "data_type": "string",
-                                        "example_values": [
-                                            "clean site"
-                                        ]
-                                    },
-                                    {
-                                        "data_path": "action_result.data.*.scans.Dr.Web.detected",
-                                        "data_type": "boolean",
-                                        "example_values": [
-                                            true,
-                                            false
-                                        ]
-                                    },
-                                    {
-                                        "data_path": "action_result.data.*.scans.Dr.Web.result",
-                                        "data_type": "string",
-                                        "example_values": [
-                                            "clean site"
-                                        ]
-                                    },
-                                    {
-                                        "data_path": "action_result.data.*.scans.ESET.detected",
-                                        "data_type": "boolean",
-                                        "example_values": [
-                                            true,
-                                            false
-                                        ]
-                                    },
-                                    {
-                                        "data_path": "action_result.data.*.scans.ESET.result",
-                                        "data_type": "string",
-                                        "example_values": [
-                                            "clean site"
-                                        ]
-                                    },
-                                    {
-                                        "data_path": "action_result.data.*.scans.Emsisoft.detected",
-                                        "data_type": "boolean",
-                                        "example_values": [
-                                            true,
-                                            false
-                                        ]
-                                    },
-                                    {
-                                        "data_path": "action_result.data.*.scans.Emsisoft.result",
-                                        "data_type": "string",
-                                        "example_values": [
-                                            "clean site"
-                                        ]
-                                    },
-                                    {
-                                        "data_path": "action_result.data.*.scans.Forcepoint ThreatSeeker.detected",
-                                        "data_type": "boolean",
-                                        "example_values": [
-                                            true,
-                                            false
-                                        ]
-                                    },
-                                    {
-                                        "data_path": "action_result.data.*.scans.Forcepoint ThreatSeeker.result",
-                                        "data_type": "string",
-                                        "example_values": [
-                                            "clean site"
-                                        ]
-                                    },
-                                    {
-                                        "data_path": "action_result.data.*.scans.Fortinet.detected",
-                                        "data_type": "boolean",
-                                        "example_values": [
-                                            true,
-                                            false
-                                        ]
-                                    },
-                                    {
-                                        "data_path": "action_result.data.*.scans.Fortinet.result",
-                                        "data_type": "string",
-                                        "example_values": [
-                                            "clean site"
-                                        ]
-                                    },
-                                    {
-                                        "data_path": "action_result.data.*.scans.FraudScore.detected",
-                                        "data_type": "boolean",
-                                        "example_values": [
-                                            true,
-                                            false
-                                        ]
-                                    },
-                                    {
-                                        "data_path": "action_result.data.*.scans.FraudScore.result",
-                                        "data_type": "string",
-                                        "example_values": [
-                                            "clean site"
-                                        ]
-                                    },
-                                    {
-                                        "data_path": "action_result.data.*.scans.FraudSense.detected",
-                                        "data_type": "boolean",
-                                        "example_values": [
-                                            true,
-                                            false
-                                        ]
-                                    },
-                                    {
-                                        "data_path": "action_result.data.*.scans.FraudSense.result",
-                                        "data_type": "string",
-                                        "example_values": [
-                                            "clean site"
-                                        ]
-                                    },
-                                    {
-                                        "data_path": "action_result.data.*.scans.G-Data.detected",
-                                        "data_type": "boolean",
-                                        "example_values": [
-                                            true,
-                                            false
-                                        ]
-                                    },
-                                    {
-                                        "data_path": "action_result.data.*.scans.G-Data.result",
-                                        "data_type": "string",
-                                        "example_values": [
-                                            "clean site"
-                                        ]
-                                    },
-                                    {
-                                        "data_path": "action_result.data.*.scans.Google Safebrowsing.detected",
-                                        "data_type": "boolean",
-                                        "example_values": [
-                                            true,
-                                            false
-                                        ]
-                                    },
-                                    {
-                                        "data_path": "action_result.data.*.scans.Google Safebrowsing.result",
-                                        "data_type": "string",
-                                        "example_values": [
-                                            "clean site"
-                                        ]
-                                    },
-                                    {
-                                        "data_path": "action_result.data.*.scans.K7AntiVirus.detected",
-                                        "data_type": "boolean",
-                                        "example_values": [
-                                            true,
-                                            false
-                                        ]
-                                    },
-                                    {
-                                        "data_path": "action_result.data.*.scans.K7AntiVirus.result",
-                                        "data_type": "string",
-                                        "example_values": [
-                                            "clean site"
-                                        ]
-                                    },
-                                    {
-                                        "data_path": "action_result.data.*.scans.Kaspersky.detected",
-                                        "data_type": "boolean",
-                                        "example_values": [
-                                            true,
-                                            false
-                                        ]
-                                    },
-                                    {
-                                        "data_path": "action_result.data.*.scans.Kaspersky.result",
-                                        "data_type": "string",
-                                        "example_values": [
-                                            "clean site"
-                                        ]
-                                    },
-                                    {
-                                        "contains": [
-                                            "url"
-                                        ],
-                                        "data_path": "action_result.data.*.scans.Malc0de Database.detail",
-                                        "data_type": "string",
-                                        "example_values": [
-                                            "http://malc0de.com/database/index.php?search=www.test.com"
-                                        ]
-                                    },
-                                    {
-                                        "data_path": "action_result.data.*.scans.Malc0de Database.detected",
-                                        "data_type": "boolean",
-                                        "example_values": [
-                                            true,
-                                            false
-                                        ]
-                                    },
-                                    {
-                                        "data_path": "action_result.data.*.scans.Malc0de Database.result",
-                                        "data_type": "string",
-                                        "example_values": [
-                                            "clean site"
-                                        ]
-                                    },
-                                    {
-                                        "data_path": "action_result.data.*.scans.Malekal.detected",
-                                        "data_type": "boolean",
-                                        "example_values": [
-                                            true,
-                                            false
-                                        ]
-                                    },
-                                    {
-                                        "data_path": "action_result.data.*.scans.Malekal.result",
-                                        "data_type": "string",
-                                        "example_values": [
-                                            "clean site"
-                                        ]
-                                    },
-                                    {
-                                        "data_path": "action_result.data.*.scans.Malware Domain Blocklist.detected",
-                                        "data_type": "boolean",
-                                        "example_values": [
-                                            true,
-                                            false
-                                        ]
-                                    },
-                                    {
-                                        "data_path": "action_result.data.*.scans.Malware Domain Blocklist.result",
-                                        "data_type": "string",
-                                        "example_values": [
-                                            "clean site"
-                                        ]
-                                    },
-                                    {
-                                        "contains": [
-                                            "url"
-                                        ],
-                                        "data_path": "action_result.data.*.scans.MalwareDomainList.detail",
-                                        "data_type": "string",
-                                        "example_values": [
-                                            "http://www.malwaredomainlist.com/mdl.php?search=www.test.com"
-                                        ]
-                                    },
-                                    {
-                                        "data_path": "action_result.data.*.scans.MalwareDomainList.detected",
-                                        "data_type": "boolean",
-                                        "example_values": [
-                                            true,
-                                            false
-                                        ]
-                                    },
-                                    {
-                                        "data_path": "action_result.data.*.scans.MalwareDomainList.result",
-                                        "data_type": "string",
-                                        "example_values": [
-                                            "clean site"
-                                        ]
-                                    },
-                                    {
-                                        "data_path": "action_result.data.*.scans.MalwarePatrol.detected",
-                                        "data_type": "boolean",
-                                        "example_values": [
-                                            true,
-                                            false
-                                        ]
-                                    },
-                                    {
-                                        "data_path": "action_result.data.*.scans.MalwarePatrol.result",
-                                        "data_type": "string",
-                                        "example_values": [
-                                            "clean site"
-                                        ]
-                                    },
-                                    {
-                                        "data_path": "action_result.data.*.scans.Malwarebytes hpHosts.detected",
-                                        "data_type": "boolean",
-                                        "example_values": [
-                                            true,
-                                            false
-                                        ]
-                                    },
-                                    {
-                                        "data_path": "action_result.data.*.scans.Malwarebytes hpHosts.result",
-                                        "data_type": "string",
-                                        "example_values": [
-                                            "clean site"
-                                        ]
-                                    },
-                                    {
-                                        "data_path": "action_result.data.*.scans.Malwared.detected",
-                                        "data_type": "boolean",
-                                        "example_values": [
-                                            true,
-                                            false
-                                        ]
-                                    },
-                                    {
-                                        "data_path": "action_result.data.*.scans.Malwared.result",
-                                        "data_type": "string",
-                                        "example_values": [
-                                            "clean site"
-                                        ]
-                                    },
-                                    {
-                                        "data_path": "action_result.data.*.scans.Netcraft.detected",
-                                        "data_type": "boolean",
-                                        "example_values": [
-                                            true,
-                                            false
-                                        ]
-                                    },
-                                    {
-                                        "data_path": "action_result.data.*.scans.Netcraft.result",
-                                        "data_type": "string",
-                                        "example_values": [
-                                            "unrated site"
-                                        ]
-                                    },
-                                    {
-                                        "data_path": "action_result.data.*.scans.NotMining.detected",
-                                        "data_type": "boolean",
-                                        "example_values": [
-                                            true,
-                                            false
-                                        ]
-                                    },
-                                    {
-                                        "data_path": "action_result.data.*.scans.NotMining.result",
-                                        "data_type": "string",
-                                        "example_values": [
-                                            "unrated site"
-                                        ]
-                                    },
-                                    {
-                                        "data_path": "action_result.data.*.scans.Nucleon.detected",
-                                        "data_type": "boolean",
-                                        "example_values": [
-                                            true,
-                                            false
-                                        ]
-                                    },
-                                    {
-                                        "data_path": "action_result.data.*.scans.Nucleon.result",
-                                        "data_type": "string",
-                                        "example_values": [
-                                            "clean site"
-                                        ]
-                                    },
-                                    {
-                                        "data_path": "action_result.data.*.scans.OpenPhish.detected",
-                                        "data_type": "boolean",
-                                        "example_values": [
-                                            true,
-                                            false
-                                        ]
-                                    },
-                                    {
-                                        "data_path": "action_result.data.*.scans.OpenPhish.result",
-                                        "data_type": "string",
-                                        "example_values": [
-                                            "clean site"
-                                        ]
-                                    },
-                                    {
-                                        "data_path": "action_result.data.*.scans.Opera.detected",
-                                        "data_type": "boolean",
-                                        "example_values": [
-                                            true,
-                                            false
-                                        ]
-                                    },
-                                    {
-                                        "data_path": "action_result.data.*.scans.Opera.result",
-                                        "data_type": "string",
-                                        "example_values": [
-                                            "clean site"
-                                        ]
-                                    },
-                                    {
-                                        "data_path": "action_result.data.*.scans.PhishLabs.detected",
-                                        "data_type": "boolean",
-                                        "example_values": [
-                                            true,
-                                            false
-                                        ]
-                                    },
-                                    {
-                                        "data_path": "action_result.data.*.scans.PhishLabs.result",
-                                        "data_type": "string",
-                                        "example_values": [
-                                            "unrated site"
-                                        ]
-                                    },
-                                    {
-                                        "data_path": "action_result.data.*.scans.Phishtank.detected",
-                                        "data_type": "boolean",
-                                        "example_values": [
-                                            true,
-                                            false
-                                        ]
-                                    },
-                                    {
-                                        "data_path": "action_result.data.*.scans.Phishtank.result",
-                                        "data_type": "string",
-                                        "example_values": [
-                                            "clean site"
-                                        ]
-                                    },
-                                    {
-                                        "data_path": "action_result.data.*.scans.Quttera.detected",
-                                        "data_type": "boolean",
-                                        "example_values": [
-                                            true,
-                                            false
-                                        ]
-                                    },
-                                    {
-                                        "data_path": "action_result.data.*.scans.Quttera.result",
-                                        "data_type": "string",
-                                        "example_values": [
-                                            "clean site"
-                                        ]
-                                    },
-                                    {
-                                        "data_path": "action_result.data.*.scans.Rising.detected",
-                                        "data_type": "boolean",
-                                        "example_values": [
-                                            true,
-                                            false
-                                        ]
-                                    },
-                                    {
-                                        "data_path": "action_result.data.*.scans.Rising.result",
-                                        "data_type": "string",
-                                        "example_values": [
-                                            "clean site"
-                                        ]
-                                    },
-                                    {
-                                        "data_path": "action_result.data.*.scans.SCUMWARE.org.detected",
-                                        "data_type": "boolean",
-                                        "example_values": [
-                                            true,
-                                            false
-                                        ]
-                                    },
-                                    {
-                                        "data_path": "action_result.data.*.scans.SCUMWARE.org.result",
-                                        "data_type": "string",
-                                        "example_values": [
-                                            "clean site"
-                                        ]
-                                    },
-                                    {
-                                        "data_path": "action_result.data.*.scans.SecureBrain.detected",
-                                        "data_type": "boolean",
-                                        "example_values": [
-                                            true,
-                                            false
-                                        ]
-                                    },
-                                    {
-                                        "data_path": "action_result.data.*.scans.SecureBrain.result",
-                                        "data_type": "string",
-                                        "example_values": [
-                                            "clean site"
-                                        ]
-                                    },
-                                    {
-                                        "data_path": "action_result.data.*.scans.Sophos.detected",
-                                        "data_type": "boolean",
-                                        "example_values": [
-                                            true,
-                                            false
-                                        ]
-                                    },
-                                    {
-                                        "data_path": "action_result.data.*.scans.Sophos.result",
-                                        "data_type": "string",
-                                        "example_values": [
-                                            "unrated site"
-                                        ]
-                                    },
-                                    {
-                                        "data_path": "action_result.data.*.scans.Spam404.detected",
-                                        "data_type": "boolean",
-                                        "example_values": [
-                                            true,
-                                            false
-                                        ]
-                                    },
-                                    {
-                                        "data_path": "action_result.data.*.scans.Spam404.result",
-                                        "data_type": "string",
-                                        "example_values": [
-                                            "clean site"
-                                        ]
-                                    },
-                                    {
-                                        "data_path": "action_result.data.*.scans.StopBadware.detected",
-                                        "data_type": "boolean",
-                                        "example_values": [
-                                            true,
-                                            false
-                                        ]
-                                    },
-                                    {
-                                        "data_path": "action_result.data.*.scans.StopBadware.result",
-                                        "data_type": "string",
-                                        "example_values": [
-                                            "unrated site"
-                                        ]
-                                    },
-                                    {
-                                        "data_path": "action_result.data.*.scans.Sucuri SiteCheck.detected",
-                                        "data_type": "boolean",
-                                        "example_values": [
-                                            true,
-                                            false
-                                        ]
-                                    },
-                                    {
-                                        "data_path": "action_result.data.*.scans.Sucuri SiteCheck.result",
-                                        "data_type": "string",
-                                        "example_values": [
-                                            "clean site"
-                                        ]
-                                    },
-                                    {
-                                        "data_path": "action_result.data.*.scans.Tencent.detected",
-                                        "data_type": "boolean",
-                                        "example_values": [
-                                            true,
-                                            false
-                                        ]
-                                    },
-                                    {
-                                        "data_path": "action_result.data.*.scans.Tencent.result",
-                                        "data_type": "string",
-                                        "example_values": [
-                                            "clean site"
-                                        ]
-                                    },
-                                    {
-                                        "data_path": "action_result.data.*.scans.ThreatHive.detected",
-                                        "data_type": "boolean",
-                                        "example_values": [
-                                            true,
-                                            false
-                                        ]
-                                    },
-                                    {
-                                        "data_path": "action_result.data.*.scans.ThreatHive.result",
-                                        "data_type": "string",
-                                        "example_values": [
-                                            "clean site"
-                                        ]
-                                    },
-                                    {
-                                        "data_path": "action_result.data.*.scans.Trustwave.detected",
-                                        "data_type": "boolean",
-                                        "example_values": [
-                                            true,
-                                            false
-                                        ]
-                                    },
-                                    {
-                                        "data_path": "action_result.data.*.scans.Trustwave.result",
-                                        "data_type": "string",
-                                        "example_values": [
-                                            "clean site"
-                                        ]
-                                    },
-                                    {
-                                        "data_path": "action_result.data.*.scans.URLQuery.detected",
-                                        "data_type": "boolean",
-                                        "example_values": [
-                                            true,
-                                            false
-                                        ]
-                                    },
-                                    {
-                                        "data_path": "action_result.data.*.scans.URLQuery.result",
-                                        "data_type": "string",
-                                        "example_values": [
-                                            "unrated site"
-                                        ]
-                                    },
-                                    {
-                                        "data_path": "action_result.data.*.scans.VX Vault.detected",
-                                        "data_type": "boolean",
-                                        "example_values": [
-                                            true,
-                                            false
-                                        ]
-                                    },
-                                    {
-                                        "data_path": "action_result.data.*.scans.VX Vault.result",
-                                        "data_type": "string",
-                                        "example_values": [
-                                            "clean site"
-                                        ]
-                                    },
-                                    {
-                                        "data_path": "action_result.data.*.scans.Virusdie External Site Scan.detected",
-                                        "data_type": "boolean",
-                                        "example_values": [
-                                            true,
-                                            false
-                                        ]
-                                    },
-                                    {
-                                        "data_path": "action_result.data.*.scans.Virusdie External Site Scan.result",
-                                        "data_type": "string",
-                                        "example_values": [
-                                            "clean site"
-                                        ]
-                                    },
-                                    {
-                                        "data_path": "action_result.data.*.scans.Web Security Guard.detected",
-                                        "data_type": "boolean",
-                                        "example_values": [
-                                            true,
-                                            false
-                                        ]
-                                    },
-                                    {
-                                        "data_path": "action_result.data.*.scans.Web Security Guard.result",
-                                        "data_type": "string",
-                                        "example_values": [
-                                            "clean site"
-                                        ]
-                                    },
-                                    {
-                                        "contains": [
-                                            "url"
-                                        ],
-                                        "data_path": "action_result.data.*.scans.Yandex Safebrowsing.detail",
-                                        "data_type": "string",
-                                        "example_values": [
-                                            "http://yandex.com/infected?l10n=en&url=https://www.test.com/"
-                                        ]
-                                    },
-                                    {
-                                        "data_path": "action_result.data.*.scans.Yandex Safebrowsing.detected",
-                                        "data_type": "boolean",
-                                        "example_values": [
-                                            true,
-                                            false
-                                        ]
-                                    },
-                                    {
-                                        "data_path": "action_result.data.*.scans.Yandex Safebrowsing.result",
-                                        "data_type": "string",
-                                        "example_values": [
-                                            "clean site"
-                                        ]
-                                    },
-                                    {
-                                        "data_path": "action_result.data.*.scans.ZCloudsec.detected",
-                                        "data_type": "boolean",
-                                        "example_values": [
-                                            true,
-                                            false
-                                        ]
-                                    },
-                                    {
-                                        "data_path": "action_result.data.*.scans.ZCloudsec.result",
-                                        "data_type": "string",
-                                        "example_values": [
-                                            "clean site"
-                                        ]
-                                    },
-                                    {
-                                        "data_path": "action_result.data.*.scans.ZDB Zeus.detected",
-                                        "data_type": "boolean",
-                                        "example_values": [
-                                            true,
-                                            false
-                                        ]
-                                    },
-                                    {
-                                        "data_path": "action_result.data.*.scans.ZDB Zeus.result",
-                                        "data_type": "string",
-                                        "example_values": [
-                                            "clean site"
-                                        ]
-                                    },
-                                    {
-                                        "data_path": "action_result.data.*.scans.ZeroCERT.detected",
-                                        "data_type": "boolean",
-                                        "example_values": [
-                                            true,
-                                            false
-                                        ]
-                                    },
-                                    {
-                                        "data_path": "action_result.data.*.scans.ZeroCERT.result",
-                                        "data_type": "string",
-                                        "example_values": [
-                                            "clean site"
-                                        ]
-                                    },
-                                    {
-                                        "data_path": "action_result.data.*.scans.Zerofox.detected",
-                                        "data_type": "boolean",
-                                        "example_values": [
-                                            true,
-                                            false
-                                        ]
-                                    },
-                                    {
-                                        "data_path": "action_result.data.*.scans.Zerofox.result",
-                                        "data_type": "string",
-                                        "example_values": [
-                                            "clean site"
-                                        ]
-                                    },
-                                    {
-                                        "contains": [
-                                            "url"
-                                        ],
-                                        "data_path": "action_result.data.*.scans.ZeusTracker.detail",
-                                        "data_type": "string",
-                                        "example_values": [
-                                            "https://zeustracker.abuse.ch/monitor.php?host=www.test.com"
-                                        ]
-                                    },
-                                    {
-                                        "data_path": "action_result.data.*.scans.ZeusTracker.detected",
-                                        "data_type": "boolean",
-                                        "example_values": [
-                                            true,
-                                            false
-                                        ]
-                                    },
-                                    {
-                                        "data_path": "action_result.data.*.scans.ZeusTracker.result",
-                                        "data_type": "string",
-                                        "example_values": [
-                                            "clean site"
-                                        ]
-                                    },
-                                    {
-                                        "data_path": "action_result.data.*.scans.desenmascara.me.detected",
-                                        "data_type": "boolean",
-                                        "example_values": [
-                                            true,
-                                            false
-                                        ]
-                                    },
-                                    {
-                                        "data_path": "action_result.data.*.scans.desenmascara.me.result",
-                                        "data_type": "string",
-                                        "example_values": [
-                                            "clean site"
-                                        ]
-                                    },
-                                    {
-                                        "data_path": "action_result.data.*.scans.malwares.com URL checker.detected",
-                                        "data_type": "boolean",
-                                        "example_values": [
-                                            true,
-                                            false
-                                        ]
-                                    },
-                                    {
-                                        "data_path": "action_result.data.*.scans.malwares.com URL checker.result",
-                                        "data_type": "string",
-                                        "example_values": [
-                                            "clean site"
-                                        ]
-                                    },
-                                    {
-                                        "data_path": "action_result.data.*.scans.securolytics.detected",
-                                        "data_type": "boolean",
-                                        "example_values": [
-                                            true,
-                                            false
-                                        ]
-                                    },
-                                    {
-                                        "data_path": "action_result.data.*.scans.securolytics.result",
-                                        "data_type": "string",
-                                        "example_values": [
-                                            "clean site"
-                                        ]
-                                    },
-                                    {
-                                        "data_path": "action_result.data.*.scans.zvelo.detected",
-                                        "data_type": "boolean",
-                                        "example_values": [
-                                            true,
-                                            false
-                                        ]
-                                    },
-                                    {
-                                        "data_path": "action_result.data.*.scans.zvelo.result",
-                                        "data_type": "string",
-                                        "example_values": [
-                                            "clean site"
-                                        ]
-                                    },
-                                    {
-                                        "data_path": "action_result.data.*.total",
-                                        "data_type": "numeric",
-                                        "example_values": [
-                                            66
-                                        ]
-                                    },
-                                    {
-                                        "contains": [
-                                            "url"
-                                        ],
-                                        "data_path": "action_result.data.*.url",
-                                        "data_type": "string",
-                                        "example_values": [
-                                            "https://www.test.com/"
-                                        ]
-                                    },
-                                    {
-                                        "data_path": "action_result.data.*.verbose_msg",
-                                        "data_type": "string",
-                                        "example_values": [
-                                            "Scan finished, scan information embedded in this object"
-                                        ]
-                                    },
-                                    {
-                                        "data_path": "action_result.summary.detections",
-                                        "data_type": "boolean"
-                                    },
-                                    {
-                                        "data_path": "action_result.summary.found",
-                                        "data_type": "boolean"
-                                    },
-                                    {
-                                        "column_name": "Positives",
-                                        "column_order": 2,
-                                        "data_path": "action_result.summary.positives",
-                                        "data_type": "numeric",
-                                        "example_values": [
-                                            0
-                                        ]
-                                    },
-                                    {
-                                        "column_name": "Total Scans",
-                                        "column_order": 1,
-                                        "data_path": "action_result.summary.total_scans",
-                                        "data_type": "numeric",
-                                        "example_values": [
-                                            66
-                                        ]
-                                    },
-                                    {
-                                        "data_path": "action_result.message",
-                                        "data_type": "string",
-                                        "example_values": [
-                                            "Positives: 0, Total scans: 66"
-                                        ]
-                                    },
-                                    {
-                                        "data_path": "summary.total_objects",
-                                        "data_type": "numeric",
-                                        "example_values": [
-                                            1
-                                        ]
-                                    },
-                                    {
-                                        "data_path": "summary.total_objects_successful",
-                                        "data_type": "numeric",
-                                        "example_values": [
-                                            1
-                                        ]
-                                    },
-                                    {
-                                        "data_path": "summary.total_positives",
-                                        "data_type": "numeric",
-                                        "example_values": [
-                                            0
-                                        ]
-                                    }
-                                ],
-                                "parameters": {
-                                    "url": {
-                                        "contains": [
-                                            "url"
-                                        ],
-                                        "data_type": "string",
-                                        "default": null,
-                                        "description": "URL to query",
-                                        "key": "url",
-                                        "order": 0,
-                                        "primary": true,
-                                        "required": true
-                                    }
-                                },
-                                "product_name": "VirusTotal",
-                                "product_vendor": "VirusTotal",
-                                "targets": "6",
-                                "type": "reputation"
-                            }
-                        ],
-                        "attrs": {
-                            ".action": {
-                                "text": "url reputation"
-                            },
-                            ".background": {
-                                "fill": "#000000",
-                                "stroke": "#5C6773"
-                            },
-                            ".color-band": {
-                                "fill": "#3C444D"
-                            },
-                            ".inPorts>.port-in": {
-                                "ref": ".background",
-                                "ref-x": 0.5
-                            },
-                            ".inPorts>.port-in>.port-body": {
-                                "port": {
-                                    "id": "in",
-                                    "type": "in"
-                                }
-                            },
-                            ".message": {
-                                "opacity": 0,
-                                "ref-x": 5,
-                                "ref-y": 105,
-                                "text": "Configuring now"
-                            },
-                            ".outPorts>.port-out": {
-                                "ref": ".background",
-                                "ref-x": 0.5
-                            },
-                            ".outPorts>.port-out>.port-body": {
-                                "port": {
-                                    "id": "out",
-                                    "type": "out"
-                                }
-                            },
-                            ".title": {
-                                "text": "Investigate"
-                            },
-                            "g.delete": {
-                                "display": "none"
-                            },
-                            "g.error": {
-                                "opacity": 0
-                            },
-                            "g.icon image": {
-                                "xlink:href": "/inc/coa/img/block_icon_investigate.svg"
-                            },
-                            "g.notes": {
-                                "display": "block"
-                            },
-                            "g.timer image": {
-                                "opacity": 1
-                            }
-                        },
-                        "block_code": "def url_reputation_2(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None):\n    phantom.debug('url_reputation_2() called')\n\n    # collect data for 'url_reputation_2' call\n    container_data = phantom.collect2(container=container, datapath=['artifact:*.cef.requestURL', 'artifact:*.id'])\n\n    parameters = []\n    \n    # build parameters list for 'url_reputation_2' call\n    for container_item in container_data:\n        if container_item[0]:\n            parameters.append({\n                'url': container_item[0],\n                # context (artifact id) is added to associate results with the artifact\n                'context': {'artifact_id': container_item[1]},\n            })\n\n    phantom.act(\"url reputation\", parameters=parameters, assets=['virustotal_api'], callback=filter_10, name=\"url_reputation_2\")\n\n    return",
-                        "callback_code": "",
-                        "callback_start": 1,
-                        "callsback": true,
-                        "color": "",
-                        "connected_to_start": true,
-                        "connection_name": "",
-                        "connection_type": "",
-                        "custom_callback": "",
-                        "custom_code": "",
-                        "custom_join": "",
-                        "custom_name": "",
-                        "delay": "0",
-                        "description": "",
-                        "has_custom": false,
-                        "has_custom_block": false,
-                        "has_custom_callback": false,
-                        "has_custom_join": false,
-                        "id": "c31b2524-85a7-46e3-9119-8b2050cd80c4",
-                        "inPorts": [
-                            "in"
-                        ],
-                        "join_code": "",
-                        "join_optional": [],
-                        "join_start": 1,
-                        "line_end": 262,
-                        "line_start": 241,
-                        "message": "Configuring now",
-                        "name": "url reputation",
-                        "notes": "",
-                        "number": 2,
-                        "order": 10,
-                        "outPorts": [
-                            "out"
-                        ],
-                        "ports": {
-                            "groups": {
-                                "in": {
-                                    "attrs": {
-                                        ".port-body": {
-                                            "fill": "#fff",
-                                            "magnet": true,
-                                            "r": 10,
-                                            "stroke": "#000"
-                                        },
-                                        ".port-label": {
-                                            "fill": "#000"
-                                        }
-                                    },
-                                    "label": {
-                                        "position": {
-                                            "args": {
-                                                "y": 10
-                                            },
-                                            "name": "left"
-                                        }
-                                    },
-                                    "position": {
-                                        "name": "left"
-                                    }
-                                },
-                                "out": {
-                                    "attrs": {
-                                        ".port-body": {
-                                            "fill": "#fff",
-                                            "magnet": true,
-                                            "r": 10,
-                                            "stroke": "#000"
-                                        },
-                                        ".port-label": {
-                                            "fill": "#000"
-                                        }
-                                    },
-                                    "label": {
-                                        "position": {
-                                            "args": {
-                                                "y": 10
-                                            },
-                                            "name": "right"
-                                        }
-                                    },
-                                    "position": {
-                                        "name": "right"
-                                    }
-                                }
-                            }
-                        },
-                        "position": {
-                            "x": 460,
-                            "y": 360
-                        },
-                        "previous_function": "",
-                        "previous_name": "url_reputation_2",
-                        "required_params": {
-                            "url": true
-                        },
-                        "reviewer": "",
-                        "show_number": false,
-                        "size": {
-                            "height": 100,
-                            "width": 180
-                        },
-                        "state": "app_action_assets",
-                        "status": "",
-                        "title": "Investigate",
-                        "type": "coa.Action",
-                        "warn": "",
-                        "z": 376
-                    },
-                    {
                         "active": false,
                         "angle": 0,
                         "attrs": {
@@ -10652,6 +9234,358 @@
                         },
                         "type": "link",
                         "z": 398
+                    },
+                    {
+                        "action": "url reputation",
+                        "action_type": "investigate",
+                        "active": false,
+                        "active_keys": {},
+                        "active_values": {
+                            "url": "artifact:*.cef.requestURL"
+                        },
+                        "angle": 0,
+                        "app": "PhishTank",
+                        "appid": "c193026d-46cf-4f17-b4b9-f22525d2d87e",
+                        "approver": "",
+                        "assets": [
+                            {
+                                "action": "url reputation",
+                                "actions": [
+                                    "url reputation",
+                                    "test connectivity"
+                                ],
+                                "active": true,
+                                "app_name": "PhishTank",
+                                "app_version": "1.0.19",
+                                "appid": "c193026d-46cf-4f17-b4b9-f22525d2d87e",
+                                "asset_name": "phishtank",
+                                "config_type": "asset",
+                                "count": 0,
+                                "fields": {
+                                    "url": "artifact:*.cef.requestURL"
+                                },
+                                "has_app": true,
+                                "id": 3,
+                                "loaded": false,
+                                "missing": false,
+                                "name": "phishtank",
+                                "output": [
+                                    {
+                                        "data_path": "action_result.status",
+                                        "data_type": "string",
+                                        "example_values": [
+                                            "success"
+                                        ]
+                                    },
+                                    {
+                                        "contains": [
+                                            "url"
+                                        ],
+                                        "data_path": "action_result.parameter.url",
+                                        "data_type": "string",
+                                        "example_values": [
+                                            "http://www.splunk.com"
+                                        ]
+                                    },
+                                    {
+                                        "column_name": "In Database",
+                                        "column_order": 3,
+                                        "data_path": "action_result.data.*.in_database",
+                                        "data_type": "boolean",
+                                        "example_values": [
+                                            false,
+                                            true
+                                        ]
+                                    },
+                                    {
+                                        "column_name": "Detail URL",
+                                        "column_order": 5,
+                                        "contains": [
+                                            "url"
+                                        ],
+                                        "data_path": "action_result.data.*.phish_detail_page",
+                                        "data_type": "string",
+                                        "example_values": [
+                                            "http://www.phishtank.com/phish_detail.php?phish_id=62001"
+                                        ]
+                                    },
+                                    {
+                                        "column_name": "phish_id",
+                                        "column_order": 2,
+                                        "data_path": "action_result.data.*.phish_id",
+                                        "data_type": "string",
+                                        "example_values": [
+                                            "62771"
+                                        ]
+                                    },
+                                    {
+                                        "column_name": "URL",
+                                        "column_order": 0,
+                                        "contains": [
+                                            "url"
+                                        ],
+                                        "data_path": "action_result.data.*.url",
+                                        "data_type": "string",
+                                        "example_values": [
+                                            "http://www.splunk.com"
+                                        ]
+                                    },
+                                    {
+                                        "column_name": "VALID",
+                                        "column_order": 1,
+                                        "data_path": "action_result.data.*.valid",
+                                        "data_type": "boolean",
+                                        "example_values": [
+                                            false,
+                                            true
+                                        ]
+                                    },
+                                    {
+                                        "column_name": "Verified",
+                                        "column_order": 4,
+                                        "data_path": "action_result.data.*.verified",
+                                        "data_type": "boolean",
+                                        "example_values": [
+                                            false,
+                                            true
+                                        ]
+                                    },
+                                    {
+                                        "data_path": "action_result.data.*.verified_at",
+                                        "data_type": "string",
+                                        "example_values": [
+                                            "2006-09-01T02:32:23+00:00"
+                                        ]
+                                    },
+                                    {
+                                        "data_path": "action_result.summary.In Database",
+                                        "data_type": "boolean",
+                                        "example_values": [
+                                            false,
+                                            true
+                                        ]
+                                    },
+                                    {
+                                        "data_path": "action_result.summary.Valid",
+                                        "data_type": "boolean",
+                                        "example_values": [
+                                            false,
+                                            true
+                                        ]
+                                    },
+                                    {
+                                        "data_path": "action_result.summary.Verified",
+                                        "data_type": "boolean",
+                                        "example_values": [
+                                            false,
+                                            true
+                                        ]
+                                    },
+                                    {
+                                        "data_path": "action_result.message",
+                                        "data_type": "string",
+                                        "example_values": [
+                                            "In database: True, Verified: False, Valid: False"
+                                        ]
+                                    },
+                                    {
+                                        "data_path": "summary.total_objects",
+                                        "data_type": "numeric",
+                                        "example_values": [
+                                            1
+                                        ]
+                                    },
+                                    {
+                                        "data_path": "summary.total_objects_successful",
+                                        "data_type": "numeric",
+                                        "example_values": [
+                                            1
+                                        ]
+                                    }
+                                ],
+                                "parameters": {
+                                    "url": {
+                                        "contains": [
+                                            "url"
+                                        ],
+                                        "data_type": "string",
+                                        "default": null,
+                                        "description": "URL to query for Phishing information",
+                                        "key": "url",
+                                        "primary": true,
+                                        "required": true
+                                    }
+                                },
+                                "product_name": "PhishTank",
+                                "product_vendor": "OpenDNS",
+                                "targets": "3",
+                                "type": "investigative"
+                            }
+                        ],
+                        "attrs": {
+                            ".action": {
+                                "text": "url reputation"
+                            },
+                            ".background": {
+                                "fill": "#000000",
+                                "stroke": "#5C6773"
+                            },
+                            ".color-band": {
+                                "fill": "#3C444D"
+                            },
+                            ".inPorts>.port-in": {
+                                "ref": ".background",
+                                "ref-x": 0.5
+                            },
+                            ".inPorts>.port-in>.port-body": {
+                                "port": {
+                                    "id": "in",
+                                    "type": "in"
+                                }
+                            },
+                            ".message": {
+                                "opacity": 0,
+                                "ref-x": 5,
+                                "ref-y": 105,
+                                "text": "Configuring now"
+                            },
+                            ".outPorts>.port-out": {
+                                "ref": ".background",
+                                "ref-x": 0.5
+                            },
+                            ".outPorts>.port-out>.port-body": {
+                                "port": {
+                                    "id": "out",
+                                    "type": "out"
+                                }
+                            },
+                            ".title": {
+                                "text": "Investigate"
+                            },
+                            "g.delete": {
+                                "display": "none"
+                            },
+                            "g.error": {
+                                "opacity": 0
+                            },
+                            "g.icon image": {
+                                "xlink:href": "/inc/coa/img/block_icon_investigate.svg"
+                            },
+                            "g.notes": {
+                                "display": "block"
+                            },
+                            "g.timer image": {
+                                "opacity": 1
+                            }
+                        },
+                        "block_code": "def url_reputation_2(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None):\n    phantom.debug('url_reputation_2() called')\n\n    # collect data for 'url_reputation_2' call\n    container_data = phantom.collect2(container=container, datapath=['artifact:*.cef.requestURL', 'artifact:*.id'])\n\n    parameters = []\n    \n    # build parameters list for 'url_reputation_2' call\n    for container_item in container_data:\n        if container_item[0]:\n            parameters.append({\n                'url': container_item[0],\n                # context (artifact id) is added to associate results with the artifact\n                'context': {'artifact_id': container_item[1]},\n            })\n\n    phantom.act(\"url reputation\", parameters=parameters, assets=['phishtank'], callback=filter_10, name=\"url_reputation_2\")\n\n    return",
+                        "callback_code": "",
+                        "callback_start": 1,
+                        "callsback": true,
+                        "color": "",
+                        "connected_to_start": true,
+                        "connection_name": "",
+                        "connection_type": "",
+                        "custom_callback": "",
+                        "custom_code": "",
+                        "custom_join": "",
+                        "custom_name": "",
+                        "delay": "0",
+                        "description": "",
+                        "has_custom": false,
+                        "has_custom_block": false,
+                        "has_custom_callback": false,
+                        "has_custom_join": false,
+                        "id": "c31b2524-85a7-46e3-9119-8b2050cd80c4",
+                        "inPorts": [
+                            "in"
+                        ],
+                        "join_code": "",
+                        "join_optional": [],
+                        "join_start": 1,
+                        "line_end": 262,
+                        "line_start": 241,
+                        "message": "Configuring now",
+                        "name": "url reputation",
+                        "notes": "",
+                        "number": 2,
+                        "order": 10,
+                        "outPorts": [
+                            "out"
+                        ],
+                        "ports": {
+                            "groups": {
+                                "in": {
+                                    "attrs": {
+                                        ".port-body": {
+                                            "fill": "#fff",
+                                            "magnet": true,
+                                            "r": 10,
+                                            "stroke": "#000"
+                                        },
+                                        ".port-label": {
+                                            "fill": "#000"
+                                        }
+                                    },
+                                    "label": {
+                                        "position": {
+                                            "args": {
+                                                "y": 10
+                                            },
+                                            "name": "left"
+                                        }
+                                    },
+                                    "position": {
+                                        "name": "left"
+                                    }
+                                },
+                                "out": {
+                                    "attrs": {
+                                        ".port-body": {
+                                            "fill": "#fff",
+                                            "magnet": true,
+                                            "r": 10,
+                                            "stroke": "#000"
+                                        },
+                                        ".port-label": {
+                                            "fill": "#000"
+                                        }
+                                    },
+                                    "label": {
+                                        "position": {
+                                            "args": {
+                                                "y": 10
+                                            },
+                                            "name": "right"
+                                        }
+                                    },
+                                    "position": {
+                                        "name": "right"
+                                    }
+                                }
+                            }
+                        },
+                        "position": {
+                            "x": 460,
+                            "y": 360
+                        },
+                        "previous_function": "",
+                        "previous_name": "url_reputation_2",
+                        "required_params": {
+                            "url": true
+                        },
+                        "reviewer": "",
+                        "show_number": false,
+                        "size": {
+                            "height": 100,
+                            "width": 180
+                        },
+                        "state": "app_action_assets",
+                        "status": "",
+                        "title": "Investigate",
+                        "type": "coa.Action",
+                        "warn": "",
+                        "z": 399
                     }
                 ]
             },
@@ -10660,7 +9594,7 @@
         "schema": 3,
         "version": "4.5.15922"
     },
-    "create_time": "2019-08-19T20:00:21.441576+00:00",
+    "create_time": "2019-08-19T20:48:14.636936+00:00",
     "draft_mode": false,
     "labels": [
         "*"

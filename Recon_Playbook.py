@@ -255,7 +255,7 @@ def url_reputation_2(action=None, success=None, container=None, results=None, ha
                 'context': {'artifact_id': container_item[1]},
             })
 
-    phantom.act("url reputation", parameters=parameters, assets=['virustotal_api'], callback=filter_10, name="url_reputation_2")
+    phantom.act("url reputation", parameters=parameters, assets=['phishtank'], callback=filter_10, name="url_reputation_2")
 
     return
 
