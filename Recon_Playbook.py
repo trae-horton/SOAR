@@ -213,7 +213,7 @@ def join_prompt_5(action=None, success=None, container=None, results=None, handl
     phantom.debug('join_prompt_5() called')
 
     # check if all connected incoming actions are done i.e. have succeeded or failed
-    if phantom.actions_done([ 'prompt_3', 'prompt_4' ]):
+    if phantom.actions_done([ 'prompt_3', 'prompt_4', 'prompt_6', 'prompt_7' ]):
         
         # call connected block "prompt_5"
         prompt_5(container=container, handle=handle)
@@ -317,7 +317,7 @@ def prompt_6(action=None, success=None, container=None, results=None, handle=Non
         },
     ]
 
-    phantom.prompt2(container=container, user=user, message=message, respond_in_mins=30, name="prompt_6", parameters=parameters, response_types=response_types)
+    phantom.prompt2(container=container, user=user, message=message, respond_in_mins=30, name="prompt_6", parameters=parameters, response_types=response_types, callback=join_prompt_5)
 
     return
 
@@ -361,7 +361,7 @@ def prompt_7(action=None, success=None, container=None, results=None, handle=Non
         },
     ]
 
-    phantom.prompt2(container=container, user=user, message=message, respond_in_mins=30, name="prompt_7", response_types=response_types)
+    phantom.prompt2(container=container, user=user, message=message, respond_in_mins=30, name="prompt_7", response_types=response_types, callback=join_prompt_5)
 
     return
 
