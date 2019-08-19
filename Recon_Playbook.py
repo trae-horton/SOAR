@@ -329,7 +329,7 @@ def detonate_url_2(action=None, success=None, container=None, results=None, hand
                 'context': {'artifact_id': container_item[1]},
             })
 
-    phantom.act("detonate url", parameters=parameters, assets=['virustotal_api'], callback=prompt_7, name="detonate_url_2")
+    phantom.act("detonate url", parameters=parameters, assets=['virustotal_api'], callback=filter_11, name="detonate_url_2")
 
     return
 
@@ -351,6 +351,24 @@ def prompt_7(action=None, success=None, container=None, results=None, handle=Non
     ]
 
     phantom.prompt2(container=container, user=user, message=message, respond_in_mins=30, name="prompt_7", response_types=response_types)
+
+    return
+
+def filter_11(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None):
+    phantom.debug('filter_11() called')
+
+    # collect filtered artifact ids for 'if' condition 1
+    matched_artifacts_1, matched_results_1 = phantom.condition(
+        container=container,
+        action_results=results,
+        conditions=[
+            ["detonate_url_2:action_result.data.*.positives", ">=", "1"],
+        ],
+        name="filter_11:condition_1")
+
+    # call connected blocks if filtered artifacts or results
+    if matched_artifacts_1 or matched_results_1:
+        prompt_7(action=action, success=success, container=container, results=results, handle=handle, filtered_artifacts=matched_artifacts_1, filtered_results=matched_results_1)
 
     return
 
