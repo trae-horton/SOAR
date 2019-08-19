@@ -402,7 +402,19 @@ def prompt_8(action=None, success=None, container=None, results=None, handle=Non
 
 {4}
 
-{2}"""
+{2}
+
++++++++
+
+{12}
+
+{11}
+
+{10}
+
+{9}
+
+{8}"""
 
     # parameter list for template variable replacement
     parameters = [
@@ -414,6 +426,11 @@ def prompt_8(action=None, success=None, container=None, results=None, handle=Non
         "url_reputation_2:action_result.data.*.url",
         "url_reputation_2:action_result.data.*.valid",
         "url_reputation_2:action_result.data.*.verified",
+        "url_reputation_2:action_result.data.*.verified_at",
+        "url_reputation_2:action_result.summary.In Database",
+        "url_reputation_2:action_result.summary.Valid",
+        "url_reputation_2:action_result.summary.Verified",
+        "url_reputation_2:action_result.message",
     ]
 
     #responses:
