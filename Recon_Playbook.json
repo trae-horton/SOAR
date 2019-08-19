@@ -7,7 +7,7 @@
             "clean": true,
             "code_block": "",
             "description": "This playbook will take the following data and run through recon modules:\n\nDestination IP\nDestination DNS\nSHA256 Hash\n\n\nActions include:\n\nPhantom DNS\nPhantom IP\nVirusTotal",
-            "hash": "11323123bb73baed1fab77ed48b05edc208294a0",
+            "hash": "da5f96b343eda45e989dfa52ec4a5cc0d5534f4b",
             "joint": {
                 "cells": [
                     {
@@ -2462,7 +2462,7 @@
                         "callback_start": 1,
                         "callsback": false,
                         "connected_to_start": true,
-                        "connection_name": "prompt 3, prompt 4, prompt 5",
+                        "connection_name": "prompt 3, prompt 4",
                         "connection_type": "action",
                         "custom_callback": "",
                         "custom_code": "",
@@ -2480,8 +2480,8 @@
                         "join_code": "# read-only block view not available",
                         "join_optional": [],
                         "join_start": 1,
-                        "line_end": 365,
-                        "line_start": 352,
+                        "line_end": 351,
+                        "line_start": 338,
                         "name": "",
                         "notes": "",
                         "number": 0,
@@ -9696,7 +9696,7 @@
                                 "opacity": 1
                             }
                         },
-                        "block_code": "def file_reputation_1(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None):\n    phantom.debug('file_reputation_1() called')\n\n    # collect data for 'file_reputation_1' call\n    container_data = phantom.collect2(container=container, datapath=['artifact:*.cef.fileHashSha256', 'artifact:*.id'])\n\n    parameters = []\n    \n    # build parameters list for 'file_reputation_1' call\n    for container_item in container_data:\n        if container_item[0]:\n            parameters.append({\n                'hash': container_item[0],\n                # context (artifact id) is added to associate results with the artifact\n                'context': {'artifact_id': container_item[1]},\n            })\n\n    phantom.act(\"file reputation\", parameters=parameters, assets=['virustotal_api'], callback=File_Filter, name=\"file_reputation_1\")\n\n    return",
+                        "block_code": "def file_reputation_1(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None):\n    phantom.debug('file_reputation_1() called')\n\n    # collect data for 'file_reputation_1' call\n    container_data = phantom.collect2(container=container, datapath=['artifact:*.cef.fileHashSha256', 'artifact:*.id'])\n\n    parameters = []\n    \n    # build parameters list for 'file_reputation_1' call\n    for container_item in container_data:\n        if container_item[0]:\n            parameters.append({\n                'hash': container_item[0],\n                # context (artifact id) is added to associate results with the artifact\n                'context': {'artifact_id': container_item[1]},\n            })\n\n    phantom.act(\"file reputation\", parameters=parameters, assets=['virustotal_api'], callback=prompt_5, name=\"file_reputation_1\")\n\n    return",
                         "callback_code": "",
                         "callback_start": 91,
                         "callsback": true,
@@ -9784,7 +9784,7 @@
                             }
                         },
                         "position": {
-                            "x": 380,
+                            "x": 320,
                             "y": 180
                         },
                         "previous_function": "",
@@ -9804,46 +9804,6 @@
                         "type": "coa.Action",
                         "warn": false,
                         "z": 199
-                    },
-                    {
-                        "attrs": {
-                            ".connection": {
-                                "stroke": "#818D99",
-                                "stroke-width": 2
-                            },
-                            ".marker-target": {
-                                "d": "M 10 0 L 0 5 L 10 10 z",
-                                "fill": "#818D99",
-                                "stroke": "#818D99"
-                            }
-                        },
-                        "connector": {
-                            "args": {
-                                "radius": 5
-                            },
-                            "name": "rounded"
-                        },
-                        "endDirections": [
-                            "left"
-                        ],
-                        "id": "1ea3174b-c952-468a-8c04-b7f5299024e2",
-                        "router": {
-                            "name": "metro"
-                        },
-                        "source": {
-                            "id": "827d8ffa-ccc9-45ff-8cb5-7257455962cd",
-                            "port": null,
-                            "selector": "g:nth-child(1) > g:nth-child(2) > g:nth-child(1) > circle:nth-child(1)"
-                        },
-                        "startDirections": [
-                            "right"
-                        ],
-                        "target": {
-                            "id": "63b8cbc1-038f-48e5-aa8c-b4a09997499d",
-                            "selector": ".port-body[type=\"input\"]"
-                        },
-                        "type": "link",
-                        "z": 251
                     },
                     {
                         "attrs": {
@@ -10018,7 +9978,7 @@
                         "callback_start": 1,
                         "callsback": true,
                         "connected_to_start": true,
-                        "connection_name": "file reputation",
+                        "connection_name": "prompt 5",
                         "connection_type": "action",
                         "custom_callback": "",
                         "custom_code": "",
@@ -10036,8 +9996,8 @@
                         "join_code": "",
                         "join_optional": [],
                         "join_start": 1,
-                        "line_end": 298,
-                        "line_start": 272,
+                        "line_end": 285,
+                        "line_start": 259,
                         "message": "{0}",
                         "name": "prompt",
                         "notes": "",
@@ -12581,7 +12541,7 @@
                         "callsback": true,
                         "color": "",
                         "connected_to_start": true,
-                        "connection_name": "file reputation",
+                        "connection_name": "prompt 5",
                         "connection_type": "action",
                         "custom_callback": "",
                         "custom_code": "",
@@ -12762,6 +12722,9 @@
                             "g.error": {
                                 "opacity": 0
                             },
+                            "g.error image": {
+                                "xlink:href": "/inc/coa/img/block_icon_warn.svg"
+                            },
                             "g.notes": {
                                 "display": "block"
                             }
@@ -12789,8 +12752,8 @@
                         "join_code": "",
                         "join_optional": [],
                         "join_start": 1,
-                        "line_end": 325,
-                        "line_start": 298,
+                        "line_end": 312,
+                        "line_start": 285,
                         "message": "detonated\n{0}",
                         "name": "prompt",
                         "notes": "",
@@ -12974,22 +12937,8 @@
                                     "type": "out"
                                 }
                             },
-                            ".outPorts>.port-2": {
-                                "port": {
-                                    "id": "out-3",
-                                    "type": "out"
-                                },
-                                "ref-x": 41,
-                                "ref-y": -2
-                            },
-                            ".outPorts>.port-2>.port-body": {
-                                "port": {
-                                    "id": "out-3",
-                                    "type": "out"
-                                }
-                            },
                             "g.delete": {
-                                "display": "none"
+                                "display": "block"
                             },
                             "g.error": {
                                 "opacity": 0
@@ -13001,12 +12950,12 @@
                                 "display": "block"
                             }
                         },
-                        "block_code": "def File_Filter(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None):\n    phantom.debug('File_Filter() called')\n\n    # collect filtered artifact ids for 'if' condition 1\n    matched_artifacts_1, matched_results_1 = phantom.condition(\n        container=container,\n        action_results=results,\n        conditions=[\n            [\"file_reputation_1:action_result.data.*.positives\", \"<\", \"5\"],\n        ],\n        name=\"File_Filter:condition_1\")\n\n    # call connected blocks if filtered artifacts or results\n    if matched_artifacts_1 or matched_results_1:\n        detonate_file_2(action=action, success=success, container=container, results=results, handle=handle, filtered_artifacts=matched_artifacts_1, filtered_results=matched_results_1)\n\n    # collect filtered artifact ids for 'if' condition 2\n    matched_artifacts_2, matched_results_2 = phantom.condition(\n        container=container,\n        action_results=results,\n        conditions=[\n            [\"file_reputation_1:action_result.data.*.positives\", \">=\", \"5\"],\n        ],\n        name=\"File_Filter:condition_2\")\n\n    # call connected blocks if filtered artifacts or results\n    if matched_artifacts_2 or matched_results_2:\n        prompt_3(action=action, success=success, container=container, results=results, handle=handle, filtered_artifacts=matched_artifacts_2, filtered_results=matched_results_2)\n\n    # collect filtered artifact ids for 'if' condition 3\n    matched_artifacts_3, matched_results_3 = phantom.condition(\n        container=container,\n        action_results=results,\n        conditions=[\n            [\"file_reputation_1:action_result.data.*.positives\", \"==\", \"\\\"NULL\\\"\"],\n        ],\n        name=\"File_Filter:condition_3\")\n\n    # call connected blocks if filtered artifacts or results\n    if matched_artifacts_3 or matched_results_3:\n        prompt_5(action=action, success=success, container=container, results=results, handle=handle, filtered_artifacts=matched_artifacts_3, filtered_results=matched_results_3)\n\n    return",
+                        "block_code": "def File_Filter(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None):\n    phantom.debug('File_Filter() called')\n\n    # collect filtered artifact ids for 'if' condition 1\n    matched_artifacts_1, matched_results_1 = phantom.condition(\n        container=container,\n        action_results=results,\n        conditions=[\n            [\"file_reputation_1:action_result.data.*.positives\", \"<\", \"5\"],\n        ],\n        name=\"File_Filter:condition_1\")\n\n    # call connected blocks if filtered artifacts or results\n    if matched_artifacts_1 or matched_results_1:\n        detonate_file_2(action=action, success=success, container=container, results=results, handle=handle, filtered_artifacts=matched_artifacts_1, filtered_results=matched_results_1)\n\n    # collect filtered artifact ids for 'if' condition 2\n    matched_artifacts_2, matched_results_2 = phantom.condition(\n        container=container,\n        action_results=results,\n        conditions=[\n            [\"file_reputation_1:action_result.data.*.positives\", \">=\", \"5\"],\n        ],\n        name=\"File_Filter:condition_2\")\n\n    # call connected blocks if filtered artifacts or results\n    if matched_artifacts_2 or matched_results_2:\n        prompt_3(action=action, success=success, container=container, results=results, handle=handle, filtered_artifacts=matched_artifacts_2, filtered_results=matched_results_2)\n\n    return",
                         "callback_code": "",
                         "callback_start": 1,
                         "callsback": false,
                         "connected_to_start": true,
-                        "connection_name": "file reputation",
+                        "connection_name": "prompt 5",
                         "connection_type": "action",
                         "custom_callback": "",
                         "custom_code": "",
@@ -13024,7 +12973,7 @@
                         "join_code": "",
                         "join_optional": [],
                         "join_start": 1,
-                        "line_end": 272,
+                        "line_end": 259,
                         "line_start": 228,
                         "name": "filter",
                         "notes": "",
@@ -13032,8 +12981,7 @@
                         "order": 11,
                         "outPorts": [
                             "out-1",
-                            "out-2",
-                            "out-3"
+                            "out-2"
                         ],
                         "outputs": [
                             {
@@ -13056,19 +13004,6 @@
                                         "data_type": "",
                                         "param": "file_reputation_1:action_result.data.*.positives",
                                         "value": "5"
-                                    }
-                                ],
-                                "display": "If",
-                                "logic": "and",
-                                "type": "if"
-                            },
-                            {
-                                "conditions": [
-                                    {
-                                        "comparison": "==",
-                                        "data_type": "",
-                                        "param": "file_reputation_1:action_result.data.*.positives",
-                                        "value": "\"NULL\""
                                     }
                                 ],
                                 "display": "If",
@@ -13129,7 +13064,7 @@
                             }
                         },
                         "position": {
-                            "x": 660,
+                            "x": 700,
                             "y": 180
                         },
                         "previous_function": "",
@@ -13143,7 +13078,7 @@
                         "status": "",
                         "type": "coa.Filter",
                         "warn": "",
-                        "z": 271
+                        "z": 272
                     },
                     {
                         "attrs": {
@@ -13166,24 +13101,65 @@
                         "endDirections": [
                             "left"
                         ],
-                        "id": "a4072522-5a8d-45b8-b392-7d70bd00e4e4",
+                        "id": "de0c7b2b-97d0-4702-b731-4c046c62d516",
                         "router": {
                             "name": "metro"
                         },
                         "source": {
-                            "id": "63b8cbc1-038f-48e5-aa8c-b4a09997499d",
-                            "port": "out-3",
-                            "selector": "g:nth-child(1) > g:nth-child(2) > g:nth-child(3) > circle:nth-child(1)"
+                            "id": "827d8ffa-ccc9-45ff-8cb5-7257455962cd",
+                            "port": null,
+                            "selector": "g:nth-child(1) > g:nth-child(2) > g:nth-child(1) > circle:nth-child(1)"
                         },
                         "startDirections": [
                             "right"
                         ],
                         "target": {
-                            "id": "6c06361e-4d1f-44e5-b4aa-cf146d308303",
+                            "id": "c06b6d00-14e9-4a0d-842f-9f4e832ec3f0",
                             "selector": ".port-body[type=\"input\"]"
                         },
                         "type": "link",
-                        "z": 272
+                        "z": 273
+                    },
+                    {
+                        "attrs": {
+                            ".connection": {
+                                "stroke": "#818D99",
+                                "stroke-width": 2
+                            },
+                            ".marker-target": {
+                                "d": "M 10 0 L 0 5 L 10 10 z",
+                                "fill": "#818D99",
+                                "stroke": "#818D99"
+                            }
+                        },
+                        "connector": {
+                            "args": {
+                                "radius": 5
+                            },
+                            "name": "rounded"
+                        },
+                        "endDirections": [
+                            "left"
+                        ],
+                        "id": "df0483f3-9c1e-48b3-9a4a-5538a64bd4ce",
+                        "router": {
+                            "name": "metro"
+                        },
+                        "source": {
+                            "id": "c06b6d00-14e9-4a0d-842f-9f4e832ec3f0",
+                            "port": null,
+                            "selector": "g:nth-child(1) > g:nth-child(2) > g:nth-child(1) > circle:nth-child(1)"
+                        },
+                        "startDirections": [
+                            "right"
+                        ],
+                        "target": {
+                            "id": "63b8cbc1-038f-48e5-aa8c-b4a09997499d",
+                            "port": "in",
+                            "selector": "g:nth-child(1) > g:nth-child(1) > g:nth-child(1) > circle:nth-child(1)"
+                        },
+                        "type": "link",
+                        "z": 275
                     },
                     {
                         "active": false,
@@ -13223,11 +13199,14 @@
                             "g.error": {
                                 "opacity": 0
                             },
+                            "g.error image": {
+                                "xlink:href": "/inc/coa/img/block_icon_warn.svg"
+                            },
                             "g.notes": {
                                 "display": "block"
                             }
                         },
-                        "block_code": "def prompt_5(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None):\n    phantom.debug('prompt_5() called')\n    \n    # set user and message variables for phantom.prompt call\n    user = \"admin\"\n    message = \"\"\"No result in VirusTotal\n{0}\"\"\"\n\n    # parameter list for template variable replacement\n    parameters = [\n        \"file_reputation_1:action_result.data.*.positives\",\n    ]\n\n    #responses:\n    response_types = [\n        {\n            \"prompt\": \"\",\n            \"options\": {\n                \"type\": \"message\",\n            },\n        },\n    ]\n\n    phantom.prompt2(container=container, user=user, message=message, respond_in_mins=30, name=\"prompt_5\", parameters=parameters, response_types=response_types)\n\n    return",
+                        "block_code": "def prompt_5(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None):\n    phantom.debug('prompt_5() called')\n    \n    # set user and message variables for phantom.prompt call\n    user = \"admin\"\n    message = \"\"\"{0}\"\"\"\n\n    # parameter list for template variable replacement\n    parameters = [\n        \"file_reputation_1:action_result.data.*.positives\",\n    ]\n\n    #responses:\n    response_types = [\n        {\n            \"prompt\": \"\",\n            \"options\": {\n                \"type\": \"message\",\n            },\n        },\n    ]\n\n    phantom.prompt2(container=container, user=user, message=message, respond_in_mins=30, name=\"prompt_5\", parameters=parameters, response_types=response_types, callback=File_Filter)\n\n    return",
                         "callback_code": "",
                         "callback_start": 1,
                         "callsback": true,
@@ -13243,16 +13222,16 @@
                         "has_custom_block": false,
                         "has_custom_callback": false,
                         "has_custom_join": false,
-                        "id": "6c06361e-4d1f-44e5-b4aa-cf146d308303",
+                        "id": "c06b6d00-14e9-4a0d-842f-9f4e832ec3f0",
                         "inPorts": [
                             "in"
                         ],
                         "join_code": "",
                         "join_optional": [],
                         "join_start": 1,
-                        "line_end": 352,
-                        "line_start": 325,
-                        "message": "No result in VirusTotal\n{0}",
+                        "line_end": 338,
+                        "line_start": 312,
+                        "message": "{0}",
                         "name": "prompt",
                         "notes": "",
                         "number": 5,
@@ -13320,8 +13299,8 @@
                             }
                         },
                         "position": {
-                            "x": 1140,
-                            "y": 60
+                            "x": 580,
+                            "y": 180
                         },
                         "previous_function": "",
                         "previous_name": "prompt_5",
@@ -13346,48 +13325,7 @@
                         "status": "",
                         "type": "coa.Prompt",
                         "warn": false,
-                        "z": 273
-                    },
-                    {
-                        "attrs": {
-                            ".connection": {
-                                "stroke": "#818D99",
-                                "stroke-width": 2
-                            },
-                            ".marker-target": {
-                                "d": "M 10 0 L 0 5 L 10 10 z",
-                                "fill": "#818D99",
-                                "stroke": "#818D99"
-                            }
-                        },
-                        "connector": {
-                            "args": {
-                                "radius": 5
-                            },
-                            "name": "rounded"
-                        },
-                        "endDirections": [
-                            "left"
-                        ],
-                        "id": "3043cef6-25a8-4e11-9986-5b3ebf9dce50",
-                        "router": {
-                            "name": "metro"
-                        },
-                        "source": {
-                            "id": "6c06361e-4d1f-44e5-b4aa-cf146d308303",
-                            "port": null,
-                            "selector": "g:nth-child(1) > g:nth-child(2) > g:nth-child(1) > circle:nth-child(1)"
-                        },
-                        "startDirections": [
-                            "right"
-                        ],
-                        "target": {
-                            "id": "8e2e6004-30c5-4a43-8292-f239c1f58209",
-                            "port": null,
-                            "selector": "g:nth-child(1) > g:nth-child(1) > g:nth-child(1) > circle:nth-child(1)"
-                        },
-                        "type": "link",
-                        "z": 274
+                        "z": 276
                     }
                 ]
             },
@@ -13396,7 +13334,7 @@
         "schema": 3,
         "version": "4.5.15922"
     },
-    "create_time": "2019-08-19T17:52:24.524953+00:00",
+    "create_time": "2019-08-19T17:53:15.571464+00:00",
     "draft_mode": false,
     "labels": [
         "*"
