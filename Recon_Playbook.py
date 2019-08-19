@@ -314,11 +314,12 @@ def prompt_5(action=None, success=None, container=None, results=None, handle=Non
     
     # set user and message variables for phantom.prompt call
     user = "admin"
-    message = """{0}"""
+    message = """{0}{1}"""
 
     # parameter list for template variable replacement
     parameters = [
-        "file_reputation_1:action_result.status",
+        "file_reputation_1:action_result.data.*.response_code",
+        "file_reputation_1:action_result.data.*.scans.*.result",
     ]
 
     #responses:
