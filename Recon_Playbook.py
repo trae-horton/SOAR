@@ -84,7 +84,7 @@ def file_reputation_1(action=None, success=None, container=None, results=None, h
                 'context': {'artifact_id': container_item[1]},
             })
 
-    phantom.act("file reputation", parameters=parameters, assets=['virustotal_api'], callback=prompt_5, name="file_reputation_1")
+    phantom.act("file reputation", parameters=parameters, assets=['virustotal_api'], callback=File_Filter, name="file_reputation_1")
 
     return
 
@@ -233,7 +233,7 @@ def File_Filter(action=None, success=None, container=None, results=None, handle=
         container=container,
         action_results=results,
         conditions=[
-            ["file_reputation_1:action_result.data.*.positives", "<", "5"],
+            ["file_reputation_1:action_result.data.*.response_code", "==", 0],
         ],
         name="File_Filter:condition_1")
 
@@ -306,32 +306,6 @@ def prompt_4(action=None, success=None, container=None, results=None, handle=Non
     ]
 
     phantom.prompt2(container=container, user=user, message=message, respond_in_mins=30, name="prompt_4", parameters=parameters, response_types=response_types)
-
-    return
-
-def prompt_5(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None):
-    phantom.debug('prompt_5() called')
-    
-    # set user and message variables for phantom.prompt call
-    user = "admin"
-    message = """{0}"""
-
-    # parameter list for template variable replacement
-    parameters = [
-        "file_reputation_1:action_result.data.*.response_code",
-    ]
-
-    #responses:
-    response_types = [
-        {
-            "prompt": "",
-            "options": {
-                "type": "message",
-            },
-        },
-    ]
-
-    phantom.prompt2(container=container, user=user, message=message, respond_in_mins=30, name="prompt_5", parameters=parameters, response_types=response_types, callback=File_Filter)
 
     return
 
