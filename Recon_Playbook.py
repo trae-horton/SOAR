@@ -255,7 +255,7 @@ def url_reputation_2(action=None, success=None, container=None, results=None, ha
                 'context': {'artifact_id': container_item[1]},
             })
 
-    phantom.act("url reputation", parameters=parameters, assets=['phishtank'], callback=prompt_8, name="url_reputation_2")
+    phantom.act("url reputation", parameters=parameters, assets=['phishtank'], callback=filter_10, name="url_reputation_2")
 
     return
 
@@ -267,7 +267,7 @@ def filter_10(action=None, success=None, container=None, results=None, handle=No
         container=container,
         action_results=results,
         conditions=[
-            ["url_reputation_2:action_result.data.*.positives", ">=", "1"],
+            ["url_reputation_2:action_result.summary.Verified", "==", True],
         ],
         name="filter_10:condition_1")
 
@@ -280,7 +280,7 @@ def filter_10(action=None, success=None, container=None, results=None, handle=No
         container=container,
         action_results=results,
         conditions=[
-            ["url_reputation_2:action_result.data.*.response_code", "==", 0],
+            ["url_reputation_2:action_result.summary.Verified", "==", False],
         ],
         name="filter_10:condition_2")
 
@@ -295,7 +295,7 @@ def prompt_6(action=None, success=None, container=None, results=None, handle=Non
     
     # set user and message variables for phantom.prompt call
     user = "admin"
-    message = """testing positive
+    message = """In PhishTank
 {0}"""
 
     # parameter list for template variable replacement
@@ -380,34 +380,6 @@ def filter_11(action=None, success=None, container=None, results=None, handle=No
     # call connected blocks if filtered artifacts or results
     if matched_artifacts_1 or matched_results_1:
         prompt_7(action=action, success=success, container=container, results=results, handle=handle, filtered_artifacts=matched_artifacts_1, filtered_results=matched_results_1)
-
-    return
-
-def prompt_8(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None):
-    phantom.debug('prompt_8() called')
-    
-    # set user and message variables for phantom.prompt call
-    user = "admin"
-    message = """{0}
-
-+++++++"""
-
-    # parameter list for template variable replacement
-    parameters = [
-        "url_reputation_2:action_result.summary.Verified",
-    ]
-
-    #responses:
-    response_types = [
-        {
-            "prompt": "",
-            "options": {
-                "type": "message",
-            },
-        },
-    ]
-
-    phantom.prompt2(container=container, user=user, message=message, respond_in_mins=30, name="prompt_8", parameters=parameters, response_types=response_types, callback=filter_10)
 
     return
 

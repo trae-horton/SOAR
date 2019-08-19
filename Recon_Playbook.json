@@ -7,7 +7,7 @@
             "clean": true,
             "code_block": "",
             "description": "This playbook will take the following data and run through recon modules:\n\nDestination IP\nDestination DNS\nSHA256 Hash\n\n\nActions include:\n\nPhantom DNS\nPhantom IP\nVirusTotal",
-            "hash": "37fa99a7f750fd49b944031321a48f265fdf21f5",
+            "hash": "f5587cd49d0e424fb1b1aa929ac62aaac08cc221",
             "joint": {
                 "cells": [
                     {
@@ -217,12 +217,12 @@
                         "join_code": "# read-only block view not available",
                         "join_optional": [],
                         "join_start": 1,
-                        "line_end": 427,
-                        "line_start": 414,
+                        "line_end": 399,
+                        "line_start": 386,
                         "name": "",
                         "notes": "",
                         "number": 0,
-                        "order": 17,
+                        "order": 16,
                         "outPorts": [],
                         "ports": {
                             "groups": {
@@ -571,7 +571,7 @@
                                 }
                             },
                             "g.delete": {
-                                "display": "block"
+                                "display": "none"
                             },
                             "g.error": {
                                 "opacity": 0
@@ -7815,7 +7815,7 @@
                         "callsback": true,
                         "color": "",
                         "connected_to_start": true,
-                        "connection_name": "prompt 8",
+                        "connection_name": "url reputation",
                         "connection_type": "action",
                         "custom_callback": "",
                         "custom_code": "",
@@ -8109,175 +8109,6 @@
                         "type": "coa.Filter",
                         "warn": "",
                         "z": 385
-                    },
-                    {
-                        "active": false,
-                        "angle": 0,
-                        "approver": "admin",
-                        "attrs": {
-                            ".background": {
-                                "fill": "#000000",
-                                "stroke": "#5C6773"
-                            },
-                            ".inPorts>.port-in": {
-                                "ref": ".background",
-                                "ref-x": 0.5
-                            },
-                            ".inPorts>.port-in>.port-body": {
-                                "port": {
-                                    "id": "in",
-                                    "type": "in"
-                                }
-                            },
-                            ".number": {
-                                "text": 6
-                            },
-                            ".outPorts>.port-out": {
-                                "ref": ".background",
-                                "ref-x": 0.5
-                            },
-                            ".outPorts>.port-out>.port-body": {
-                                "port": {
-                                    "id": "out",
-                                    "type": "out"
-                                }
-                            },
-                            "g.delete": {
-                                "display": "none"
-                            },
-                            "g.error": {
-                                "opacity": 0
-                            },
-                            "g.error image": {
-                                "xlink:href": "/inc/coa/img/block_icon_warn.svg"
-                            },
-                            "g.notes": {
-                                "display": "block"
-                            }
-                        },
-                        "block_code": "def prompt_6(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None):\n    phantom.debug('prompt_6() called')\n    \n    # set user and message variables for phantom.prompt call\n    user = \"admin\"\n    message = \"\"\"testing positive\n{0}\"\"\"\n\n    # parameter list for template variable replacement\n    parameters = [\n        \"url_reputation_2:action_result.data.*.positives\",\n    ]\n\n    #responses:\n    response_types = [\n        {\n            \"prompt\": \"\",\n            \"options\": {\n                \"type\": \"list\",\n                \"choices\": [\n                    \"Yes\",\n                    \"No\",\n                ]\n            },\n        },\n    ]\n\n    phantom.prompt2(container=container, user=user, message=message, respond_in_mins=30, name=\"prompt_6\", parameters=parameters, response_types=response_types, callback=join_prompt_5)\n\n    return",
-                        "callback_code": "",
-                        "callback_start": 1,
-                        "callsback": true,
-                        "connected_to_start": true,
-                        "connection_name": "prompt 8",
-                        "connection_type": "action",
-                        "custom_callback": "",
-                        "custom_code": "",
-                        "custom_join": "",
-                        "custom_name": "",
-                        "description": "",
-                        "has_custom": false,
-                        "has_custom_block": false,
-                        "has_custom_callback": false,
-                        "has_custom_join": false,
-                        "id": "ffcc843b-e0ac-4d06-8edc-03b07e355d78",
-                        "inPorts": [
-                            "in"
-                        ],
-                        "join_code": "",
-                        "join_optional": [],
-                        "join_start": 1,
-                        "line_end": 324,
-                        "line_start": 293,
-                        "message": "testing positive\n{0}",
-                        "name": "prompt",
-                        "notes": "",
-                        "number": 6,
-                        "order": 12,
-                        "outPorts": [
-                            "out"
-                        ],
-                        "parameters": [
-                            {
-                                "position": 0,
-                                "type": "",
-                                "value": "url_reputation_2:action_result.data.*.positives"
-                            }
-                        ],
-                        "ports": {
-                            "groups": {
-                                "in": {
-                                    "attrs": {
-                                        ".port-body": {
-                                            "fill": "#fff",
-                                            "magnet": true,
-                                            "r": 10,
-                                            "stroke": "#000"
-                                        },
-                                        ".port-label": {
-                                            "fill": "#000"
-                                        }
-                                    },
-                                    "label": {
-                                        "position": {
-                                            "args": {
-                                                "y": 10
-                                            },
-                                            "name": "left"
-                                        }
-                                    },
-                                    "position": {
-                                        "name": "left"
-                                    }
-                                },
-                                "out": {
-                                    "attrs": {
-                                        ".port-body": {
-                                            "fill": "#fff",
-                                            "magnet": true,
-                                            "r": 10,
-                                            "stroke": "#000"
-                                        },
-                                        ".port-label": {
-                                            "fill": "#000"
-                                        }
-                                    },
-                                    "label": {
-                                        "position": {
-                                            "args": {
-                                                "y": 10
-                                            },
-                                            "name": "right"
-                                        }
-                                    },
-                                    "position": {
-                                        "name": "right"
-                                    }
-                                }
-                            }
-                        },
-                        "position": {
-                            "x": 1240,
-                            "y": 360
-                        },
-                        "previous_function": "",
-                        "previous_name": "prompt_6",
-                        "respond_in": "30",
-                        "response_key": "Message",
-                        "response_options": [],
-                        "response_type": "list",
-                        "responses": [
-                            {
-                                "response_key": "Yes/No",
-                                "response_options": [
-                                    "Yes",
-                                    "No"
-                                ],
-                                "response_prompt": "",
-                                "response_type": "list"
-                            }
-                        ],
-                        "show_number": true,
-                        "size": {
-                            "height": 80,
-                            "width": 80
-                        },
-                        "state": "prompt",
-                        "status": "",
-                        "type": "coa.Prompt",
-                        "warn": false,
-                        "z": 387
                     },
                     {
                         "active": false,
@@ -9252,7 +9083,7 @@
                                 "opacity": 1
                             }
                         },
-                        "block_code": "def url_reputation_2(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None):\n    phantom.debug('url_reputation_2() called')\n\n    # collect data for 'url_reputation_2' call\n    container_data = phantom.collect2(container=container, datapath=['artifact:*.cef.requestURL', 'artifact:*.id'])\n\n    parameters = []\n    \n    # build parameters list for 'url_reputation_2' call\n    for container_item in container_data:\n        if container_item[0]:\n            parameters.append({\n                'url': container_item[0],\n                # context (artifact id) is added to associate results with the artifact\n                'context': {'artifact_id': container_item[1]},\n            })\n\n    phantom.act(\"url reputation\", parameters=parameters, assets=['phishtank'], callback=prompt_8, name=\"url_reputation_2\")\n\n    return",
+                        "block_code": "def url_reputation_2(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None):\n    phantom.debug('url_reputation_2() called')\n\n    # collect data for 'url_reputation_2' call\n    container_data = phantom.collect2(container=container, datapath=['artifact:*.cef.requestURL', 'artifact:*.id'])\n\n    parameters = []\n    \n    # build parameters list for 'url_reputation_2' call\n    for container_item in container_data:\n        if container_item[0]:\n            parameters.append({\n                'url': container_item[0],\n                # context (artifact id) is added to associate results with the artifact\n                'context': {'artifact_id': container_item[1]},\n            })\n\n    phantom.act(\"url reputation\", parameters=parameters, assets=['phishtank'], callback=filter_10, name=\"url_reputation_2\")\n\n    return",
                         "callback_code": "",
                         "callback_start": 1,
                         "callsback": true,
@@ -9359,7 +9190,7 @@
                         "title": "Investigate",
                         "type": "coa.Action",
                         "warn": "",
-                        "z": 401
+                        "z": 409
                     },
                     {
                         "active": false,
@@ -9420,12 +9251,12 @@
                                 "display": "block"
                             }
                         },
-                        "block_code": "def filter_10(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None):\n    phantom.debug('filter_10() called')\n\n    # collect filtered artifact ids for 'if' condition 1\n    matched_artifacts_1, matched_results_1 = phantom.condition(\n        container=container,\n        action_results=results,\n        conditions=[\n            [\"url_reputation_2:action_result.data.*.positives\", \">=\", \"1\"],\n        ],\n        name=\"filter_10:condition_1\")\n\n    # call connected blocks if filtered artifacts or results\n    if matched_artifacts_1 or matched_results_1:\n        prompt_6(action=action, success=success, container=container, results=results, handle=handle, filtered_artifacts=matched_artifacts_1, filtered_results=matched_results_1)\n\n    # collect filtered artifact ids for 'if' condition 2\n    matched_artifacts_2, matched_results_2 = phantom.condition(\n        container=container,\n        action_results=results,\n        conditions=[\n            [\"url_reputation_2:action_result.data.*.response_code\", \"==\", 0],\n        ],\n        name=\"filter_10:condition_2\")\n\n    # call connected blocks if filtered artifacts or results\n    if matched_artifacts_2 or matched_results_2:\n        detonate_url_2(action=action, success=success, container=container, results=results, handle=handle, filtered_artifacts=matched_artifacts_2, filtered_results=matched_results_2)\n\n    return",
+                        "block_code": "def filter_10(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None):\n    phantom.debug('filter_10() called')\n\n    # collect filtered artifact ids for 'if' condition 1\n    matched_artifacts_1, matched_results_1 = phantom.condition(\n        container=container,\n        action_results=results,\n        conditions=[\n            [\"url_reputation_2:action_result.summary.Verified\", \"==\", True],\n        ],\n        name=\"filter_10:condition_1\")\n\n    # call connected blocks if filtered artifacts or results\n    if matched_artifacts_1 or matched_results_1:\n        prompt_6(action=action, success=success, container=container, results=results, handle=handle, filtered_artifacts=matched_artifacts_1, filtered_results=matched_results_1)\n\n    # collect filtered artifact ids for 'if' condition 2\n    matched_artifacts_2, matched_results_2 = phantom.condition(\n        container=container,\n        action_results=results,\n        conditions=[\n            [\"url_reputation_2:action_result.summary.Verified\", \"==\", False],\n        ],\n        name=\"filter_10:condition_2\")\n\n    # call connected blocks if filtered artifacts or results\n    if matched_artifacts_2 or matched_results_2:\n        detonate_url_2(action=action, success=success, container=container, results=results, handle=handle, filtered_artifacts=matched_artifacts_2, filtered_results=matched_results_2)\n\n    return",
                         "callback_code": "",
                         "callback_start": 1,
                         "callsback": false,
                         "connected_to_start": true,
-                        "connection_name": "prompt 8",
+                        "connection_name": "url reputation",
                         "connection_type": "action",
                         "custom_callback": "",
                         "custom_code": "",
@@ -9457,10 +9288,10 @@
                             {
                                 "conditions": [
                                     {
-                                        "comparison": ">=",
+                                        "comparison": "==",
                                         "data_type": "",
-                                        "param": "url_reputation_2:action_result.data.*.positives",
-                                        "value": "1"
+                                        "param": "url_reputation_2:action_result.summary.Verified",
+                                        "value": "True"
                                     }
                                 ],
                                 "display": "If",
@@ -9472,8 +9303,8 @@
                                     {
                                         "comparison": "==",
                                         "data_type": "",
-                                        "param": "url_reputation_2:action_result.data.*.response_code",
-                                        "value": "0"
+                                        "param": "url_reputation_2:action_result.summary.Verified",
+                                        "value": "False"
                                     }
                                 ],
                                 "display": "If",
@@ -9548,7 +9379,7 @@
                         "status": "",
                         "type": "coa.Filter",
                         "warn": "",
-                        "z": 402
+                        "z": 413
                     },
                     {
                         "attrs": {
@@ -9571,7 +9402,7 @@
                         "endDirections": [
                             "left"
                         ],
-                        "id": "06ef27e5-1c03-4871-b591-4c9600eb934c",
+                        "id": "4e77a7c5-d244-422b-b4e2-eb880f796a0e",
                         "router": {
                             "name": "metro"
                         },
@@ -9584,52 +9415,12 @@
                             "right"
                         ],
                         "target": {
-                            "id": "6fd92052-6f66-47fc-84b2-9e6320632bfa",
-                            "selector": ".port-body[type=\"input\"]"
-                        },
-                        "type": "link",
-                        "z": 403
-                    },
-                    {
-                        "attrs": {
-                            ".connection": {
-                                "stroke": "#818D99",
-                                "stroke-width": 2
-                            },
-                            ".marker-target": {
-                                "d": "M 10 0 L 0 5 L 10 10 z",
-                                "fill": "#818D99",
-                                "stroke": "#818D99"
-                            }
-                        },
-                        "connector": {
-                            "args": {
-                                "radius": 5
-                            },
-                            "name": "rounded"
-                        },
-                        "endDirections": [
-                            "left"
-                        ],
-                        "id": "22c0ae95-f571-4a19-ab5c-bab81af47819",
-                        "router": {
-                            "name": "metro"
-                        },
-                        "source": {
-                            "id": "6fd92052-6f66-47fc-84b2-9e6320632bfa",
-                            "port": null,
-                            "selector": "g:nth-child(1) > g:nth-child(2) > g:nth-child(1) > circle:nth-child(1)"
-                        },
-                        "startDirections": [
-                            "right"
-                        ],
-                        "target": {
                             "id": "bbf1f9e0-6e6d-40a8-ade5-d701f32eaa9d",
                             "port": "in",
                             "selector": "g:nth-child(1) > g:nth-child(1) > g:nth-child(1) > circle:nth-child(1)"
                         },
                         "type": "link",
-                        "z": 405
+                        "z": 414
                     },
                     {
                         "active": false,
@@ -9651,7 +9442,7 @@
                                 }
                             },
                             ".number": {
-                                "text": 8
+                                "text": 6
                             },
                             ".outPorts>.port-out": {
                                 "ref": ".background",
@@ -9676,7 +9467,7 @@
                                 "display": "block"
                             }
                         },
-                        "block_code": "def prompt_8(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None):\n    phantom.debug('prompt_8() called')\n    \n    # set user and message variables for phantom.prompt call\n    user = \"admin\"\n    message = \"\"\"{0}\n\n+++++++\"\"\"\n\n    # parameter list for template variable replacement\n    parameters = [\n        \"url_reputation_2:action_result.summary.Verified\",\n    ]\n\n    #responses:\n    response_types = [\n        {\n            \"prompt\": \"\",\n            \"options\": {\n                \"type\": \"message\",\n            },\n        },\n    ]\n\n    phantom.prompt2(container=container, user=user, message=message, respond_in_mins=30, name=\"prompt_8\", parameters=parameters, response_types=response_types, callback=filter_10)\n\n    return",
+                        "block_code": "def prompt_6(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None):\n    phantom.debug('prompt_6() called')\n    \n    # set user and message variables for phantom.prompt call\n    user = \"admin\"\n    message = \"\"\"In PhishTank\n{0}\"\"\"\n\n    # parameter list for template variable replacement\n    parameters = [\n        \"url_reputation_2:action_result.data.*.positives\",\n    ]\n\n    #responses:\n    response_types = [\n        {\n            \"prompt\": \"\",\n            \"options\": {\n                \"type\": \"list\",\n                \"choices\": [\n                    \"Yes\",\n                    \"No\",\n                ]\n            },\n        },\n    ]\n\n    phantom.prompt2(container=container, user=user, message=message, respond_in_mins=30, name=\"prompt_6\", parameters=parameters, response_types=response_types, callback=join_prompt_5)\n\n    return",
                         "callback_code": "",
                         "callback_start": 1,
                         "callsback": true,
@@ -9692,28 +9483,28 @@
                         "has_custom_block": false,
                         "has_custom_callback": false,
                         "has_custom_join": false,
-                        "id": "6fd92052-6f66-47fc-84b2-9e6320632bfa",
+                        "id": "ffcc843b-e0ac-4d06-8edc-03b07e355d78",
                         "inPorts": [
                             "in"
                         ],
                         "join_code": "",
                         "join_optional": [],
                         "join_start": 1,
-                        "line_end": 414,
-                        "line_start": 386,
-                        "message": "{0}\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n+++++++",
+                        "line_end": 324,
+                        "line_start": 293,
+                        "message": "In PhishTank\n{0}",
                         "name": "prompt",
                         "notes": "",
-                        "number": 8,
-                        "order": 16,
+                        "number": 6,
+                        "order": 12,
                         "outPorts": [
                             "out"
                         ],
                         "parameters": [
                             {
-                                "position": 11,
+                                "position": 0,
                                 "type": "",
-                                "value": "url_reputation_2:action_result.summary.Verified"
+                                "value": "url_reputation_2:action_result.data.*.positives"
                             }
                         ],
                         "ports": {
@@ -9769,21 +9560,24 @@
                             }
                         },
                         "position": {
-                            "x": 620,
-                            "y": 560
+                            "x": 1240,
+                            "y": 360
                         },
                         "previous_function": "",
-                        "previous_name": "prompt_8",
+                        "previous_name": "prompt_6",
                         "respond_in": "30",
                         "response_key": "Message",
                         "response_options": [],
                         "response_type": "list",
                         "responses": [
                             {
-                                "response_key": "Message",
-                                "response_options": [],
+                                "response_key": "Yes/No",
+                                "response_options": [
+                                    "Yes",
+                                    "No"
+                                ],
                                 "response_prompt": "",
-                                "response_type": "message"
+                                "response_type": "list"
                             }
                         ],
                         "show_number": true,
@@ -9795,7 +9589,7 @@
                         "status": "",
                         "type": "coa.Prompt",
                         "warn": false,
-                        "z": 408
+                        "z": 415
                     }
                 ]
             },
@@ -9804,7 +9598,7 @@
         "schema": 3,
         "version": "4.5.15922"
     },
-    "create_time": "2019-08-19T20:56:41.494680+00:00",
+    "create_time": "2019-08-19T20:58:54.228955+00:00",
     "draft_mode": false,
     "labels": [
         "*"
