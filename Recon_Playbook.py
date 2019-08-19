@@ -97,12 +97,11 @@ Whois IP =
 
 Whois Domain = 
 
-URL Reputation = {1}"""
+URL Reputation ="""
 
     # parameter list for template variable replacement
     parameters = [
         "file_reputation_1:action_result.status",
-        "url_reputation_1:action_result.parameter.url",
     ]
 
     phantom.format(container=container, template=template, parameters=parameters, name="format_1")
