@@ -7,7 +7,7 @@
             "clean": true,
             "code_block": "",
             "description": "This playbook will take the following data and run through recon modules:\n\nDestination IP\nDestination DNS\nSHA256 Hash\n\n\nActions include:\n\nPhantom DNS\nPhantom IP\nVirusTotal",
-            "hash": "0cabafc583ae97c3c50d16918084ae7b75cd1323",
+            "hash": "55ac92fc133a71a800d9a6ada318e2c8d71d96a7",
             "joint": {
                 "cells": [
                     {
@@ -12899,11 +12899,11 @@
                     {
                         "active": false,
                         "angle": 0,
-                        "approver": "",
+                        "approver": "admin",
                         "attrs": {
                             ".background": {
                                 "fill": "#000000",
-                                "stroke": "#E6984E"
+                                "stroke": "#5C6773"
                             },
                             ".inPorts>.port-in": {
                                 "ref": ".background",
@@ -12932,7 +12932,7 @@
                                 "display": "none"
                             },
                             "g.error": {
-                                "opacity": 1
+                                "opacity": 0
                             },
                             "g.error image": {
                                 "xlink:href": "/inc/coa/img/block_icon_warn.svg"
@@ -12941,7 +12941,7 @@
                                 "display": "block"
                             }
                         },
-                        "block_code": "def prompt_2(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None):\n    phantom.debug('prompt_2() called')\n    \n    # set user and message variables for phantom.prompt call\n    user = \"\"\n    message = \"\"\"{0}\"\"\"\n\n    # parameter list for template variable replacement\n    parameters = [\n        \"format_2:formatted_data\",\n    ]\n\n    #responses:\n    response_types = [\n        {\n            \"prompt\": \"\",\n            \"options\": {\n                \"type\": \"message\",\n            },\n        },\n    ]\n\n    phantom.prompt2(container=container, user=user, message=message, respond_in_mins=30, name=\"prompt_2\", parameters=parameters, response_types=response_types)\n\n    return",
+                        "block_code": "def prompt_2(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None):\n    phantom.debug('prompt_2() called')\n    \n    # set user and message variables for phantom.prompt call\n    user = \"admin\"\n    message = \"\"\"{0}\"\"\"\n\n    # parameter list for template variable replacement\n    parameters = [\n        \"format_2:formatted_data\",\n    ]\n\n    #responses:\n    response_types = [\n        {\n            \"prompt\": \"\",\n            \"options\": {\n                \"type\": \"message\",\n            },\n        },\n    ]\n\n    phantom.prompt2(container=container, user=user, message=message, respond_in_mins=30, name=\"prompt_2\", parameters=parameters, response_types=response_types)\n\n    return",
                         "callback_code": "",
                         "callback_start": 1,
                         "callsback": true,
@@ -13057,10 +13057,10 @@
                             "width": 80
                         },
                         "state": "prompt",
-                        "status": "warn",
+                        "status": "",
                         "type": "coa.Prompt",
                         "warn": false,
-                        "z": 226
+                        "z": 228
                     }
                 ]
             },
@@ -13069,7 +13069,7 @@
         "schema": 3,
         "version": "4.5.15922"
     },
-    "create_time": "2019-08-19T17:02:48.530989+00:00",
+    "create_time": "2019-08-19T17:03:03.643562+00:00",
     "draft_mode": false,
     "labels": [
         "*"
