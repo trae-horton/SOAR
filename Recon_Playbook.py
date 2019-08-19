@@ -93,7 +93,7 @@ def File_Filter(action=None, success=None, container=None, results=None, handle=
         container=container,
         action_results=results,
         conditions=[
-            ["file_reputation_1:action_result.data.*.positives", ">=", "5"],
+            ["file_reputation_1:action_result.data.*.positives", "==", "5"],
         ],
         name="File_Filter:condition_2")
 
@@ -280,7 +280,7 @@ def filter_10(action=None, success=None, container=None, results=None, handle=No
         container=container,
         action_results=results,
         conditions=[
-            ["url_reputation_2:action_result.data.*.positives", "<=", 0],
+            ["url_reputation_2:action_result.data.*.response_code", "<=", 0],
         ],
         name="filter_10:condition_2")
 
