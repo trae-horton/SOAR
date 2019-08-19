@@ -257,7 +257,7 @@ def prompt_3(action=None, success=None, container=None, results=None, handle=Non
         },
     ]
 
-    phantom.prompt2(container=container, user=user, message=message, respond_in_mins=30, name="prompt_3", parameters=parameters, response_types=response_types, callback=join_prompt_5)
+    phantom.prompt2(container=container, user=user, message=message, respond_in_mins=30, name="prompt_3", parameters=parameters, response_types=response_types, callback=join_task_1)
 
     return
 
@@ -284,7 +284,7 @@ def prompt_4(action=None, success=None, container=None, results=None, handle=Non
         },
     ]
 
-    phantom.prompt2(container=container, user=user, message=message, respond_in_mins=30, name="prompt_4", parameters=parameters, response_types=response_types, callback=join_prompt_5)
+    phantom.prompt2(container=container, user=user, message=message, respond_in_mins=30, name="prompt_4", parameters=parameters, response_types=response_types, callback=join_task_1)
 
     return
 
@@ -306,35 +306,25 @@ def filter_8(action=None, success=None, container=None, results=None, handle=Non
 
     return
 
-def prompt_5(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None):
-    phantom.debug('prompt_5() called')
+def task_1(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None):
+    phantom.debug('task_1() called')
     
-    # set user and message variables for phantom.prompt call
+    # set user and message variables for phantom.task call
     user = "admin"
-    message = """Exmerge"""
+    message = "exmerge"
 
-    #responses:
-    response_types = [
-        {
-            "prompt": "",
-            "options": {
-                "type": "message",
-            },
-        },
-    ]
-
-    phantom.prompt2(container=container, user=user, message=message, respond_in_mins=30, name="prompt_5", response_types=response_types)
+    phantom.task(user=user, message=message, respond_in_mins=30, name="task_1")
 
     return
 
-def join_prompt_5(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None):
-    phantom.debug('join_prompt_5() called')
+def join_task_1(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None):
+    phantom.debug('join_task_1() called')
 
     # check if all connected incoming actions are done i.e. have succeeded or failed
     if phantom.actions_done([ 'prompt_4', 'prompt_3' ]):
         
-        # call connected block "prompt_5"
-        prompt_5(container=container, handle=handle)
+        # call connected block "task_1"
+        task_1(container=container, handle=handle)
     
     return
 
