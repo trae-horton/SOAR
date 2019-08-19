@@ -263,7 +263,7 @@ def format_2(action=None, success=None, container=None, results=None, handle=Non
 
     # parameter list for template variable replacement
     parameters = [
-        "filtered-data:filter_3:condition_2:file_reputation_1:action_result.status",
+        "file_reputation_1:action_result.data.*.positives",
     ]
 
     phantom.format(container=container, template=template, parameters=parameters, name="format_2")
