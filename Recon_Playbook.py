@@ -100,17 +100,20 @@ def file_reputation_1(action=None, success=None, container=None, results=None, h
 def format_1(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None):
     phantom.debug('format_1() called')
     
-    template = """File Info = {0}
+    template = """File Reputation = {0}
 
-IP Info = {1}
+Whois IP = {1}
 
-Domain Info = {2}"""
+Whois Domain = {2}
+
+URL Reputation = {3}"""
 
     # parameter list for template variable replacement
     parameters = [
         "file_reputation_1:action_result.data.*.verbose_msg",
         "whois_ip_1:action_result.message",
         "whois_domain_1:action_result.message",
+        "url_reputation_1:action_result.data.*.in_database",
     ]
 
     phantom.format(container=container, template=template, parameters=parameters, name="format_1")
