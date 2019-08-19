@@ -208,17 +208,17 @@ def detonate_file_2(action=None, success=None, container=None, results=None, han
     #phantom.debug('Action: {0} {1}'.format(action['name'], ('SUCCEEDED' if success else 'FAILED')))
     
     # collect data for 'detonate_file_2' call
-    results_data_1 = phantom.collect2(container=container, datapath=['file_reputation_1:action_result.data.*.positives', 'file_reputation_1:action_result.parameter.context.artifact_id'], action_results=results)
+    inputs_data_1 = phantom.collect2(container=container, datapath=['file_reputation_1:artifact:*.cef.cs6', 'file_reputation_1:artifact:*.id'], action_results=results)
 
     parameters = []
     
     # build parameters list for 'detonate_file_2' call
-    for results_item_1 in results_data_1:
-        if results_item_1[0]:
+    for inputs_item_1 in inputs_data_1:
+        if inputs_item_1[0]:
             parameters.append({
-                'vault_id': results_item_1[0],
+                'vault_id': inputs_item_1[0],
                 # context (artifact id) is added to associate results with the artifact
-                'context': {'artifact_id': results_item_1[1]},
+                'context': {'artifact_id': inputs_item_1[1]},
             })
 
     phantom.act("detonate file", parameters=parameters, assets=['virustotal_api'], callback=prompt_4, name="detonate_file_2")
@@ -292,7 +292,7 @@ def prompt_4(action=None, success=None, container=None, results=None, handle=Non
 
     # parameter list for template variable replacement
     parameters = [
-        "detonate_file_2:action_result.status",
+        "detonate_file_2:action_result.data.*.positives",
     ]
 
     #responses:
