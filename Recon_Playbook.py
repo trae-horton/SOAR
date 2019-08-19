@@ -114,7 +114,7 @@ def join_format_1(action=None, success=None, container=None, results=None, handl
     phantom.debug('join_format_1() called')
 
     # check if all connected incoming actions are done i.e. have succeeded or failed
-    if phantom.actions_done([ 'detonate_url_1', 'url_reputation_1', 'file_reputation_1', 'detonate_file_1' ]):
+    if phantom.actions_done([ 'file_reputation_1', 'detonate_file_1' ]):
         
         # call connected block "format_1"
         format_1(container=container, handle=handle)
@@ -210,7 +210,7 @@ def filter_5(action=None, success=None, container=None, results=None, handle=Non
 
     # call connected blocks if filtered artifacts or results
     if matched_artifacts_1 or matched_results_1:
-        join_format_1(action=action, success=success, container=container, results=results, handle=handle, filtered_artifacts=matched_artifacts_1, filtered_results=matched_results_1)
+        pass
 
     # collect filtered artifact ids for 'if' condition 2
     matched_artifacts_2, matched_results_2 = phantom.condition(
@@ -264,7 +264,7 @@ def filter_6(action=None, success=None, container=None, results=None, handle=Non
 
     # call connected blocks if filtered artifacts or results
     if matched_artifacts_1 or matched_results_1:
-        join_format_1(action=action, success=success, container=container, results=results, handle=handle, filtered_artifacts=matched_artifacts_1, filtered_results=matched_results_1)
+        pass
 
     return
 
