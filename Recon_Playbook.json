@@ -7,7 +7,7 @@
             "clean": true,
             "code_block": "import sys\nimport urllib \nimport urlparse",
             "description": "This playbook will take the following data and run through recon modules:\n\nDestination IP\nDestination DNS\nSHA256 Hash\n\n\nActions include:\n\nPhantom DNS\nPhantom IP\nVirusTotal",
-            "hash": "324862b90671a2269f305100931a62ef06f66c3e",
+            "hash": "599042e264c60f6b8bbc5fdc35a32caaee6597b6",
             "joint": {
                 "cells": [
                     {
@@ -217,8 +217,8 @@
                         "join_code": "# read-only block view not available",
                         "join_optional": [],
                         "join_start": 1,
-                        "line_end": 430,
-                        "line_start": 417,
+                        "line_end": 425,
+                        "line_start": 412,
                         "name": "",
                         "notes": "",
                         "number": 0,
@@ -6727,8 +6727,8 @@
                         "join_code": "",
                         "join_optional": [],
                         "join_start": 1,
-                        "line_end": 378,
-                        "line_start": 357,
+                        "line_end": 373,
+                        "line_start": 352,
                         "message": "detinated URL",
                         "name": "prompt",
                         "notes": "",
@@ -7094,8 +7094,8 @@
                         "join_code": "",
                         "join_optional": [],
                         "join_start": 1,
-                        "line_end": 396,
-                        "line_start": 378,
+                        "line_end": 391,
+                        "line_start": 373,
                         "name": "filter",
                         "notes": "",
                         "number": 11,
@@ -7477,8 +7477,8 @@
                         "join_code": "",
                         "join_optional": [],
                         "join_start": 1,
-                        "line_end": 303,
-                        "line_start": 272,
+                        "line_end": 298,
+                        "line_start": 267,
                         "name": "filter",
                         "notes": "",
                         "number": 10,
@@ -7696,8 +7696,8 @@
                         "join_code": "",
                         "join_optional": [],
                         "join_start": 1,
-                        "line_end": 334,
-                        "line_start": 303,
+                        "line_end": 329,
+                        "line_start": 298,
                         "message": "In PhishTank\n{0}",
                         "name": "prompt",
                         "notes": "",
@@ -9226,8 +9226,8 @@
                         "join_code": "",
                         "join_optional": [],
                         "join_start": 1,
-                        "line_end": 357,
-                        "line_start": 334,
+                        "line_end": 352,
+                        "line_start": 329,
                         "message": "Configuring now",
                         "name": "detonate url",
                         "notes": "",
@@ -9392,8 +9392,8 @@
                         "join_code": "",
                         "join_optional": [],
                         "join_start": 1,
-                        "line_end": 417,
-                        "line_start": 396,
+                        "line_end": 412,
+                        "line_start": 391,
                         "message": "Configuring now",
                         "name": "custom function",
                         "notes": "",
@@ -9485,7 +9485,7 @@
                         "type": "coa.FunctionBlock",
                         "userGeneratedCode": "    test = phantom.collect2(container=container, datapath=['artifact:*.cef.requestURL'])\n    query  = urlparse.urlparse(test).query\n    param  = urlparse.parse_qs(query)\n    u = (param['u'][0].replace('-', '%')\n                      .replace('_', '/'))\n    url = urllib.unquote(u)\n",
                         "warn": false,
-                        "z": 431
+                        "z": 435
                     },
                     {
                         "action": "url reputation",
@@ -9493,7 +9493,7 @@
                         "active": false,
                         "active_keys": {},
                         "active_values": {
-                            "url": "artifact:*.cef.requestURL"
+                            "url": "url"
                         },
                         "angle": 0,
                         "app": "PhishTank",
@@ -9514,7 +9514,7 @@
                                 "config_type": "asset",
                                 "count": 0,
                                 "fields": {
-                                    "url": "artifact:*.cef.requestURL"
+                                    "url": "url"
                                 },
                                 "has_app": true,
                                 "id": 3,
@@ -9742,7 +9742,7 @@
                                 "opacity": 1
                             }
                         },
-                        "block_code": "def url_reputation_2(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None):\n    phantom.debug('url_reputation_2() called')\n\n    # collect data for 'url_reputation_2' call\n    container_data = phantom.collect2(container=container, datapath=['artifact:*.cef.requestURL', 'artifact:*.id'])\n\n    parameters = []\n    \n    # build parameters list for 'url_reputation_2' call\n    for container_item in container_data:\n        if container_item[0]:\n            parameters.append({\n                'url': container_item[0],\n                # context (artifact id) is added to associate results with the artifact\n                'context': {'artifact_id': container_item[1]},\n            })\n\n    phantom.act(\"url reputation\", parameters=parameters, assets=['phishtank'], callback=filter_10, name=\"url_reputation_2\")\n\n    return",
+                        "block_code": "def url_reputation_2(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None):\n    phantom.debug('url_reputation_2() called')\n\n    # collect data for 'url_reputation_2' call\n\n    parameters = []\n    \n    # build parameters list for 'url_reputation_2' call\n    parameters.append({\n        'url': \"url\",\n    })\n\n    phantom.act(\"url reputation\", parameters=parameters, assets=['phishtank'], callback=filter_10, name=\"url_reputation_2\")\n\n    return",
                         "callback_code": "",
                         "callback_start": 1,
                         "callsback": true,
@@ -9767,7 +9767,7 @@
                         "join_code": "",
                         "join_optional": [],
                         "join_start": 1,
-                        "line_end": 272,
+                        "line_end": 267,
                         "line_start": 251,
                         "message": "Configuring now",
                         "name": "url reputation",
@@ -9848,8 +9848,8 @@
                         "status": "",
                         "title": "Investigate",
                         "type": "coa.Action",
-                        "warn": false,
-                        "z": 432
+                        "warn": "",
+                        "z": 436
                     }
                 ]
             },
@@ -9858,7 +9858,7 @@
         "schema": 3,
         "version": "4.5.15922"
     },
-    "create_time": "2019-08-20T17:38:15.363287+00:00",
+    "create_time": "2019-08-20T17:39:39.778420+00:00",
     "draft_mode": false,
     "labels": [
         "email"

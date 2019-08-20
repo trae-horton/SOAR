@@ -252,18 +252,13 @@ def url_reputation_2(action=None, success=None, container=None, results=None, ha
     phantom.debug('url_reputation_2() called')
 
     # collect data for 'url_reputation_2' call
-    container_data = phantom.collect2(container=container, datapath=['artifact:*.cef.requestURL', 'artifact:*.id'])
 
     parameters = []
     
     # build parameters list for 'url_reputation_2' call
-    for container_item in container_data:
-        if container_item[0]:
-            parameters.append({
-                'url': container_item[0],
-                # context (artifact id) is added to associate results with the artifact
-                'context': {'artifact_id': container_item[1]},
-            })
+    parameters.append({
+        'url': "url",
+    })
 
     phantom.act("url reputation", parameters=parameters, assets=['phishtank'], callback=filter_10, name="url_reputation_2")
 
