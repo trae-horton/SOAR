@@ -332,19 +332,15 @@ def detonate_url_2(action=None, success=None, container=None, results=None, hand
     
     #phantom.debug('Action: {0} {1}'.format(action['name'], ('SUCCEEDED' if success else 'FAILED')))
     
+    Parse_Proofpoint_URL__url_parsed = json.loads(phantom.get_run_data(key='Parse_Proofpoint_URL:url_parsed'))
     # collect data for 'detonate_url_2' call
-    container_data = phantom.collect2(container=container, datapath=['artifact:*.cef.requestURL', 'artifact:*.id'])
 
     parameters = []
     
     # build parameters list for 'detonate_url_2' call
-    for container_item in container_data:
-        if container_item[0]:
-            parameters.append({
-                'url': container_item[0],
-                # context (artifact id) is added to associate results with the artifact
-                'context': {'artifact_id': container_item[1]},
-            })
+    parameters.append({
+        'url': Parse_Proofpoint_URL__url_parsed,
+    })
 
     phantom.act("detonate url", parameters=parameters, assets=['virustotal_api'], callback=filter_11, name="detonate_url_2")
 
