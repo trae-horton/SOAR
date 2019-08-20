@@ -36,6 +36,9 @@ def on_start(container):
     # call 'Parse_Proofpoint_URL' block
     Parse_Proofpoint_URL(container=container)
 
+    # call 'domain_reputation_1' block
+    domain_reputation_1(container=container)
+
     return
 
 def file_reputation_1(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None):
@@ -409,6 +412,53 @@ def Parse_Proofpoint_URL(action=None, success=None, container=None, results=None
 
     phantom.save_run_data(key='Parse_Proofpoint_URL:url_parsed', value=json.dumps(Parse_Proofpoint_URL__url_parsed))
     url_reputation_2(container=container)
+
+    return
+
+def domain_reputation_1(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None):
+    phantom.debug('domain_reputation_1() called')
+
+    # collect data for 'domain_reputation_1' call
+    container_data = phantom.collect2(container=container, datapath=['artifact:*.cef.destinationDnsDomain', 'artifact:*.id'])
+
+    parameters = []
+    
+    # build parameters list for 'domain_reputation_1' call
+    for container_item in container_data:
+        if container_item[0]:
+            parameters.append({
+                'domain': container_item[0],
+                # context (artifact id) is added to associate results with the artifact
+                'context': {'artifact_id': container_item[1]},
+            })
+
+    phantom.act("domain reputation", parameters=parameters, assets=['virustotal_api'], callback=prompt_8, name="domain_reputation_1")
+
+    return
+
+def prompt_8(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None):
+    phantom.debug('prompt_8() called')
+    
+    # set user and message variables for phantom.prompt call
+    user = "admin"
+    message = """{0}"""
+
+    # parameter list for template variable replacement
+    parameters = [
+        "domain_reputation_1:action_result.data.*.detected_communicating_samples.*.positives",
+    ]
+
+    #responses:
+    response_types = [
+        {
+            "prompt": "",
+            "options": {
+                "type": "message",
+            },
+        },
+    ]
+
+    phantom.prompt2(container=container, user=user, message=message, respond_in_mins=30, name="prompt_8", parameters=parameters, response_types=response_types)
 
     return
 
