@@ -7,7 +7,7 @@
             "clean": true,
             "code_block": "import sys\nimport urllib \nimport urlparse",
             "description": "This playbook will take the following data and run through recon modules:\n\nDestination IP\nDestination DNS\nSHA256 Hash\n\n\nActions include:\n\nPhantom DNS\nPhantom IP\nVirusTotal",
-            "hash": "2a726cef52b6a38671515f788643662c8b168d7c",
+            "hash": "44c1a7eeb24bcbb547313ff9115d32325b271ce6",
             "joint": {
                 "cells": [
                     {
@@ -217,8 +217,8 @@
                         "join_code": "# read-only block view not available",
                         "join_optional": [],
                         "join_start": 1,
-                        "line_end": 429,
-                        "line_start": 416,
+                        "line_end": 433,
+                        "line_start": 420,
                         "name": "",
                         "notes": "",
                         "number": 0,
@@ -9354,7 +9354,7 @@
                                 "text": "custom function"
                             },
                             "g.delete": {
-                                "display": "none"
+                                "display": "block"
                             },
                             "g.error": {
                                 "opacity": 0
@@ -9366,15 +9366,15 @@
                                 "display": "block"
                             }
                         },
-                        "block_code": "def Parse_Proofpoint_URL(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None):\n    phantom.debug('Parse_Proofpoint_URL() called')\n    container_data = phantom.collect2(container=container, datapath=['artifact:*.cef.requestURL', 'artifact:*.id'])\n    container_item_0 = [item[0] for item in container_data]\n\n    ################################################################################\n    ## Custom Code Start\n    ################################################################################\n    phantom.debug(container_item_0)\n    test = container_item_0[0]\n        \n    query  = urlparse.urlparse(test).query\n    param  = urlparse.parse_qs(query)\n    u = (param['u'][0].replace('-', '%')\n                      .replace('_', '/'))\n    url = urllib.unquote(u)\n\n    ################################################################################\n    ## Custom Code End\n    ################################################################################\n    url_reputation_2(container=container)\n\n    return",
+                        "block_code": "def Parse_Proofpoint_URL(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None):\n    phantom.debug('Parse_Proofpoint_URL() called')\n    container_data = phantom.collect2(container=container, datapath=['artifact:*.cef.requestURL', 'artifact:*.id'])\n    container_item_0 = [item[0] for item in container_data]\n\n    Parse_Proofpoint_URL__url_parsed = None\n\n    ################################################################################\n    ## Custom Code Start\n    ################################################################################\n    phantom.debug(container_item_0)\n    test = container_item_0[0]\n        \n    query  = urlparse.urlparse(test).query\n    param  = urlparse.parse_qs(query)\n    u = (param['u'][0].replace('-', '%')\n                      .replace('_', '/'))\n    url = urllib.unquote(u)\n\n    ################################################################################\n    ## Custom Code End\n    ################################################################################\n\n    phantom.save_run_data(key='Parse_Proofpoint_URL:url_parsed', value=json.dumps(Parse_Proofpoint_URL__url_parsed))\n    url_reputation_2(container=container)\n\n    return",
                         "callback_code": "",
                         "callback_start": 1,
                         "callsback": false,
                         "connected_to_start": true,
                         "connection_name": "",
                         "connection_type": "",
-                        "customCodeEndLineOffset": 5,
-                        "customCodeStartLine": 8,
+                        "customCodeEndLineOffset": 7,
+                        "customCodeStartLine": 10,
                         "custom_callback": "",
                         "custom_code": "def Parse_Proofpoint_URL(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None):\n    phantom.debug('Parse_Proofpoint_URL() called')\n    container_data = phantom.collect2(container=container, datapath=['artifact:*.cef.requestURL', 'artifact:*.id'])\n    container_item_0 = [item[0] for item in container_data]\n\n    ################################################################################\n    ## Custom Code Start\n    ################################################################################\n    phantom.debug(container_item_0)\n    test = container_item_0[0]\n        \n    query  = urlparse.urlparse(test).query\n    param  = urlparse.parse_qs(query)\n    u = (param['u'][0].replace('-', '%')\n                      .replace('_', '/'))\n    url = urllib.unquote(u)\n    \n\n\n    ################################################################################\n    ## Custom Code End\n    ################################################################################\n    url_reputation_2(container=container)\n\n    return",
                         "custom_join": "",
@@ -9392,7 +9392,7 @@
                         "join_code": "",
                         "join_optional": [],
                         "join_start": 1,
-                        "line_end": 416,
+                        "line_end": 420,
                         "line_start": 392,
                         "message": "Configuring now",
                         "name": "custom function",
@@ -9406,7 +9406,7 @@
                             {
                                 "position": 1,
                                 "type": "",
-                                "value": ""
+                                "value": "url_parsed"
                             }
                         ],
                         "parameters": [
@@ -9485,7 +9485,7 @@
                         "type": "coa.FunctionBlock",
                         "userGeneratedCode": "    phantom.debug(container_item_0)\n    test = container_item_0[0]\n        \n    query  = urlparse.urlparse(test).query\n    param  = urlparse.parse_qs(query)\n    u = (param['u'][0].replace('-', '%')\n                      .replace('_', '/'))\n    url = urllib.unquote(u)\n    \n\n",
                         "warn": false,
-                        "z": 461
+                        "z": 465
                     },
                     {
                         "action": "url reputation",
@@ -9493,7 +9493,7 @@
                         "active": false,
                         "active_keys": {},
                         "active_values": {
-                            "url": "container:url"
+                            "url": "Parse_Proofpoint_URL:custom_function:url_parsed"
                         },
                         "angle": 0,
                         "app": "PhishTank",
@@ -9514,7 +9514,7 @@
                                 "config_type": "asset",
                                 "count": 0,
                                 "fields": {
-                                    "url": "container:url"
+                                    "url": "Parse_Proofpoint_URL:custom_function:url_parsed"
                                 },
                                 "has_app": true,
                                 "id": 3,
@@ -9718,8 +9718,7 @@
                                 "opacity": 1
                             },
                             "g.code image": {
-                                "opacity": 1,
-                                "xlink:href": "/inc/coa/img/block_icon_code_dark_on.svg"
+                                "opacity": 1
                             },
                             "g.delete": {
                                 "display": "none"
@@ -9743,7 +9742,7 @@
                                 "opacity": 1
                             }
                         },
-                        "block_code": "def url_reputation_2(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None):\n    phantom.debug('url_reputation_2() called')\n\n    # collect data for 'url_reputation_2' call\n    container_data = phantom.collect2(container=container, datapath=['artifact:*.cef.requestURL', 'artifact:*.id'])\n\n    parameters = []\n    \n    # build parameters list for 'url_reputation_2' call\n    for container_item in container_data:\n        if container_item[0]:\n            parameters.append({\n                'url': container_item[0],\n                # context (artifact id) is added to associate results with the artifact\n                'context': {'artifact_id': container_item[1]},\n            })\n\n    phantom.act(\"url reputation\", parameters=parameters, assets=['phishtank'], callback=filter_10, name=\"url_reputation_2\")\n\n    return",
+                        "block_code": "def url_reputation_2(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None):\n    phantom.debug('url_reputation_2() called')\n\n    Parse_Proofpoint_URL__url_parsed = json.loads(phantom.get_run_data(key='Parse_Proofpoint_URL:url_parsed'))\n    # collect data for 'url_reputation_2' call\n\n    parameters = []\n    \n    # build parameters list for 'url_reputation_2' call\n    parameters.append({\n        'url': Parse_Proofpoint_URL__url_parsed,\n    })\n\n    phantom.act(\"url reputation\", parameters=parameters, assets=['phishtank'], callback=filter_10, name=\"url_reputation_2\")\n\n    return",
                         "callback_code": "",
                         "callback_start": 272,
                         "callsback": true,
@@ -9752,13 +9751,13 @@
                         "connection_name": "",
                         "connection_type": "",
                         "custom_callback": "",
-                        "custom_code": "def url_reputation_2(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None):\n    phantom.debug('url_reputation_2() called')\n    url_value = container.get('url', None)\n    phantom.debu(url_value)\n    # collect data for 'url_reputation_2' call\n\n    parameters = []\n    \n    # build parameters list for 'url_reputation_2' call\n    parameters.append({\n        'url': url_value,\n    })\n\n    phantom.act(\"url reputation\", parameters=parameters, assets=['phishtank'], callback=filter_10, name=\"url_reputation_2\")\n\n    return",
+                        "custom_code": "",
                         "custom_join": "",
                         "custom_name": "",
                         "delay": "0",
                         "description": "",
                         "has_custom": false,
-                        "has_custom_block": true,
+                        "has_custom_block": false,
                         "has_custom_callback": false,
                         "has_custom_join": false,
                         "id": "c31b2524-85a7-46e3-9119-8b2050cd80c4",
@@ -9849,8 +9848,8 @@
                         "status": "",
                         "title": "Investigate",
                         "type": "coa.Action",
-                        "warn": false,
-                        "z": 463
+                        "warn": "",
+                        "z": 466
                     }
                 ]
             },
@@ -9859,7 +9858,7 @@
         "schema": 3,
         "version": "4.5.15922"
     },
-    "create_time": "2019-08-20T18:05:15.289093+00:00",
+    "create_time": "2019-08-20T18:07:04.998499+00:00",
     "draft_mode": false,
     "labels": [
         "email"

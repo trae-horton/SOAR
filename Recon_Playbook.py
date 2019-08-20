@@ -250,15 +250,15 @@ def filter_9(action=None, success=None, container=None, results=None, handle=Non
 
 def url_reputation_2(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None):
     phantom.debug('url_reputation_2() called')
-    url_value = container.get('url', None)
-    phantom.debu(url_value)
+
+    Parse_Proofpoint_URL__url_parsed = json.loads(phantom.get_run_data(key='Parse_Proofpoint_URL:url_parsed'))
     # collect data for 'url_reputation_2' call
 
     parameters = []
     
     # build parameters list for 'url_reputation_2' call
     parameters.append({
-        'url': url_value,
+        'url': Parse_Proofpoint_URL__url_parsed,
     })
 
     phantom.act("url reputation", parameters=parameters, assets=['phishtank'], callback=filter_10, name="url_reputation_2")
@@ -394,6 +394,8 @@ def Parse_Proofpoint_URL(action=None, success=None, container=None, results=None
     container_data = phantom.collect2(container=container, datapath=['artifact:*.cef.requestURL', 'artifact:*.id'])
     container_item_0 = [item[0] for item in container_data]
 
+    Parse_Proofpoint_URL__url_parsed = None
+
     ################################################################################
     ## Custom Code Start
     ################################################################################
@@ -409,6 +411,8 @@ def Parse_Proofpoint_URL(action=None, success=None, container=None, results=None
     ################################################################################
     ## Custom Code End
     ################################################################################
+
+    phantom.save_run_data(key='Parse_Proofpoint_URL:url_parsed', value=json.dumps(Parse_Proofpoint_URL__url_parsed))
     url_reputation_2(container=container)
 
     return
