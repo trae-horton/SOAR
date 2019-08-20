@@ -17,6 +17,16 @@ import phantom.rules as phantom
 import json
 from datetime import datetime, timedelta
 
+##############################
+# Start - Global Code Block
+
+import sys
+import urllib 
+import urlparse
+
+# End - Global Code block
+##############################
+
 def on_start(container):
     phantom.debug('on_start() called')
     
