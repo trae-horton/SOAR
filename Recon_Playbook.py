@@ -33,8 +33,8 @@ def on_start(container):
     # call 'file_reputation_1' block
     file_reputation_1(container=container)
 
-    # call 'custom_function_1' block
-    custom_function_1(container=container)
+    # call 'Parse_Proofpoint_URL' block
+    Parse_Proofpoint_URL(container=container)
 
     return
 
@@ -393,8 +393,8 @@ def filter_11(action=None, success=None, container=None, results=None, handle=No
 
     return
 
-def custom_function_1(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None):
-    phantom.debug('custom_function_1() called')
+def Parse_Proofpoint_URL(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None):
+    phantom.debug('Parse_Proofpoint_URL() called')
     input_parameter_0 = ""
 
     ################################################################################
