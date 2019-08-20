@@ -445,7 +445,7 @@ def prompt_8(action=None, success=None, container=None, results=None, handle=Non
 
     # parameter list for template variable replacement
     parameters = [
-        "domain_reputation_1:action_result.parameter.domain",
+        "domain_reputation_1:action_result.data.*.categories",
     ]
 
     #responses:
