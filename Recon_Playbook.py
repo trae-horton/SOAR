@@ -250,20 +250,16 @@ def filter_9(action=None, success=None, container=None, results=None, handle=Non
 
 def url_reputation_2(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None):
     phantom.debug('url_reputation_2() called')
-
+    url_value = container.get('url', None)
+    phantom.debu(url_value)
     # collect data for 'url_reputation_2' call
-    container_data = phantom.collect2(container=container, datapath=['artifact:*.cef.requestURL', 'artifact:*.id'])
 
     parameters = []
     
     # build parameters list for 'url_reputation_2' call
-    for container_item in container_data:
-        if container_item[0]:
-            parameters.append({
-                'url': container_item[0],
-                # context (artifact id) is added to associate results with the artifact
-                'context': {'artifact_id': container_item[1]},
-            })
+    parameters.append({
+        'url': url_value,
+    })
 
     phantom.act("url reputation", parameters=parameters, assets=['phishtank'], callback=filter_10, name="url_reputation_2")
 
@@ -409,8 +405,6 @@ def Parse_Proofpoint_URL(action=None, success=None, container=None, results=None
     u = (param['u'][0].replace('-', '%')
                       .replace('_', '/'))
     url = urllib.unquote(u)
-    
-    return
 
     ################################################################################
     ## Custom Code End
