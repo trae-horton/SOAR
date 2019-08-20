@@ -7,7 +7,6 @@
             "clean": true,
             "code_block": "import sys\nimport urllib \nimport urlparse",
             "description": "This playbook will take the following data and run through recon modules:\n\nDestination IP\nDestination DNS\nSHA256 Hash\n\n\nActions include:\n\nPhantom DNS\nPhantom IP\nVirusTotal",
-            "hash": "4c9425ca5fe9912246affb6d2e35abc8b969d27a",
             "joint": {
                 "cells": [
                     {
@@ -12597,7 +12596,7 @@
                         "status": "",
                         "type": "coa.Prompt",
                         "warn": false,
-                        "z": 501
+                        "z": 502
                     }
                 ]
             },
@@ -12609,7 +12608,7 @@
     "create_time": "2019-08-20T19:05:15.736950+00:00",
     "draft_mode": false,
     "labels": [
-        "*"
+        "email"
     ],
     "tags": []
 }
