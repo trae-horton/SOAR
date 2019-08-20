@@ -395,22 +395,14 @@ def filter_11(action=None, success=None, container=None, results=None, handle=No
 
 def Parse_Proofpoint_URL(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None):
     phantom.debug('Parse_Proofpoint_URL() called')
-    input_parameter_0 = ""
+    container_data = phantom.collect2(container=container, datapath=['artifact:*.cef.requestURL', 'artifact:*.id'])
+    container_item_0 = [item[0] for item in container_data]
 
     ################################################################################
     ## Custom Code Start
     ################################################################################
-    container_data = phantom.collect2(container=container, datapath=['artifact:*.cef.requestURL', 'artifact:*.id'])
-    parameters = []
-    for container_item in container_data:
-        if container_item[0]:
-            parameters.append({
-                'url': container_item[0],
-                # context (artifact id) is added to associate results with the artifact
-                'context': {'artifact_id': container_item[1]},
-            })
-            
-    test = 'https://urldefense.proofpoint.com/v2/url?u=https-3A__shadowboundseries.top_Admin_odrv_index.php&d=DwMFAg&c=lYuZ_P7jPmjZqnqbuCPOKq7eqkM5nWwRSRdsLqrc314&r=XD-0sW0SiDagMU_Kz9JlycqKtWlb22Xfn6F27xN31j1pMOX-wagK3TP8IgX5vqpN&m=QQJpP_YKAuIcgE1_FloUDxFPhI-21Ow259kFw6GJIqM&s=G-jzk1VakxIUrKTES-9QB5hNApKLfGTh5n_ONvU7z88&e='
+
+    test = container_item_0
         
     query  = urlparse.urlparse(test).query
     param  = urlparse.parse_qs(query)
