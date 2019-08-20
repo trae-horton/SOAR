@@ -410,7 +410,8 @@ def Parse_Proofpoint_URL(action=None, success=None, container=None, results=None
                 'context': {'artifact_id': container_item[1]},
             })
             
-    test = container_item[0]        
+    test = 'https://urldefense.proofpoint.com/v2/url?u=https-3A__shadowboundseries.top_Admin_odrv_index.php&d=DwMFAg&c=lYuZ_P7jPmjZqnqbuCPOKq7eqkM5nWwRSRdsLqrc314&r=XD-0sW0SiDagMU_Kz9JlycqKtWlb22Xfn6F27xN31j1pMOX-wagK3TP8IgX5vqpN&m=QQJpP_YKAuIcgE1_FloUDxFPhI-21Ow259kFw6GJIqM&s=G-jzk1VakxIUrKTES-9QB5hNApKLfGTh5n_ONvU7z88&e='
+        
     query  = urlparse.urlparse(test).query
     param  = urlparse.parse_qs(query)
     u = (param['u'][0].replace('-', '%')
