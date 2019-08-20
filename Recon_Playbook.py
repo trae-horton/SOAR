@@ -252,13 +252,18 @@ def url_reputation_2(action=None, success=None, container=None, results=None, ha
     phantom.debug('url_reputation_2() called')
 
     # collect data for 'url_reputation_2' call
+    container_data = phantom.collect2(container=container, datapath=['artifact:*.cef.requestURL', 'artifact:*.id'])
 
     parameters = []
     
     # build parameters list for 'url_reputation_2' call
-    parameters.append({
-        'url': "url",
-    })
+    for container_item in container_data:
+        if container_item[0]:
+            parameters.append({
+                'url': container_item[0],
+                # context (artifact id) is added to associate results with the artifact
+                'context': {'artifact_id': container_item[1]},
+            })
 
     phantom.act("url reputation", parameters=parameters, assets=['phishtank'], callback=filter_10, name="url_reputation_2")
 
@@ -395,7 +400,17 @@ def Parse_Proofpoint_URL(action=None, success=None, container=None, results=None
     ################################################################################
     ## Custom Code Start
     ################################################################################
-    test = phantom.collect2(container=container, datapath=['artifact:*.cef.requestURL'])
+    container_data = phantom.collect2(container=container, datapath=['artifact:*.cef.requestURL', 'artifact:*.id'])
+    parameters = []
+    for container_item in container_data:
+        if container_item[0]:
+            parameters.append({
+                'url': container_item[0],
+                # context (artifact id) is added to associate results with the artifact
+                'context': {'artifact_id': container_item[1]},
+            })
+            
+    test = container_item[0]        
     query  = urlparse.urlparse(test).query
     param  = urlparse.parse_qs(query)
     u = (param['u'][0].replace('-', '%')
