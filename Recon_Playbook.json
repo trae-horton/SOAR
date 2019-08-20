@@ -7,7 +7,7 @@
             "clean": true,
             "code_block": "import sys\nimport urllib \nimport urlparse",
             "description": "This playbook will take the following data and run through recon modules:\n\nDestination IP\nDestination DNS\nSHA256 Hash\n\n\nActions include:\n\nPhantom DNS\nPhantom IP\nVirusTotal",
-            "hash": "44c1a7eeb24bcbb547313ff9115d32325b271ce6",
+            "hash": "40c2e6a71268647cc624bd4a6f1300a826795130",
             "joint": {
                 "cells": [
                     {
@@ -6511,7 +6511,7 @@
                                 }
                             },
                             "g.delete": {
-                                "display": "none"
+                                "display": "block"
                             },
                             "g.error": {
                                 "opacity": 0
@@ -9354,7 +9354,7 @@
                                 "text": "custom function"
                             },
                             "g.delete": {
-                                "display": "block"
+                                "display": "none"
                             },
                             "g.error": {
                                 "opacity": 0
@@ -9718,7 +9718,8 @@
                                 "opacity": 1
                             },
                             "g.code image": {
-                                "opacity": 1
+                                "opacity": 1,
+                                "xlink:href": "/inc/coa/img/block_icon_code_dark_on.svg"
                             },
                             "g.delete": {
                                 "display": "none"
@@ -9751,13 +9752,13 @@
                         "connection_name": "",
                         "connection_type": "",
                         "custom_callback": "",
-                        "custom_code": "",
+                        "custom_code": "def url_reputation_2(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None):\n    phantom.debug('url_reputation_2() called')\n\n    Parse_Proofpoint_URL__url_parsed = json.loads(phantom.get_run_data(key='Parse_Proofpoint_URL:url_parsed'))\n    # collect data for 'url_reputation_2' call\n    phantom.debug(Parse_Proofpoint_URL__url_parsed)\n    parameters = []\n    \n    # build parameters list for 'url_reputation_2' call\n    parameters.append({\n        'url': Parse_Proofpoint_URL__url_parsed,\n    })\n\n    phantom.act(\"url reputation\", parameters=parameters, assets=['phishtank'], callback=filter_10, name=\"url_reputation_2\")\n\n    return",
                         "custom_join": "",
                         "custom_name": "",
                         "delay": "0",
                         "description": "",
                         "has_custom": false,
-                        "has_custom_block": false,
+                        "has_custom_block": true,
                         "has_custom_callback": false,
                         "has_custom_join": false,
                         "id": "c31b2524-85a7-46e3-9119-8b2050cd80c4",
@@ -9848,8 +9849,8 @@
                         "status": "",
                         "title": "Investigate",
                         "type": "coa.Action",
-                        "warn": "",
-                        "z": 466
+                        "warn": false,
+                        "z": 467
                     }
                 ]
             },
@@ -9858,7 +9859,7 @@
         "schema": 3,
         "version": "4.5.15922"
     },
-    "create_time": "2019-08-20T18:07:04.998499+00:00",
+    "create_time": "2019-08-20T18:08:12.229141+00:00",
     "draft_mode": false,
     "labels": [
         "email"

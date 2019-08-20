@@ -253,7 +253,7 @@ def url_reputation_2(action=None, success=None, container=None, results=None, ha
 
     Parse_Proofpoint_URL__url_parsed = json.loads(phantom.get_run_data(key='Parse_Proofpoint_URL:url_parsed'))
     # collect data for 'url_reputation_2' call
-
+    phantom.debug(Parse_Proofpoint_URL__url_parsed)
     parameters = []
     
     # build parameters list for 'url_reputation_2' call
