@@ -7,6 +7,7 @@
             "clean": true,
             "code_block": "import sys\nimport urllib \nimport urlparse",
             "description": "This playbook will take the following data and run through recon modules:\n\nDestination IP\nDestination DNS\nSHA256 Hash\n\n\nActions include:\n\nPhantom DNS\nPhantom IP\nVirusTotal",
+            "hash": "2f1cb0910cf80d3cfa872705386cdc14eaf0d129",
             "joint": {
                 "cells": [
                     {
@@ -216,8 +217,8 @@
                         "join_code": "# read-only block view not available",
                         "join_optional": [],
                         "join_start": 1,
-                        "line_end": 495,
-                        "line_start": 482,
+                        "line_end": 499,
+                        "line_start": 486,
                         "name": "",
                         "notes": "",
                         "number": 0,
@@ -10768,8 +10769,8 @@
                         "join_code": "",
                         "join_optional": [],
                         "join_start": 1,
-                        "line_end": 482,
-                        "line_start": 465,
+                        "line_end": 486,
+                        "line_start": 469,
                         "name": "filter",
                         "notes": "",
                         "number": 12,
@@ -10947,7 +10948,7 @@
                                 "display": "block"
                             }
                         },
-                        "block_code": "def prompt_8(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None):\n    phantom.debug('prompt_8() called')\n    \n    # set user and message variables for phantom.prompt call\n    user = \"admin\"\n    message = \"\"\"{0}\"\"\"\n\n    # parameter list for template variable replacement\n    parameters = [\n        \"domain_reputation_1:action_result.data.*.detected_urls.*.positives\",\n    ]\n\n    #responses:\n    response_types = [\n        {\n            \"prompt\": \"\",\n            \"options\": {\n                \"type\": \"message\",\n            },\n        },\n    ]\n\n    phantom.prompt2(container=container, user=user, message=message, respond_in_mins=30, name=\"prompt_8\", parameters=parameters, response_types=response_types)\n\n    return",
+                        "block_code": "def prompt_8(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None):\n    phantom.debug('prompt_8() called')\n    \n    # set user and message variables for phantom.prompt call\n    user = \"admin\"\n    message = \"\"\"{0}\n\nnew\n{1}\"\"\"\n\n    # parameter list for template variable replacement\n    parameters = [\n        \"domain_reputation_1:action_result.data.*.detected_urls.*.positives\",\n        \"domain_reputation_1:action_result.data.*.detected_urls.*.total\",\n    ]\n\n    #responses:\n    response_types = [\n        {\n            \"prompt\": \"\",\n            \"options\": {\n                \"type\": \"message\",\n            },\n        },\n    ]\n\n    phantom.prompt2(container=container, user=user, message=message, respond_in_mins=30, name=\"prompt_8\", parameters=parameters, response_types=response_types)\n\n    return",
                         "callback_code": "",
                         "callback_start": 1,
                         "callsback": true,
@@ -10970,9 +10971,9 @@
                         "join_code": "",
                         "join_optional": [],
                         "join_start": 1,
-                        "line_end": 465,
+                        "line_end": 469,
                         "line_start": 439,
-                        "message": "{0}",
+                        "message": "{0}\n\nnew\n{1}",
                         "name": "prompt",
                         "notes": "",
                         "number": 8,
@@ -10985,6 +10986,11 @@
                                 "position": 0,
                                 "type": "",
                                 "value": "domain_reputation_1:action_result.data.*.detected_urls.*.positives"
+                            },
+                            {
+                                "position": 1,
+                                "type": "",
+                                "value": "domain_reputation_1:action_result.data.*.detected_urls.*.total"
                             }
                         ],
                         "ports": {
@@ -11066,7 +11072,7 @@
                         "status": "",
                         "type": "coa.Prompt",
                         "warn": false,
-                        "z": 486
+                        "z": 487
                     }
                 ]
             },
@@ -11075,7 +11081,7 @@
         "schema": 3,
         "version": "4.5.15922"
     },
-    "create_time": "2019-08-20T18:49:12.312082+00:00",
+    "create_time": "2019-08-20T18:52:26.543970+00:00",
     "draft_mode": false,
     "labels": [
         "*"
