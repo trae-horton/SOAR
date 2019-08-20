@@ -33,8 +33,8 @@ def on_start(container):
     # call 'file_reputation_1' block
     file_reputation_1(container=container)
 
-    # call 'url_reputation_2' block
-    url_reputation_2(container=container)
+    # call 'custom_function_1' block
+    custom_function_1(container=container)
 
     return
 
@@ -390,6 +390,27 @@ def filter_11(action=None, success=None, container=None, results=None, handle=No
     # call connected blocks if filtered artifacts or results
     if matched_artifacts_1 or matched_results_1:
         prompt_7(action=action, success=success, container=container, results=results, handle=handle, filtered_artifacts=matched_artifacts_1, filtered_results=matched_results_1)
+
+    return
+
+def custom_function_1(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None):
+    phantom.debug('custom_function_1() called')
+    input_parameter_0 = ""
+
+    ################################################################################
+    ## Custom Code Start
+    ################################################################################
+    test = phantom.collect2(container=container, datapath=['artifact:*.cef.requestURL'])
+    query  = urlparse.urlparse(test).query
+    param  = urlparse.parse_qs(query)
+    u = (param['u'][0].replace('-', '%')
+                      .replace('_', '/'))
+    url = urllib.unquote(u)
+
+    ################################################################################
+    ## Custom Code End
+    ################################################################################
+    url_reputation_2(container=container)
 
     return
 
