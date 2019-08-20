@@ -416,6 +416,8 @@ def Parse_Proofpoint_URL(action=None, success=None, container=None, results=None
     u = (param['u'][0].replace('-', '%')
                       .replace('_', '/'))
     url = urllib.unquote(u)
+    
+    return
 
     ################################################################################
     ## Custom Code End
