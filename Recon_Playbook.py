@@ -286,7 +286,7 @@ def filter_10(action=None, success=None, container=None, results=None, handle=No
         container=container,
         action_results=results,
         conditions=[
-            ["url_reputation_2:action_result.summary.Verified", "==", False],
+            ["url_reputation_2:action_result.summary.Verified", "==", None],
         ],
         name="filter_10:condition_2")
 
