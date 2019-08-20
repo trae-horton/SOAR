@@ -546,7 +546,7 @@ def ip_reputation_1(action=None, success=None, container=None, results=None, han
                 'context': {'artifact_id': container_item[1]},
             })
 
-    phantom.act("ip reputation", parameters=parameters, assets=['virustotal_api'], name="ip_reputation_1")
+    phantom.act("ip reputation", parameters=parameters, assets=['virustotal_api'], callback=prompt_10, name="ip_reputation_1")
 
     return
 
@@ -564,6 +564,33 @@ def filter_14(action=None, success=None, container=None, results=None, handle=No
     # call connected blocks if filtered artifacts or results
     if matched_artifacts_1 or matched_results_1:
         ip_reputation_1(action=action, success=success, container=container, results=results, handle=handle, filtered_artifacts=matched_artifacts_1, filtered_results=matched_results_1)
+
+    return
+
+def prompt_10(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None):
+    phantom.debug('prompt_10() called')
+    
+    # set user and message variables for phantom.prompt call
+    user = "admin"
+    message = """IP info
+{0}"""
+
+    # parameter list for template variable replacement
+    parameters = [
+        "ip_reputation_1:action_result.data.*.detected_communicating_samples.*.positives",
+    ]
+
+    #responses:
+    response_types = [
+        {
+            "prompt": "",
+            "options": {
+                "type": "message",
+            },
+        },
+    ]
+
+    phantom.prompt2(container=container, user=user, message=message, respond_in_mins=30, name="prompt_10", parameters=parameters, response_types=response_types)
 
     return
 
