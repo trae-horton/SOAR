@@ -402,7 +402,7 @@ def Parse_Proofpoint_URL(action=None, success=None, container=None, results=None
     ## Custom Code Start
     ################################################################################
     phantom.debug(container_item_0)
-    test = container_item_0
+    test = container_item_0[0]
         
     query  = urlparse.urlparse(test).query
     param  = urlparse.parse_qs(query)
