@@ -226,7 +226,7 @@ def join_prompt_5(action=None, success=None, container=None, results=None, handl
     phantom.debug('join_prompt_5() called')
 
     # check if all connected incoming actions are done i.e. have succeeded or failed
-    if phantom.actions_done([ 'prompt_4', 'prompt_3', 'prompt_6', 'prompt_7' ]):
+    if phantom.actions_done([ 'prompt_4', 'prompt_3', 'prompt_6', 'prompt_7', 'prompt_9', 'prompt_8' ]):
         
         # call connected block "prompt_5"
         prompt_5(container=container, handle=handle)
@@ -432,37 +432,7 @@ def domain_reputation_1(action=None, success=None, container=None, results=None,
                 'context': {'artifact_id': container_item[1]},
             })
 
-    phantom.act("domain reputation", parameters=parameters, assets=['virustotal_api'], callback=prompt_8, name="domain_reputation_1")
-
-    return
-
-def prompt_8(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None):
-    phantom.debug('prompt_8() called')
-    
-    # set user and message variables for phantom.prompt call
-    user = "admin"
-    message = """{0}
-
-new
-{1}"""
-
-    # parameter list for template variable replacement
-    parameters = [
-        "domain_reputation_1:action_result.data.*.detected_urls.*.positives",
-        "domain_reputation_1:action_result.data.*.detected_urls.*.total",
-    ]
-
-    #responses:
-    response_types = [
-        {
-            "prompt": "",
-            "options": {
-                "type": "message",
-            },
-        },
-    ]
-
-    phantom.prompt2(container=container, user=user, message=message, respond_in_mins=30, name="prompt_8", parameters=parameters, response_types=response_types)
+    phantom.act("domain reputation", parameters=parameters, assets=['virustotal_api'], callback=filter_13, name="domain_reputation_1")
 
     return
 
@@ -480,6 +450,79 @@ def filter_12(action=None, success=None, container=None, results=None, handle=No
     # call connected blocks if filtered artifacts or results
     if matched_artifacts_1 or matched_results_1:
         Parse_Proofpoint_URL(action=action, success=success, container=container, results=results, handle=handle, filtered_artifacts=matched_artifacts_1, filtered_results=matched_results_1)
+
+    return
+
+def filter_13(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None):
+    phantom.debug('filter_13() called')
+
+    # collect filtered artifact ids for 'if' condition 1
+    matched_artifacts_1, matched_results_1 = phantom.condition(
+        container=container,
+        action_results=results,
+        conditions=[
+            ["domain_reputation_1:action_result.data.*.detected_urls.*.positives", ">=", "3"],
+        ],
+        name="filter_13:condition_1")
+
+    # call connected blocks if filtered artifacts or results
+    if matched_artifacts_1 or matched_results_1:
+        prompt_9(action=action, success=success, container=container, results=results, handle=handle, filtered_artifacts=matched_artifacts_1, filtered_results=matched_results_1)
+
+    # collect filtered artifact ids for 'if' condition 2
+    matched_artifacts_2, matched_results_2 = phantom.condition(
+        container=container,
+        action_results=results,
+        conditions=[
+            ["domain_reputation_1:action_result.data.*.detected_urls.*.positives", "<", "3"],
+        ],
+        name="filter_13:condition_2")
+
+    # call connected blocks if filtered artifacts or results
+    if matched_artifacts_2 or matched_results_2:
+        prompt_8(action=action, success=success, container=container, results=results, handle=handle, filtered_artifacts=matched_artifacts_2, filtered_results=matched_results_2)
+
+    return
+
+def prompt_8(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None):
+    phantom.debug('prompt_8() called')
+    
+    # set user and message variables for phantom.prompt call
+    user = "admin"
+    message = """Not a bad domain"""
+
+    #responses:
+    response_types = [
+        {
+            "prompt": "",
+            "options": {
+                "type": "message",
+            },
+        },
+    ]
+
+    phantom.prompt2(container=container, user=user, message=message, respond_in_mins=30, name="prompt_8", response_types=response_types, callback=join_prompt_5)
+
+    return
+
+def prompt_9(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None):
+    phantom.debug('prompt_9() called')
+    
+    # set user and message variables for phantom.prompt call
+    user = "admin"
+    message = """This is a bad domain and needs to be blocked"""
+
+    #responses:
+    response_types = [
+        {
+            "prompt": "",
+            "options": {
+                "type": "message",
+            },
+        },
+    ]
+
+    phantom.prompt2(container=container, user=user, message=message, respond_in_mins=30, name="prompt_9", response_types=response_types, callback=join_prompt_5)
 
     return
 
