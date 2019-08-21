@@ -6,7 +6,8 @@
         "data": {
             "clean": true,
             "code_block": "import sys\nimport urllib \nimport urlparse",
-            "description": "This playbook will take the following data and run through recon modules:\n\nDestination IP\nDestination DNS\nSHA256 Hash\n\n\nActions include:\n\nPhantom DNS\nPhantom IP\nVirusTotal",
+            "description": "This playbook will take the following data and run through recon modules:\n\nnew stuff\n\nActions include:\n\nPhantom DNS\nPhantom IP\nVirusTotal",
+            "hash": "41fb092639fe2dc505b5f586197c7e07af891055",
             "joint": {
                 "cells": [
                     {
@@ -72,8 +73,8 @@
                         "join_code": "# read-only block view not available",
                         "join_optional": [],
                         "join_start": 1,
-                        "line_end": 610,
-                        "line_start": 597,
+                        "line_end": 607,
+                        "line_start": 594,
                         "name": "",
                         "notes": "",
                         "number": 0,
@@ -464,8 +465,8 @@
                         "join_code": "",
                         "join_optional": [],
                         "join_start": 1,
-                        "line_end": 257,
-                        "line_start": 239,
+                        "line_end": 254,
+                        "line_start": 236,
                         "name": "filter",
                         "notes": "",
                         "number": 9,
@@ -750,8 +751,8 @@
                         "join_code": "",
                         "join_optional": [],
                         "join_start": 1,
-                        "line_end": 185,
-                        "line_start": 153,
+                        "line_end": 182,
+                        "line_start": 150,
                         "message": "Detonated\nBlock Hash?\n{0}",
                         "name": "prompt",
                         "notes": "",
@@ -922,8 +923,8 @@
                         "join_code": "",
                         "join_optional": [],
                         "join_start": 1,
-                        "line_end": 153,
-                        "line_start": 122,
+                        "line_end": 150,
+                        "line_start": 119,
                         "message": "Block Hash?\n{0}",
                         "name": "prompt",
                         "notes": "",
@@ -1093,9 +1094,9 @@
                         ],
                         "join_code": "def join_prompt_5(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None):\n    phantom.debug('join_prompt_5() called')\n\n    # check if all connected incoming actions are done i.e. have succeeded or failed\n    if phantom.actions_done([ 'prompt_4', 'prompt_3', 'prompt_6', 'prompt_7', 'prompt_9', 'prompt_8' ]):\n        \n        # call connected block \"prompt_5\"\n        prompt_5(container=container, handle=handle)\n    \n    return",
                         "join_optional": [],
-                        "join_start": 228,
-                        "line_end": 239,
-                        "line_start": 203,
+                        "join_start": 225,
+                        "line_end": 236,
+                        "line_start": 200,
                         "message": "Exmerge?",
                         "name": "prompt",
                         "notes": "",
@@ -3695,8 +3696,8 @@
                         "join_code": "",
                         "join_optional": [],
                         "join_start": 1,
-                        "line_end": 91,
-                        "line_start": 68,
+                        "line_end": 88,
+                        "line_start": 65,
                         "message": "Configuring now",
                         "name": "detonate file",
                         "notes": "",
@@ -3864,8 +3865,8 @@
                         "join_code": "",
                         "join_optional": [],
                         "join_start": 1,
-                        "line_end": 122,
-                        "line_start": 91,
+                        "line_end": 119,
+                        "line_start": 88,
                         "name": "filter",
                         "notes": "",
                         "number": 7,
@@ -4042,8 +4043,8 @@
                         "join_code": "",
                         "join_optional": [],
                         "join_start": 1,
-                        "line_end": 376,
-                        "line_start": 355,
+                        "line_end": 373,
+                        "line_start": 352,
                         "message": "detinated URL",
                         "name": "prompt",
                         "notes": "",
@@ -4245,8 +4246,8 @@
                         "join_code": "",
                         "join_optional": [],
                         "join_start": 1,
-                        "line_end": 203,
-                        "line_start": 185,
+                        "line_end": 200,
+                        "line_start": 182,
                         "name": "filter",
                         "notes": "",
                         "number": 8,
@@ -4409,8 +4410,8 @@
                         "join_code": "",
                         "join_optional": [],
                         "join_start": 1,
-                        "line_end": 394,
-                        "line_start": 376,
+                        "line_end": 391,
+                        "line_start": 373,
                         "name": "filter",
                         "notes": "",
                         "number": 11,
@@ -4819,8 +4820,8 @@
                         "join_code": "",
                         "join_optional": [],
                         "join_start": 1,
-                        "line_end": 336,
-                        "line_start": 305,
+                        "line_end": 333,
+                        "line_start": 302,
                         "message": "In PhishTank\n{0}",
                         "name": "prompt",
                         "notes": "",
@@ -5242,8 +5243,8 @@
                         "join_code": "",
                         "join_optional": [],
                         "join_start": 1,
-                        "line_end": 274,
-                        "line_start": 257,
+                        "line_end": 271,
+                        "line_start": 254,
                         "message": "Configuring now",
                         "name": "url reputation",
                         "notes": "",
@@ -5411,8 +5412,8 @@
                         "join_code": "",
                         "join_optional": [],
                         "join_start": 1,
-                        "line_end": 421,
-                        "line_start": 394,
+                        "line_end": 418,
+                        "line_start": 391,
                         "message": "Configuring now",
                         "name": "custom function",
                         "notes": "",
@@ -5591,8 +5592,8 @@
                         "join_code": "",
                         "join_optional": [],
                         "join_start": 1,
-                        "line_end": 305,
-                        "line_start": 274,
+                        "line_end": 302,
+                        "line_start": 271,
                         "name": "filter",
                         "notes": "",
                         "number": 10,
@@ -7046,8 +7047,8 @@
                         "join_code": "",
                         "join_optional": [],
                         "join_start": 1,
-                        "line_end": 355,
-                        "line_start": 336,
+                        "line_end": 352,
+                        "line_start": 333,
                         "message": "Configuring now",
                         "name": "detonate url",
                         "notes": "",
@@ -7773,6 +7774,12 @@
                             ".title": {
                                 "text": "Investigate"
                             },
+                            "g.approver image": {
+                                "opacity": 1
+                            },
+                            "g.code image": {
+                                "opacity": 1
+                            },
                             "g.delete": {
                                 "display": "none"
                             },
@@ -7787,6 +7794,12 @@
                             },
                             "g.notes": {
                                 "display": "block"
+                            },
+                            "g.notes image": {
+                                "opacity": 1
+                            },
+                            "g.timer image": {
+                                "opacity": 1
                             }
                         },
                         "block_code": "def domain_reputation_1(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None):\n    phantom.debug('domain_reputation_1() called')\n\n    # collect data for 'domain_reputation_1' call\n    container_data = phantom.collect2(container=container, datapath=['artifact:*.cef.destinationDnsDomain', 'artifact:*.id'])\n\n    parameters = []\n    \n    # build parameters list for 'domain_reputation_1' call\n    for container_item in container_data:\n        if container_item[0]:\n            parameters.append({\n                'domain': container_item[0],\n                # context (artifact id) is added to associate results with the artifact\n                'context': {'artifact_id': container_item[1]},\n            })\n\n    phantom.act(\"domain reputation\", parameters=parameters, assets=['virustotal_api'], callback=filter_13, name=\"domain_reputation_1\")\n\n    return",
@@ -7814,8 +7827,8 @@
                         "join_code": "",
                         "join_optional": [],
                         "join_start": 1,
-                        "line_end": 442,
-                        "line_start": 421,
+                        "line_end": 439,
+                        "line_start": 418,
                         "message": "Configuring now",
                         "name": "domain reputation",
                         "notes": "",
@@ -7895,7 +7908,7 @@
                         "status": "",
                         "title": "Investigate",
                         "type": "coa.Action",
-                        "warn": "",
+                        "warn": false,
                         "z": 475
                     },
                     {
@@ -8019,6 +8032,9 @@
                             },
                             "g.notes": {
                                 "display": "block"
+                            },
+                            "g.notes image": {
+                                "opacity": 1
                             }
                         },
                         "block_code": "def filter_12(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None):\n    phantom.debug('filter_12() called')\n\n    # collect filtered artifact ids for 'if' condition 1\n    matched_artifacts_1, matched_results_1 = phantom.condition(\n        container=container,\n        conditions=[\n            [\"artifact:*.cef.requestURL\", \">=\", \"1\"],\n        ],\n        name=\"filter_12:condition_1\")\n\n    # call connected blocks if filtered artifacts or results\n    if matched_artifacts_1 or matched_results_1:\n        Parse_Proofpoint_URL(action=action, success=success, container=container, results=results, handle=handle, filtered_artifacts=matched_artifacts_1, filtered_results=matched_results_1)\n\n    return",
@@ -8044,8 +8060,8 @@
                         "join_code": "",
                         "join_optional": [],
                         "join_start": 1,
-                        "line_end": 459,
-                        "line_start": 442,
+                        "line_end": 456,
+                        "line_start": 439,
                         "name": "filter",
                         "notes": "",
                         "number": 12,
@@ -8134,7 +8150,7 @@
                         "state": "filter",
                         "status": "",
                         "type": "coa.Filter",
-                        "warn": "",
+                        "warn": false,
                         "z": 480
                     },
                     {
@@ -8272,6 +8288,9 @@
                             },
                             "g.notes": {
                                 "display": "block"
+                            },
+                            "g.notes image": {
+                                "opacity": 1
                             }
                         },
                         "block_code": "def filter_13(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None):\n    phantom.debug('filter_13() called')\n\n    # collect filtered artifact ids for 'if' condition 1\n    matched_artifacts_1, matched_results_1 = phantom.condition(\n        container=container,\n        action_results=results,\n        conditions=[\n            [\"domain_reputation_1:action_result.data.*.detected_urls.*.positives\", \">=\", \"3\"],\n        ],\n        name=\"filter_13:condition_1\")\n\n    # call connected blocks if filtered artifacts or results\n    if matched_artifacts_1 or matched_results_1:\n        prompt_9(action=action, success=success, container=container, results=results, handle=handle, filtered_artifacts=matched_artifacts_1, filtered_results=matched_results_1)\n\n    # collect filtered artifact ids for 'if' condition 2\n    matched_artifacts_2, matched_results_2 = phantom.condition(\n        container=container,\n        action_results=results,\n        conditions=[\n            [\"domain_reputation_1:action_result.data.*.detected_urls.*.positives\", \"<\", \"3\"],\n        ],\n        name=\"filter_13:condition_2\")\n\n    # call connected blocks if filtered artifacts or results\n    if matched_artifacts_2 or matched_results_2:\n        prompt_8(action=action, success=success, container=container, results=results, handle=handle, filtered_artifacts=matched_artifacts_2, filtered_results=matched_results_2)\n\n    return",
@@ -8297,8 +8316,8 @@
                         "join_code": "",
                         "join_optional": [],
                         "join_start": 1,
-                        "line_end": 490,
-                        "line_start": 459,
+                        "line_end": 487,
+                        "line_start": 456,
                         "name": "filter",
                         "notes": "",
                         "number": 13,
@@ -8401,7 +8420,7 @@
                         "state": "filter",
                         "status": "",
                         "type": "coa.Filter",
-                        "warn": "",
+                        "warn": false,
                         "z": 483
                     },
                     {
@@ -8484,6 +8503,9 @@
                             },
                             "g.notes": {
                                 "display": "block"
+                            },
+                            "g.notes image": {
+                                "opacity": 1
                             }
                         },
                         "block_code": "def prompt_8(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None):\n    phantom.debug('prompt_8() called')\n    \n    # set user and message variables for phantom.prompt call\n    user = \"admin\"\n    message = \"\"\"Not a bad domain\"\"\"\n\n    #responses:\n    response_types = [\n        {\n            \"prompt\": \"\",\n            \"options\": {\n                \"type\": \"message\",\n            },\n        },\n    ]\n\n    phantom.prompt2(container=container, user=user, message=message, respond_in_mins=30, name=\"prompt_8\", response_types=response_types, callback=join_prompt_5)\n\n    return",
@@ -8509,8 +8531,8 @@
                         "join_code": "",
                         "join_optional": [],
                         "join_start": 1,
-                        "line_end": 511,
-                        "line_start": 490,
+                        "line_end": 508,
+                        "line_start": 487,
                         "message": "Not a bad domain",
                         "name": "prompt",
                         "notes": "",
@@ -8681,6 +8703,9 @@
                             },
                             "g.notes": {
                                 "display": "block"
+                            },
+                            "g.notes image": {
+                                "opacity": 1
                             }
                         },
                         "block_code": "def prompt_9(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None):\n    phantom.debug('prompt_9() called')\n    \n    # set user and message variables for phantom.prompt call\n    user = \"admin\"\n    message = \"\"\"This is a bad domain and needs to be blocked\"\"\"\n\n    #responses:\n    response_types = [\n        {\n            \"prompt\": \"\",\n            \"options\": {\n                \"type\": \"message\",\n            },\n        },\n    ]\n\n    phantom.prompt2(container=container, user=user, message=message, respond_in_mins=30, name=\"prompt_9\", response_types=response_types, callback=join_prompt_5)\n\n    return",
@@ -8706,8 +8731,8 @@
                         "join_code": "",
                         "join_optional": [],
                         "join_start": 1,
-                        "line_end": 532,
-                        "line_start": 511,
+                        "line_end": 529,
+                        "line_start": 508,
                         "message": "This is a bad domain and needs to be blocked",
                         "name": "prompt",
                         "notes": "",
@@ -11336,8 +11361,8 @@
                         "join_code": "",
                         "join_optional": [],
                         "join_start": 97,
-                        "line_end": 68,
-                        "line_start": 47,
+                        "line_end": 65,
+                        "line_start": 44,
                         "message": "Configuring now",
                         "name": "file reputation",
                         "notes": "",
@@ -11469,7 +11494,7 @@
                         "callback_code": "# read-only block view not available",
                         "callback_start": 1,
                         "callsback": false,
-                        "connected_to_start": false,
+                        "connected_to_start": true,
                         "connection_name": "",
                         "connection_type": "",
                         "custom_callback": "",
@@ -11486,8 +11511,8 @@
                         "join_code": "# read-only block view not available",
                         "join_optional": [],
                         "join_start": 1,
-                        "line_end": 47,
-                        "line_start": 30,
+                        "line_end": 44,
+                        "line_start": 27,
                         "name": "",
                         "notes": "",
                         "number": 0,
@@ -12109,6 +12134,12 @@
                             ".title": {
                                 "text": "Investigate"
                             },
+                            "g.approver image": {
+                                "opacity": 1
+                            },
+                            "g.code image": {
+                                "opacity": 1
+                            },
                             "g.delete": {
                                 "display": "none"
                             },
@@ -12123,6 +12154,12 @@
                             },
                             "g.notes": {
                                 "display": "block"
+                            },
+                            "g.notes image": {
+                                "opacity": 1
+                            },
+                            "g.timer image": {
+                                "opacity": 1
                             }
                         },
                         "block_code": "def ip_reputation_1(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None):\n    phantom.debug('ip_reputation_1() called')\n\n    # collect data for 'ip_reputation_1' call\n    container_data = phantom.collect2(container=container, datapath=['artifact:*.cef.destinationAddress', 'artifact:*.id'])\n\n    parameters = []\n    \n    # build parameters list for 'ip_reputation_1' call\n    for container_item in container_data:\n        if container_item[0]:\n            parameters.append({\n                'ip': container_item[0],\n                # context (artifact id) is added to associate results with the artifact\n                'context': {'artifact_id': container_item[1]},\n            })\n\n    phantom.act(\"ip reputation\", parameters=parameters, assets=['virustotal_api'], callback=prompt_10, name=\"ip_reputation_1\")\n\n    return",
@@ -12150,8 +12187,8 @@
                         "join_code": "",
                         "join_optional": [],
                         "join_start": 1,
-                        "line_end": 553,
-                        "line_start": 532,
+                        "line_end": 550,
+                        "line_start": 529,
                         "message": "Configuring now",
                         "name": "ip reputation",
                         "notes": "",
@@ -12231,7 +12268,7 @@
                         "status": "",
                         "title": "Investigate",
                         "type": "coa.Action",
-                        "warn": "",
+                        "warn": false,
                         "z": 498
                     },
                     {
@@ -12277,6 +12314,9 @@
                             },
                             "g.notes": {
                                 "display": "block"
+                            },
+                            "g.notes image": {
+                                "opacity": 1
                             }
                         },
                         "block_code": "def filter_14(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None):\n    phantom.debug('filter_14() called')\n\n    # collect filtered artifact ids for 'if' condition 1\n    matched_artifacts_1, matched_results_1 = phantom.condition(\n        container=container,\n        conditions=[\n            [\"artifact:*.cef.destinationAddress\", \">=\", \"1\"],\n        ],\n        name=\"filter_14:condition_1\")\n\n    # call connected blocks if filtered artifacts or results\n    if matched_artifacts_1 or matched_results_1:\n        ip_reputation_1(action=action, success=success, container=container, results=results, handle=handle, filtered_artifacts=matched_artifacts_1, filtered_results=matched_results_1)\n\n    return",
@@ -12302,8 +12342,8 @@
                         "join_code": "",
                         "join_optional": [],
                         "join_start": 1,
-                        "line_end": 570,
-                        "line_start": 553,
+                        "line_end": 567,
+                        "line_start": 550,
                         "name": "filter",
                         "notes": "",
                         "number": 14,
@@ -12392,7 +12432,7 @@
                         "state": "filter",
                         "status": "",
                         "type": "coa.Filter",
-                        "warn": "",
+                        "warn": false,
                         "z": 499
                     },
                     {
@@ -12475,6 +12515,9 @@
                             },
                             "g.notes": {
                                 "display": "block"
+                            },
+                            "g.notes image": {
+                                "opacity": 1
                             }
                         },
                         "block_code": "def prompt_10(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None):\n    phantom.debug('prompt_10() called')\n    \n    # set user and message variables for phantom.prompt call\n    user = \"admin\"\n    message = \"\"\"IP info\n{0}\"\"\"\n\n    # parameter list for template variable replacement\n    parameters = [\n        \"ip_reputation_1:action_result.data.*.detected_communicating_samples.*.positives\",\n    ]\n\n    #responses:\n    response_types = [\n        {\n            \"prompt\": \"\",\n            \"options\": {\n                \"type\": \"message\",\n            },\n        },\n    ]\n\n    phantom.prompt2(container=container, user=user, message=message, respond_in_mins=30, name=\"prompt_10\", parameters=parameters, response_types=response_types)\n\n    return",
@@ -12500,8 +12543,8 @@
                         "join_code": "",
                         "join_optional": [],
                         "join_start": 1,
-                        "line_end": 597,
-                        "line_start": 570,
+                        "line_end": 594,
+                        "line_start": 567,
                         "message": "IP info\n{0}",
                         "name": "prompt",
                         "notes": "",
@@ -12605,7 +12648,7 @@
         "schema": 3,
         "version": "4.5.15922"
     },
-    "create_time": "2019-08-20T19:05:15.736950+00:00",
+    "create_time": "2019-08-21T22:35:08.865214+00:00",
     "draft_mode": false,
     "labels": [
         "email"

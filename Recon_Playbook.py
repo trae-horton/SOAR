@@ -1,10 +1,7 @@
 """
 This playbook will take the following data and run through recon modules:
 
-Destination IP
-Destination DNS
-SHA256 Hash
-
+new stuff
 
 Actions include:
 
