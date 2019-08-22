@@ -20,6 +20,7 @@ from datetime import datetime, timedelta
 import sys
 import urllib 
 import urlparse
+import time
 
 # End - Global Code block
 ##############################
@@ -337,7 +338,7 @@ def detonate_url_2(action=None, success=None, container=None, results=None, hand
     
     Parse_Proofpoint_URL__url_parsed = json.loads(phantom.get_run_data(key='Parse_Proofpoint_URL:url_parsed'))
     # collect data for 'detonate_url_2' call
-
+    time.sleep(60)
     parameters = []
     
     # build parameters list for 'detonate_url_2' call
