@@ -599,7 +599,7 @@ def filter_15(action=None, success=None, container=None, results=None, handle=No
     matched_artifacts_1, matched_results_1 = phantom.condition(
         container=container,
         conditions=[
-            ["artifact:*.cef.requestURL", "==", "https://urldefense.proofpoint.com*"],
+            ["artifact:*.cef.requestURL", "in", "https://urldefense.proofpoint.com*"],
         ],
         name="filter_15:condition_1")
 
