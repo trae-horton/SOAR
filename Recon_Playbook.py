@@ -442,17 +442,17 @@ def domain_reputation_1(action=None, success=None, container=None, results=None,
     phantom.debug('domain_reputation_1() called')
 
     # collect data for 'domain_reputation_1' call
-    container_data = phantom.collect2(container=container, datapath=['artifact:*.cef.destinationDnsDomain', 'artifact:*.id'])
+    filtered_artifacts_data_1 = phantom.collect2(container=container, datapath=['filtered-data:filter_17:condition_1:artifact:*.cef.sourceDnsDomain', 'filtered-data:filter_17:condition_1:artifact:*.id'])
 
     parameters = []
     
     # build parameters list for 'domain_reputation_1' call
-    for container_item in container_data:
-        if container_item[0]:
+    for filtered_artifacts_item_1 in filtered_artifacts_data_1:
+        if filtered_artifacts_item_1[0]:
             parameters.append({
-                'domain': container_item[0],
+                'domain': filtered_artifacts_item_1[0],
                 # context (artifact id) is added to associate results with the artifact
-                'context': {'artifact_id': container_item[1]},
+                'context': {'artifact_id': filtered_artifacts_item_1[1]},
             })
 
     phantom.act("domain reputation", parameters=parameters, assets=['virustotal_api'], callback=filter_13, name="domain_reputation_1")
