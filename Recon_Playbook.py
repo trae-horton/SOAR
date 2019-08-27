@@ -28,17 +28,17 @@ import time
 def on_start(container):
     phantom.debug('on_start() called')
     
-    # call 'file_reputation_1' block
-    file_reputation_1(container=container)
-
-    # call 'filter_12' block
-    filter_12(container=container)
-
     # call 'filter_14' block
     filter_14(container=container)
 
     # call 'filter_16' block
     filter_16(container=container)
+
+    # call 'filter_12' block
+    filter_12(container=container)
+
+    # call 'filter_20' block
+    filter_20(container=container)
 
     return
 
@@ -227,7 +227,7 @@ def join_prompt_5(action=None, success=None, container=None, results=None, handl
     phantom.debug('join_prompt_5() called')
 
     # check if all connected incoming actions are done i.e. have succeeded or failed
-    if phantom.actions_done([ 'prompt_4', 'prompt_3', 'prompt_6', 'prompt_7', 'prompt_9', 'prompt_8' ]):
+    if phantom.actions_done([ 'prompt_4', 'prompt_3', 'prompt_6', 'prompt_7', 'prompt_9' ]):
         
         # call connected block "prompt_5"
         prompt_5(container=container, handle=handle)
@@ -492,40 +492,6 @@ def filter_13(action=None, success=None, container=None, results=None, handle=No
     if matched_artifacts_1 or matched_results_1:
         prompt_9(action=action, success=success, container=container, results=results, handle=handle, filtered_artifacts=matched_artifacts_1, filtered_results=matched_results_1)
 
-    # collect filtered artifact ids for 'if' condition 2
-    matched_artifacts_2, matched_results_2 = phantom.condition(
-        container=container,
-        action_results=results,
-        conditions=[
-            ["domain_reputation_1:action_result.data.*.detected_urls.*.positives", "<", "3"],
-        ],
-        name="filter_13:condition_2")
-
-    # call connected blocks if filtered artifacts or results
-    if matched_artifacts_2 or matched_results_2:
-        prompt_8(action=action, success=success, container=container, results=results, handle=handle, filtered_artifacts=matched_artifacts_2, filtered_results=matched_results_2)
-
-    return
-
-def prompt_8(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None):
-    phantom.debug('prompt_8() called')
-    
-    # set user and message variables for phantom.prompt call
-    user = "admin"
-    message = """Not a bad domain"""
-
-    #responses:
-    response_types = [
-        {
-            "prompt": "",
-            "options": {
-                "type": "message",
-            },
-        },
-    ]
-
-    phantom.prompt2(container=container, user=user, message=message, respond_in_mins=30, name="prompt_8", response_types=response_types, callback=join_prompt_5)
-
     return
 
 def prompt_9(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None):
@@ -767,6 +733,23 @@ def filter_19(action=None, success=None, container=None, results=None, handle=No
     # call connected blocks if filtered artifacts or results
     if matched_artifacts_1 or matched_results_1:
         join_prompt_7(action=action, success=success, container=container, results=results, handle=handle, filtered_artifacts=matched_artifacts_1, filtered_results=matched_results_1)
+
+    return
+
+def filter_20(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None):
+    phantom.debug('filter_20() called')
+
+    # collect filtered artifact ids for 'if' condition 1
+    matched_artifacts_1, matched_results_1 = phantom.condition(
+        container=container,
+        conditions=[
+            ["artifact:*.cef.fileHashSha256", ">=", "1"],
+        ],
+        name="filter_20:condition_1")
+
+    # call connected blocks if filtered artifacts or results
+    if matched_artifacts_1 or matched_results_1:
+        file_reputation_1(action=action, success=success, container=container, results=results, handle=handle, filtered_artifacts=matched_artifacts_1, filtered_results=matched_results_1)
 
     return
 
