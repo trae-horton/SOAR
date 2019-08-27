@@ -283,7 +283,7 @@ def filter_10(action=None, success=None, container=None, results=None, handle=No
 
     # call connected blocks if filtered artifacts or results
     if matched_artifacts_1 or matched_results_1:
-        prompt_6(action=action, success=success, container=container, results=results, handle=handle, filtered_artifacts=matched_artifacts_1, filtered_results=matched_results_1)
+        join_prompt_6(action=action, success=success, container=container, results=results, handle=handle, filtered_artifacts=matched_artifacts_1, filtered_results=matched_results_1)
 
     # collect filtered artifact ids for 'if' condition 2
     matched_artifacts_2, matched_results_2 = phantom.condition(
@@ -331,6 +331,17 @@ def prompt_6(action=None, success=None, container=None, results=None, handle=Non
 
     return
 
+def join_prompt_6(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None):
+    phantom.debug('join_prompt_6() called')
+
+    # check if all connected incoming actions are done i.e. have succeeded or failed
+    if phantom.actions_done([ 'url_reputation_2', 'url_reputation_4' ]):
+        
+        # call connected block "prompt_6"
+        prompt_6(container=container, handle=handle)
+    
+    return
+
 def detonate_url_2(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None):
     phantom.debug('detonate_url_2() called')
     
@@ -371,6 +382,17 @@ def prompt_7(action=None, success=None, container=None, results=None, handle=Non
 
     return
 
+def join_prompt_7(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None):
+    phantom.debug('join_prompt_7() called')
+
+    # check if all connected incoming actions are done i.e. have succeeded or failed
+    if phantom.actions_done([ 'detonate_url_2', 'detonate_url_3' ]):
+        
+        # call connected block "prompt_7"
+        prompt_7(container=container, handle=handle)
+    
+    return
+
 def filter_11(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None):
     phantom.debug('filter_11() called')
 
@@ -385,7 +407,7 @@ def filter_11(action=None, success=None, container=None, results=None, handle=No
 
     # call connected blocks if filtered artifacts or results
     if matched_artifacts_1 or matched_results_1:
-        prompt_7(action=action, success=success, container=container, results=results, handle=handle, filtered_artifacts=matched_artifacts_1, filtered_results=matched_results_1)
+        join_prompt_7(action=action, success=success, container=container, results=results, handle=handle, filtered_artifacts=matched_artifacts_1, filtered_results=matched_results_1)
 
     return
 
@@ -607,6 +629,18 @@ def filter_15(action=None, success=None, container=None, results=None, handle=No
     if matched_artifacts_1 or matched_results_1:
         Parse_Proofpoint_URL(action=action, success=success, container=container, results=results, handle=handle, filtered_artifacts=matched_artifacts_1, filtered_results=matched_results_1)
 
+    # collect filtered artifact ids for 'if' condition 2
+    matched_artifacts_2, matched_results_2 = phantom.condition(
+        container=container,
+        conditions=[
+            ["https://urldefense.proofpoint.com", "not in", "artifact:*.cef.requestURL"],
+        ],
+        name="filter_15:condition_2")
+
+    # call connected blocks if filtered artifacts or results
+    if matched_artifacts_2 or matched_results_2:
+        url_reputation_4(action=action, success=success, container=container, results=results, handle=handle, filtered_artifacts=matched_artifacts_2, filtered_results=matched_results_2)
+
     return
 
 def filter_16(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None):
@@ -640,6 +674,99 @@ def filter_17(action=None, success=None, container=None, results=None, handle=No
     # call connected blocks if filtered artifacts or results
     if matched_artifacts_1 or matched_results_1:
         domain_reputation_1(action=action, success=success, container=container, results=results, handle=handle, filtered_artifacts=matched_artifacts_1, filtered_results=matched_results_1)
+
+    return
+
+def filter_18(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None):
+    phantom.debug('filter_18() called')
+
+    # collect filtered artifact ids for 'if' condition 1
+    matched_artifacts_1, matched_results_1 = phantom.condition(
+        container=container,
+        action_results=results,
+        conditions=[
+            ["url_reputation_4:action_result.summary.Verified", "==", True],
+        ],
+        name="filter_18:condition_1")
+
+    # call connected blocks if filtered artifacts or results
+    if matched_artifacts_1 or matched_results_1:
+        join_prompt_6(action=action, success=success, container=container, results=results, handle=handle, filtered_artifacts=matched_artifacts_1, filtered_results=matched_results_1)
+
+    # collect filtered artifact ids for 'if' condition 2
+    matched_artifacts_2, matched_results_2 = phantom.condition(
+        container=container,
+        action_results=results,
+        conditions=[
+            ["url_reputation_4:action_result.summary.Verified", "==", None],
+        ],
+        name="filter_18:condition_2")
+
+    # call connected blocks if filtered artifacts or results
+    if matched_artifacts_2 or matched_results_2:
+        detonate_url_3(action=action, success=success, container=container, results=results, handle=handle, filtered_artifacts=matched_artifacts_2, filtered_results=matched_results_2)
+
+    return
+
+def url_reputation_4(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None):
+    phantom.debug('url_reputation_4() called')
+
+    # collect data for 'url_reputation_4' call
+    filtered_artifacts_data_1 = phantom.collect2(container=container, datapath=['filtered-data:filter_15:condition_2:artifact:*.cef.requestURL', 'filtered-data:filter_15:condition_2:artifact:*.id'])
+
+    parameters = []
+    
+    # build parameters list for 'url_reputation_4' call
+    for filtered_artifacts_item_1 in filtered_artifacts_data_1:
+        if filtered_artifacts_item_1[0]:
+            parameters.append({
+                'url': filtered_artifacts_item_1[0],
+                # context (artifact id) is added to associate results with the artifact
+                'context': {'artifact_id': filtered_artifacts_item_1[1]},
+            })
+
+    phantom.act("url reputation", parameters=parameters, assets=['phishtank'], callback=filter_18, name="url_reputation_4")
+
+    return
+
+def detonate_url_3(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None):
+    phantom.debug('detonate_url_3() called')
+    
+    #phantom.debug('Action: {0} {1}'.format(action['name'], ('SUCCEEDED' if success else 'FAILED')))
+    
+    # collect data for 'detonate_url_3' call
+    inputs_data_1 = phantom.collect2(container=container, datapath=['url_reputation_4:artifact:*.cef.requestURL', 'url_reputation_4:artifact:*.id'], action_results=results)
+
+    parameters = []
+    
+    # build parameters list for 'detonate_url_3' call
+    for inputs_item_1 in inputs_data_1:
+        if inputs_item_1[0]:
+            parameters.append({
+                'url': inputs_item_1[0],
+                # context (artifact id) is added to associate results with the artifact
+                'context': {'artifact_id': inputs_item_1[1]},
+            })
+
+    phantom.act("detonate url", parameters=parameters, assets=['virustotal_api'], callback=filter_19, name="detonate_url_3")
+
+    return
+
+def filter_19(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None):
+    phantom.debug('filter_19() called')
+
+    # collect filtered artifact ids for 'if' condition 1
+    matched_artifacts_1, matched_results_1 = phantom.condition(
+        container=container,
+        action_results=results,
+        conditions=[
+            ["detonate_url_3:action_result.data.*.positives", ">=", "1"],
+        ],
+        name="filter_19:condition_1")
+
+    # call connected blocks if filtered artifacts or results
+    if matched_artifacts_1 or matched_results_1:
+        join_prompt_7(action=action, success=success, container=container, results=results, handle=handle, filtered_artifacts=matched_artifacts_1, filtered_results=matched_results_1)
 
     return
 
