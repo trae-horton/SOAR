@@ -31,14 +31,14 @@ def on_start(container):
     # call 'file_reputation_1' block
     file_reputation_1(container=container)
 
-    # call 'domain_reputation_1' block
-    domain_reputation_1(container=container)
-
     # call 'filter_12' block
     filter_12(container=container)
 
     # call 'filter_14' block
     filter_14(container=container)
+
+    # call 'filter_16' block
+    filter_16(container=container)
 
     return
 
@@ -606,6 +606,40 @@ def filter_15(action=None, success=None, container=None, results=None, handle=No
     # call connected blocks if filtered artifacts or results
     if matched_artifacts_1 or matched_results_1:
         Parse_Proofpoint_URL(action=action, success=success, container=container, results=results, handle=handle, filtered_artifacts=matched_artifacts_1, filtered_results=matched_results_1)
+
+    return
+
+def filter_16(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None):
+    phantom.debug('filter_16() called')
+
+    # collect filtered artifact ids for 'if' condition 1
+    matched_artifacts_1, matched_results_1 = phantom.condition(
+        container=container,
+        conditions=[
+            ["artifact:*.cef.destinationDnsDomain", ">=", "1"],
+        ],
+        name="filter_16:condition_1")
+
+    # call connected blocks if filtered artifacts or results
+    if matched_artifacts_1 or matched_results_1:
+        filter_17(action=action, success=success, container=container, results=results, handle=handle, filtered_artifacts=matched_artifacts_1, filtered_results=matched_results_1)
+
+    return
+
+def filter_17(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None):
+    phantom.debug('filter_17() called')
+
+    # collect filtered artifact ids for 'if' condition 1
+    matched_artifacts_1, matched_results_1 = phantom.condition(
+        container=container,
+        conditions=[
+            ["https://urldefense.proofpoint.com", "not in", "filtered-data:filter_16:condition_1:artifact:*.cef.destinationDnsDomain"],
+        ],
+        name="filter_17:condition_1")
+
+    # call connected blocks if filtered artifacts or results
+    if matched_artifacts_1 or matched_results_1:
+        domain_reputation_1(action=action, success=success, container=container, results=results, handle=handle, filtered_artifacts=matched_artifacts_1, filtered_results=matched_results_1)
 
     return
 
