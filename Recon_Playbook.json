@@ -7,7 +7,7 @@
             "clean": true,
             "code_block": "import sys\nimport urllib \nimport urlparse\nimport time",
             "description": "This playbook will take the following data and run through recon modules:\n\nnew stuff\n\nActions include:\n\nPhantom DNS\nPhantom IP\nVirusTotal",
-            "hash": "d1961d723096c4536cccf857c280352dcd11105c",
+            "hash": "ec7edf7b304f027057697348b09260078c38caf1",
             "joint": {
                 "cells": [
                     {
@@ -5628,7 +5628,7 @@
                                 "opacity": 1
                             },
                             "g.delete": {
-                                "display": "none"
+                                "display": "block"
                             },
                             "g.error": {
                                 "opacity": 0
@@ -12726,7 +12726,7 @@
                                 "display": "block"
                             }
                         },
-                        "block_code": "def filter_15(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None):\n    phantom.debug('filter_15() called')\n\n    # collect filtered artifact ids for 'if' condition 1\n    matched_artifacts_1, matched_results_1 = phantom.condition(\n        container=container,\n        conditions=[\n            [\"artifact:*.cef.requestURL\", \"==\", \"https://urldefense.proofpoint.com\"],\n        ],\n        name=\"filter_15:condition_1\")\n\n    # call connected blocks if filtered artifacts or results\n    if matched_artifacts_1 or matched_results_1:\n        Parse_Proofpoint_URL(action=action, success=success, container=container, results=results, handle=handle, filtered_artifacts=matched_artifacts_1, filtered_results=matched_results_1)\n\n    return",
+                        "block_code": "def filter_15(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None):\n    phantom.debug('filter_15() called')\n\n    # collect filtered artifact ids for 'if' condition 1\n    matched_artifacts_1, matched_results_1 = phantom.condition(\n        container=container,\n        conditions=[\n            [\"artifact:*.cef.requestURL\", \"==\", \"https://urldefense.proofpoint.com*\"],\n        ],\n        name=\"filter_15:condition_1\")\n\n    # call connected blocks if filtered artifacts or results\n    if matched_artifacts_1 or matched_results_1:\n        Parse_Proofpoint_URL(action=action, success=success, container=container, results=results, handle=handle, filtered_artifacts=matched_artifacts_1, filtered_results=matched_results_1)\n\n    return",
                         "callback_code": "",
                         "callback_start": 1,
                         "callsback": false,
@@ -12765,7 +12765,7 @@
                                         "comparison": "==",
                                         "data_type": "",
                                         "param": "artifact:*.cef.requestURL",
-                                        "value": "https://urldefense.proofpoint.com"
+                                        "value": "https://urldefense.proofpoint.com*"
                                     }
                                 ],
                                 "display": "If",
@@ -12840,7 +12840,7 @@
                         "status": "",
                         "type": "coa.Filter",
                         "warn": "",
-                        "z": 520
+                        "z": 521
                     }
                 ]
             },
@@ -12849,7 +12849,7 @@
         "schema": 3,
         "version": "4.5.15922"
     },
-    "create_time": "2019-08-27T17:33:57.475265+00:00",
+    "create_time": "2019-08-27T17:35:06.546907+00:00",
     "draft_mode": false,
     "labels": [
         "email"
