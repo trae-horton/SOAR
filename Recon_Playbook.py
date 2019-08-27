@@ -442,7 +442,7 @@ def domain_reputation_1(action=None, success=None, container=None, results=None,
     phantom.debug('domain_reputation_1() called')
 
     # collect data for 'domain_reputation_1' call
-    filtered_artifacts_data_1 = phantom.collect2(container=container, datapath=['filtered-data:filter_17:condition_1:artifact:*.cef.sourceDnsDomain', 'filtered-data:filter_17:condition_1:artifact:*.id'])
+    filtered_artifacts_data_1 = phantom.collect2(container=container, datapath=['filtered-data:filter_17:condition_1:artifact:*.cef.destinationDnsDomain', 'filtered-data:filter_17:condition_1:artifact:*.id'])
 
     parameters = []
     
