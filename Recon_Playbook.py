@@ -633,7 +633,7 @@ def filter_17(action=None, success=None, container=None, results=None, handle=No
     matched_artifacts_1, matched_results_1 = phantom.condition(
         container=container,
         conditions=[
-            ["https://urldefense.proofpoint.com", "not in", "artifact:*.cef.destinationDnsDomain"],
+            ["urldefense.proofpoint.com", "not in", "artifact:*.cef.destinationDnsDomain"],
         ],
         name="filter_17:condition_1")
 
