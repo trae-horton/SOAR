@@ -248,7 +248,7 @@ def filter_5(action=None, success=None, container=None, results=None, handle=Non
         container=container,
         action_results=results,
         conditions=[
-            ["detonate_url_3:action_result.data.*.positives", ">=", "1"],
+            ["detonate_url_3:action_result.summary.positives", ">=", "1"],
         ],
         name="filter_5:condition_1")
 
