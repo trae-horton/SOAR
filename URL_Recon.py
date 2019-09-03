@@ -132,7 +132,7 @@ def filter_2(action=None, success=None, container=None, results=None, handle=Non
 
     # call connected blocks if filtered artifacts or results
     if matched_artifacts_1 or matched_results_1:
-        pass
+        prompt_4(action=action, success=success, container=container, results=results, handle=handle, filtered_artifacts=matched_artifacts_1, filtered_results=matched_results_1)
 
     # collect filtered artifact ids for 'if' condition 2
     matched_artifacts_2, matched_results_2 = phantom.condition(
@@ -182,7 +182,7 @@ def filter_3(action=None, success=None, container=None, results=None, handle=Non
 
     # call connected blocks if filtered artifacts or results
     if matched_artifacts_1 or matched_results_1:
-        pass
+        prompt_2(action=action, success=success, container=container, results=results, handle=handle, filtered_artifacts=matched_artifacts_1, filtered_results=matched_results_1)
 
     # collect filtered artifact ids for 'if' condition 2
     matched_artifacts_2, matched_results_2 = phantom.condition(
@@ -236,7 +236,7 @@ def filter_4(action=None, success=None, container=None, results=None, handle=Non
 
     # call connected blocks if filtered artifacts or results
     if matched_artifacts_1 or matched_results_1:
-        pass
+        prompt_3(action=action, success=success, container=container, results=results, handle=handle, filtered_artifacts=matched_artifacts_1, filtered_results=matched_results_1)
 
     return
 
@@ -254,7 +254,7 @@ def filter_5(action=None, success=None, container=None, results=None, handle=Non
 
     # call connected blocks if filtered artifacts or results
     if matched_artifacts_1 or matched_results_1:
-        format_2(action=action, success=success, container=container, results=results, handle=handle, filtered_artifacts=matched_artifacts_1, filtered_results=matched_results_1)
+        prompt_1(action=action, success=success, container=container, results=results, handle=handle, filtered_artifacts=matched_artifacts_1, filtered_results=matched_results_1)
 
     return
 
@@ -263,35 +263,198 @@ def prompt_1(action=None, success=None, container=None, results=None, handle=Non
     
     # set user and message variables for phantom.prompt call
     user = "admin"
-    message = """URL Is BAD  - from URL_Recon"""
-
-    #responses:
-    response_types = [
-        {
-            "prompt": "",
-            "options": {
-                "type": "message",
-            },
-        },
-    ]
-
-    phantom.prompt2(container=container, user=user, message=message, respond_in_mins=180, name="prompt_1", response_types=response_types)
-
-    return
-
-def format_2(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None):
-    phantom.debug('format_2() called')
-    
-    template = """{0}"""
+    message = """The following URL is malicious
+{0}
+Do you want to block this URL?"""
 
     # parameter list for template variable replacement
     parameters = [
         "artifact:*.cef.requestURL",
     ]
 
-    phantom.format(container=container, template=template, parameters=parameters, name="format_2")
+    #responses:
+    response_types = [
+        {
+            "prompt": "",
+            "options": {
+                "type": "list",
+                "choices": [
+                    "Yes",
+                    "No",
+                ]
+            },
+        },
+    ]
 
-    prompt_1(container=container)
+    phantom.prompt2(container=container, user=user, message=message, respond_in_mins=180, name="prompt_1", parameters=parameters, response_types=response_types, callback=filter_6)
+
+    return
+
+def prompt_2(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None):
+    phantom.debug('prompt_2() called')
+    
+    # set user and message variables for phantom.prompt call
+    user = "admin"
+    message = """The following URL is malicious
+{0}
+Do you want to block this URL?"""
+
+    # parameter list for template variable replacement
+    parameters = [
+        "artifact:*.cef.requestURL",
+    ]
+
+    #responses:
+    response_types = [
+        {
+            "prompt": "",
+            "options": {
+                "type": "list",
+                "choices": [
+                    "Yes",
+                    "No",
+                ]
+            },
+        },
+    ]
+
+    phantom.prompt2(container=container, user=user, message=message, respond_in_mins=30, name="prompt_2", parameters=parameters, response_types=response_types, callback=filter_7)
+
+    return
+
+def prompt_3(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None):
+    phantom.debug('prompt_3() called')
+    
+    # set user and message variables for phantom.prompt call
+    user = "admin"
+    message = """The following URL is malicious
+{0}
+Do you want to block this URL?"""
+
+    # parameter list for template variable replacement
+    parameters = [
+        "Parsed_Proofpoint_URL:custom_function:url_parsed",
+    ]
+
+    #responses:
+    response_types = [
+        {
+            "prompt": "",
+            "options": {
+                "type": "list",
+                "choices": [
+                    "Yes",
+                    "No",
+                ]
+            },
+        },
+    ]
+
+    phantom.prompt2(container=container, user=user, message=message, respond_in_mins=30, name="prompt_3", parameters=parameters, response_types=response_types, callback=filter_8)
+
+    return
+
+def prompt_4(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None):
+    phantom.debug('prompt_4() called')
+    
+    # set user and message variables for phantom.prompt call
+    user = "admin"
+    message = """The following URL is malicious
+{0}
+Do you want to block this URL?{0}"""
+
+    # parameter list for template variable replacement
+    parameters = [
+        "Parsed_Proofpoint_URL:custom_function:url_parsed",
+    ]
+
+    #responses:
+    response_types = [
+        {
+            "prompt": "",
+            "options": {
+                "type": "list",
+                "choices": [
+                    "Yes",
+                    "No",
+                ]
+            },
+        },
+    ]
+
+    phantom.prompt2(container=container, user=user, message=message, respond_in_mins=30, name="prompt_4", parameters=parameters, response_types=response_types, callback=filter_9)
+
+    return
+
+def filter_6(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None):
+    phantom.debug('filter_6() called')
+
+    # collect filtered artifact ids for 'if' condition 1
+    matched_artifacts_1, matched_results_1 = phantom.condition(
+        container=container,
+        action_results=results,
+        conditions=[
+            ["prompt_1:action_result.status", "==", "Yes"],
+        ],
+        name="filter_6:condition_1")
+
+    # call connected blocks if filtered artifacts or results
+    if matched_artifacts_1 or matched_results_1:
+        pass
+
+    return
+
+def filter_7(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None):
+    phantom.debug('filter_7() called')
+
+    # collect filtered artifact ids for 'if' condition 1
+    matched_artifacts_1, matched_results_1 = phantom.condition(
+        container=container,
+        action_results=results,
+        conditions=[
+            ["prompt_2:action_result.status", "==", "Yes"],
+        ],
+        name="filter_7:condition_1")
+
+    # call connected blocks if filtered artifacts or results
+    if matched_artifacts_1 or matched_results_1:
+        pass
+
+    return
+
+def filter_8(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None):
+    phantom.debug('filter_8() called')
+
+    # collect filtered artifact ids for 'if' condition 1
+    matched_artifacts_1, matched_results_1 = phantom.condition(
+        container=container,
+        action_results=results,
+        conditions=[
+            ["prompt_3:action_result.status", "==", "Yes"],
+        ],
+        name="filter_8:condition_1")
+
+    # call connected blocks if filtered artifacts or results
+    if matched_artifacts_1 or matched_results_1:
+        pass
+
+    return
+
+def filter_9(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None):
+    phantom.debug('filter_9() called')
+
+    # collect filtered artifact ids for 'if' condition 1
+    matched_artifacts_1, matched_results_1 = phantom.condition(
+        container=container,
+        action_results=results,
+        conditions=[
+            ["prompt_4:action_result.status", "==", "Yes"],
+        ],
+        name="filter_9:condition_1")
+
+    # call connected blocks if filtered artifacts or results
+    if matched_artifacts_1 or matched_results_1:
+        pass
 
     return
 
