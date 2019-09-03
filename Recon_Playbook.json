@@ -7,7 +7,6 @@
             "clean": true,
             "code_block": "import sys\nimport urllib \nimport urlparse\nimport time",
             "description": "This playbook will take the following data and run through recon modules:\n\nnew stuff\n\nActions include:\n\nPhantom DNS\nPhantom IP\nVirusTotal",
-            "hash": "1bb65adcaa6f64d2de493eb726bcf1fb4eebc19e",
             "joint": {
                 "cells": [
                     {
@@ -5515,8 +5514,8 @@
                             }
                         },
                         "position": {
-                            "x": 0,
-                            "y": 360
+                            "x": 40,
+                            "y": 280
                         },
                         "previous_function": "",
                         "previous_name": "filter_12",
@@ -10144,8 +10143,8 @@
                             }
                         },
                         "position": {
-                            "x": 220,
-                            "y": 360
+                            "x": 180,
+                            "y": 280
                         },
                         "previous_function": "",
                         "previous_name": "playbook_SOAR_URL_Recon_1",
