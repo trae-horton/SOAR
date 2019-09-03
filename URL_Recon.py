@@ -40,8 +40,8 @@ def Parsed_Proofpoint_URL(action=None, success=None, container=None, results=Non
     param  = urlparse.parse_qs(query)
     u = (param['u'][0].replace('-', '%')
                       .replace('_', '/'))
-    Parse_Proofpoint_URL__url_parsed = urllib.unquote(u)
-    phantom.debug(Parse_Proofpoint_URL__url_parsed)
+    Parsed_Proofpoint_URL__url_parsed = urllib.unquote(u)
+    phantom.debug(Parsed_Proofpoint_URL__url_parsed)
     ################################################################################
     ## Custom Code End
     ################################################################################
