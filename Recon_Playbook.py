@@ -294,7 +294,7 @@ def playbook_SOAR_Hash_Recon_1(action=None, success=None, container=None, result
     phantom.debug('playbook_SOAR_Hash_Recon_1() called')
     
     # call playbook "SOAR/Hash_Recon", returns the playbook_run_id
-    playbook_run_id = phantom.playbook("SOAR/Hash_Recon", container=container)
+    playbook_run_id = phantom.playbook("SOAR/Hash_Recon", container=container, name="playbook_SOAR_Hash_Recon_1")
 
     return
 
