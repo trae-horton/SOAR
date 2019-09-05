@@ -19,8 +19,8 @@ import time
 def on_start(container):
     phantom.debug('on_start() called')
     
-    # call 'filter_1' block
-    filter_1(container=container)
+    # call 'filter_10' block
+    filter_10(container=container)
 
     return
 
@@ -455,6 +455,23 @@ def filter_9(action=None, success=None, container=None, results=None, handle=Non
     # call connected blocks if filtered artifacts or results
     if matched_artifacts_1 or matched_results_1:
         pass
+
+    return
+
+def filter_10(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None):
+    phantom.debug('filter_10() called')
+
+    # collect filtered artifact ids for 'if' condition 1
+    matched_artifacts_1, matched_results_1 = phantom.condition(
+        container=container,
+        conditions=[
+            ["artifact:*.cef.requestURL", ">=", "1"],
+        ],
+        name="filter_10:condition_1")
+
+    # call connected blocks if filtered artifacts or results
+    if matched_artifacts_1 or matched_results_1:
+        filter_1(action=action, success=success, container=container, results=results, handle=handle, filtered_artifacts=matched_artifacts_1, filtered_results=matched_results_1)
 
     return
 
