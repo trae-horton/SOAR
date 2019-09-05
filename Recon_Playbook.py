@@ -34,11 +34,11 @@ def on_start(container):
     # call 'filter_16' block
     filter_16(container=container)
 
-    # call 'filter_12' block
-    filter_12(container=container)
-
     # call 'filter_20' block
     filter_20(container=container)
+
+    # call 'playbook_SOAR_URL_Recon_1' block
+    playbook_SOAR_URL_Recon_1(container=container)
 
     return
 
@@ -270,23 +270,6 @@ def domain_reputation_1(action=None, success=None, container=None, results=None,
             })
 
     phantom.act("domain reputation", parameters=parameters, assets=['virustotal_api'], callback=filter_13, name="domain_reputation_1")
-
-    return
-
-def filter_12(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None):
-    phantom.debug('filter_12() called')
-
-    # collect filtered artifact ids for 'if' condition 1
-    matched_artifacts_1, matched_results_1 = phantom.condition(
-        container=container,
-        conditions=[
-            ["artifact:*.cef.requestURL", ">=", "1"],
-        ],
-        name="filter_12:condition_1")
-
-    # call connected blocks if filtered artifacts or results
-    if matched_artifacts_1 or matched_results_1:
-        playbook_SOAR_URL_Recon_1(action=action, success=success, container=container, results=results, handle=handle, filtered_artifacts=matched_artifacts_1, filtered_results=matched_results_1)
 
     return
 
