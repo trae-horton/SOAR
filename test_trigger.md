@@ -1,1 +1,1 @@
-709137403761-5a8rphtf85q4r98p2fm8gkphk5ra7ju4.apps.googleusercontent.com
+SECRET_KEY = 'ibqznpxs4ap=z31j0z0@m)bht*ym(89vb015%ndwpm3^e8z#vh'
